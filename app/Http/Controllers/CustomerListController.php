@@ -10,4 +10,9 @@ class CustomerListController extends Controller
     {
         return view('customer_list/index');
     }
+
+    public function customer_profile()
+    {
+        return view('customer_list/customer_profile');
+    }
 }
