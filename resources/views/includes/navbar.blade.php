@@ -10,9 +10,14 @@
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <li class="nav-item">
-                <div>
-                    <p>Muhammad Sumbul</p>
-                    <p>Marketer</p>
+                <div class="p-2">
+                    <div class="mb-0">
+                        <label><strong>Muhammad Sumbul</strong></label>
+                    </div>
+                    
+                    <div class="mb-0">
+                        <label class="float-end">Marketer</label>
+                    </div>
                 </div>
             </li>
 
