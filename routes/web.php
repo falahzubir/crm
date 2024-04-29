@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerListController;
 use Illuminate\Support\Facades\Route;
+
 
 
 // -------------------------------------------------- AUTHENTICATION --------------------------------------------------

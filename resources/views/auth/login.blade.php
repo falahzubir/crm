@@ -11,7 +11,7 @@
                         <h4 class="mb-2 mt-3 text-center">Welcome! 👋</h4>
                         <p class="mb-4 text-center">Please sign-in to your account and start the adventure</p>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ route('submit-login') }}" method="POST">
+                        <form id="formAuthentication" class="mb-3" action="" method="POST">
                             @csrf
 
                             @if (session('success'))
@@ -35,7 +35,7 @@
                             <div class="mb-4 form-password-toggle">
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="password">Password</label>
-                                    <a href="{{ route('forgot-page') }}">
+                                    <a href="">
                                         <small>Forgot Password?</small>
                                       </a>
                                 </div>
@@ -60,7 +60,7 @@
 
                             <p class="text-center">
                                 <span>New on our platform?</span>
-                                <a href="{{ route('register-page') }}">
+                                <a href="">
                                     <span>Create an account</span>
                                 </a>
                             </p>
