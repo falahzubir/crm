@@ -38,7 +38,105 @@
             </div>
             <div class="card-body">
                 <form action="">
-                    
+                    <div class="row p-4 d-flex align-items-center justify-content-between">
+                        <div class="col-md-5">
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Name :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-4 col-form-label" for="basic-default-name">Nick Name :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Titles :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label" for="basic-default-name">Gender :</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-4 col-form-label" for="basic-default-name">Marital Status :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Age :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="row mb-3">
+                                <label class="col-sm-4 col-form-label" for="basic-default-name">IC Number :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-4 col-form-label" for="basic-default-name">Phone Number :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label" for="basic-default-name">Weight (KG) : </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label" for="basic-default-name">Height (cm) :</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">BMI :</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label" for="basic-default-name">Blood Type :</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
