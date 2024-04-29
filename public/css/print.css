@@ -1,0 +1,9 @@
+@page {
+  size: landscape;
+  margin: 0;
+}
+
+#print-btn {
+  display: none;
+  visibility: none;
+}

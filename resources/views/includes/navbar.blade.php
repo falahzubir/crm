@@ -1,0 +1,27 @@
+<!-- Navbar -->
+<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+    id="layout-navbar">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bx bx-menu bx-sm"></i>
+        </a>
+    </div>
+
+    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <li class="nav-item">
+                <div>
+                    <p>Muhammad Sumbul</p>
+                    <p>Marketer</p>
+                </div>
+            </li>
+
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <div class="avatar avatar-online">
+                    <img src="../assets/img/avatars/5.png" class="w-px-45 h-100 rounded-circle" />
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- / Navbar -->

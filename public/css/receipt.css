@@ -1,0 +1,100 @@
+* {
+  font-size: 9pt;
+}
+
+form {
+  margin-top: 100px;
+  width: 680px;
+  height: 470px;
+}
+
+img {
+  width: 100px;
+  position: absolute;
+}
+
+h5 {
+  margin-top: 0px;
+}
+
+p {
+  font-size: 9pt;
+}
+
+label {
+  font-size: 9pt;
+  font-weight: bold;
+}
+
+input {
+  height: 20px;
+  font-size: 9pt;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.id input {
+  margin-left: 36px;
+}
+
+.nama label {
+  margin-right: 5px;
+}
+
+.nama input {
+  width: 250px;
+  margin-left: 59px;
+}
+
+.date input {
+  margin-left: 71px;
+  width: 100px;
+}
+
+.receipt input {
+  margin-left: 6px;
+  width: 100px;
+}
+
+.cheque input {
+  margin-left: 5px;
+  width: 100px;
+}
+
+.donation {
+  position: absolute;
+}
+
+.donation input {
+  margin-left: 30px;
+}
+
+.detail {
+  margin-left: 300px;
+}
+
+.detail input {
+  width: 295px;
+  margin-left: 10px;
+}
+
+.amount input {
+  margin-left: 5px;
+}
+
+.mix {
+  font-size: 10pt;
+  margin-left: 150px;
+}
+
+.mix1 {
+  margin-top: 0px;
+  margin-left: 10px;
+}
+
+.mix2 {
+  margin-top: 30px;
+  margin-left: 3px;
+  margin-bottom: 5px;
+}
