@@ -6,13 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Question extends Model
+class CustomerTitle extends Model
 {
     use HasFactory, SoftDeletes;
-
-    public function inputValues()
-    {
-        return $this->hasMany(InputValue::class);
-    }
-    
 }

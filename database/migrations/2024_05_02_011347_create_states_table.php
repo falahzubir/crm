@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->notNull();
-            $table->string('code', 10)->notNull();
+            $table->string('key', 10)->notNull();
             $table->unsignedBigInteger('country_id')->notNull();
             $table->timestamps();
         });

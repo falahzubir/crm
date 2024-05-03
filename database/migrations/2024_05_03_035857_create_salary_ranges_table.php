@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('salary_ranges', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255)->notNull();
-            $table->string('key', 10)->notNull();
-            $table->binary('flag')->nullable()->default(null);
+            $table->string('name');
+            $table->decimal('min_salary', 10, 2);
+            $table->decimal('max_salary', 10, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('salary_ranges');
     }
 };

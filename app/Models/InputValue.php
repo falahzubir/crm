@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class InputValue extends Model
 {
     use HasFactory, SoftDeletes;
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }
