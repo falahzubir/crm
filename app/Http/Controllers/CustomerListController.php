@@ -15,4 +15,9 @@ class CustomerListController extends Controller
     {
         return view('customer_list/customer_profile');
     }
+
+    public function customer_edit()
+    {
+        return view('customer_list/customer_edit');
+    }
 }

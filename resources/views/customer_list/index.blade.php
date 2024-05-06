@@ -87,8 +87,8 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="" class="text-secondary"><i class='bx bx-pencil'></i></a>
-                                    <a href="" class="text-secondary"><i class='bx bx-show-alt'></i></a>
+                                    <a href="{{ route('customer.edit') }}" class="text-secondary"><i class='bx bx-pencil'></i></a>
+                                    <a href="{{ route('customer.profile') }}" class="text-secondary"><i class='bx bx-show-alt'></i></a>
                                 </td>
                                 <td>
                                     <div class="row flex-row align-items-center">

@@ -42,7 +42,7 @@
 
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
-    <style>
+    {{-- <style>
         #nama,
         #details {
             text-decoration: none;
@@ -54,7 +54,26 @@
             text-decoration: underline;
             color: #696cff;
         }
-    </style>
+
+        .layout-menu {
+            /* display: none; */
+            /* Hide sidebar by default */
+            width: 110px;
+        }
+
+        .layout-menu.sidebar-open {
+            display: block;
+            /* Show sidebar when opened */
+        }
+
+        .sidebar-text {
+            display: none;
+        }
+
+        .menu-icon {
+            margin-left: 20px;
+        }
+    </style> --}}
 
     <script>
         window.addEventListener("load", () => {
@@ -76,7 +95,7 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
-            @include('includes.menu')
+            @include('includes.sidebar')
 
             <!-- Layout container -->
             <div class="layout-page">
@@ -91,7 +110,11 @@
                 <footer class="content-footer footer bg-footer-theme mb-3">
                     <div class="container-xxl d-flex flex-wrap justify-content-center flex-md-row flex-column">
                         <div class="mb-2 mb-md-0">
-                            <strong>CRM @ <script>document.write(new Date().getFullYear());</script></strong>
+                            <strong>CRM @
+                                <script>
+                                    document.write(new Date().getFullYear());
+                                </script>
+                            </strong>
                         </div>
                     </div>
                 </footer>
@@ -155,6 +178,17 @@
             });
         </script>
     @endif
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sidebar = document.getElementById("layout-menu");
+            const sidebarToggle = document.getElementById("sidebar-toggle");
+
+            sidebarToggle.addEventListener("click", function() {
+                sidebar.classList.toggle("sidebar-open");
+            });
+        });
+    </script>
 
 </body>
 

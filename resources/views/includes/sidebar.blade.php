@@ -14,28 +14,26 @@
     </div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item">
-            <a href="" class="menu-link">
+        <li class="menu-item active">
+            <a href="{{ route('customer.list') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-group"></i>
-                <div data-i18n="Analytics">Customer List</div>
+                <div class="sidebar-text">Customer List</div>
             </a>
         </li>
 
         <li class="menu-item">
             <a href="" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-cog"></i>
-                <div data-i18n="Tables">Setting</div>
+                <div class="sidebar-text">Setting</div>
             </a>
         </li>
 
         <li class="menu-item">
-        <a href="" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-log-in"></i>
-            <div data-i18n="Tables">Logout</div>
-        </a>
-    </li>
-
+            <a href="" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-log-in"></i>
+                <div class="sidebar-text">Logout</div>
+            </a>
+        </li>
     </ul>
-
 </aside>
 <!-- / Sidebar -->
