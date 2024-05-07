@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class CustomerListController extends Controller
 {
-    public function index()
+    public function customer_list()
     {
-        return view('customer_list/index');
+        return view('customer_list/customer_list');
     }
 
     public function customer_profile()

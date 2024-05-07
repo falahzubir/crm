@@ -15,7 +15,7 @@
                             <p class="mb-2">Please sign-in to your account.</p>
                         </div>
 
-                        <form id="formAuthentication" class="mb-3" action="" method="POST">
+                        <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
                             @csrf
 
                             @if (session('success'))
