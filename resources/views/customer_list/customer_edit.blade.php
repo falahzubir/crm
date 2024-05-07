@@ -460,7 +460,74 @@
                 </a>
             </div>
             <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
-                
+                <div class="mb-3">
+                    <label class="mb-3">Aware or not about EMZI? :</label>
+                    <div>
+                        <input type="radio" name=""> Yes
+                        <input type="radio" name=""> No
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">How do you know about EMZI? :</label>
+                    <div>
+                        <input type="checkbox" name=""> Social Media
+                        <input type="checkbox" name=""> Friends
+                        <input type="checkbox" name=""> Website
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">First EMZI Product Purchased? :</label>
+                    <input type="text" class="form-control" name="">
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">Why Buying EMZI Products? :</label>
+                    <input type="text" class="form-control" name="">
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">Why Support EMZI Products? :</label>
+                    <input type="text" class="form-control" name="">
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">Purchase Frequency :</label>
+                    <input type="text" class="form-control" name="">
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">What Products Does EMZI Have? :</label>
+                    <input type="text" class="form-control" name="">
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">Do you EMZI has its own factory? :</label>
+                    <div>
+                        <input type="radio" name=""> Yes
+                        <input type="radio" name=""> No
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">Do you know EMZI has a laboratory at the university? :</label>
+                    <div>
+                        <input type="radio" name=""> Yes
+                        <input type="radio" name=""> No
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="mb-3">Are EMZI Products Effective? :</label>
+                    <div>
+                        <input type="radio" name=""> Yes, Highly Effective
+                        <br>
+                        <input type="radio" name=""> Less Effective
+                        <br>
+                        <input type="radio" name=""> Not Effective
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -518,6 +585,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
