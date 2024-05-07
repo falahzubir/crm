@@ -41,7 +41,7 @@ return new class extends Migration
             $table->unsignedBigInteger('salary_range_id')->nullable()->default(null);
             $table->foreign('salary_range_id')->references('id')->on('salary_ranges');
             $table->unsignedBigInteger('tier_id')->nullable()->default(null);
-            $table->foreign('tier_id')->references('id')->on('customer_tiers');
+            $table->foreign('tier_id')->references('id')->on('tiers');
             $table->string('working_hour', 10)->nullable()->default(null);
             $table->text('additional_tags')->nullable()->default(null);
             $table->unsignedBigInteger('updated_by')->nullable()->default(null);
