@@ -22,12 +22,20 @@ class AuthController extends Controller
         ];
 
         // Queries
-        $customersResponse = $this->makeRequest('http://127.0.0.1:8001/api/customers');
-        $customers = json_decode($customersResponse, true);
+        // $customersResponse = $this->makeRequest('http://127.0.0.1:8001/api/customers');
+        // $customers = json_decode($customersResponse, true);
+
+        $states = State::all();
+        $customers = Customer::join('states', 'customers.state_id', '=', 'states.id')
+            ->join('countries', 'states.country_id', '=', 'countries.id')
+            ->select('customers.*', 'states.id as state_id', 'states.name as state_name', 'countries.flag as flag')
+            ->whereNull('customers.deleted_at')
+            ->paginate(10);
 
         if (Auth::attempt($credetials)) {
-            return view('customer_list/customer_list', [
+             return view('customer_list/customer_list', [
                 'customers' => $customers,
+                'states' => $states,
             ]);
         }
         

@@ -107,9 +107,9 @@
                                 @foreach ($customers as $row)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('customer.edit') }}" class="text-secondary"><i
+                                            <a href="{{ route('customer.edit', ['id' =>  $row->id]) }}" class="text-secondary"><i
                                                     class='bx bx-pencil'></i></a>
-                                            <a href="{{ route('customer.profile') }}" class="text-secondary"><i
+                                            <a href="{{ route('customer.profile', ['id' =>  $row->id]) }}" class="text-secondary"><i
                                                     class='bx bx-show-alt'></i></a>
                                         </td>
                                         <td>
