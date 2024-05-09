@@ -84,14 +84,14 @@
 
         <div class="card mt-5">
             <div class="card-body">
-                <div class="table-responsive text-nowrap">
+                <div class="table-responsive">
                     <table class="table table-borderless">
-                        <thead class="table-light">
+                        <thead class="table-light text-center">
                             <tr>
                                 <th>ACTION</th>
                                 <th>NAME</th>
                                 <th>PHONE</th>
-                                <th>SPENT (MYR)</th>
+                                <th style="width: 150px;">SPENT (MYR)</th>
                                 <th>STATE</th>
                                 <th>ORDER</th>
                                 <th>OM</th>
@@ -106,46 +106,56 @@
                             @else
                                 @foreach ($customers as $row)
                                     <tr>
-                                        <td>
+                                        <td class="text-center">
+                                            {{-- Action --}}
                                             <a href="{{ route('customer.edit', ['id' =>  $row->id]) }}" class="text-secondary"><i
                                                     class='bx bx-pencil'></i></a>
                                             <a href="{{ route('customer.profile', ['id' =>  $row->id]) }}" class="text-secondary"><i
                                                     class='bx bx-show-alt'></i></a>
                                         </td>
                                         <td>
+                                            {{-- Name --}}
                                             <div class="row flex-row align-items-center">
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-2">
                                                     <ul class="navbar-nav flex-row align-items-center">
                                                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                                             <div class="avatar">
-                                                                <img src="{{ $row->photo }}"
+                                                                <img src="{{ $row->photo != null ? $row->photo : '../assets/img/avatars/user.jpeg' }}"
                                                                     class="w-px-45 h-100 rounded-circle" />
                                                             </div>
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <div class="col-sm-8">
+                                                <div class="col-sm-10">
                                                     <strong>{{ $row->name }}</strong>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            {{ $row->phone }}
+                                        <td class="text-center">
+                                            {{-- Phone --}}
+                                            {{ $row->phone != null ? $row->phone : '-' }}
                                         </td>
-                                        <td>
-                                            <div class="text-success"><strong>2,249.88</strong></div>
+                                        <td class="text-center">
+                                            {{-- Spent --}}
+                                            <div class="text-success">
+                                                <strong>-</strong>
+                                            </div>
                                         </td>
-                                        <td>
-                                            {{ $row->flag }} {{ $row->state_name }}
+                                        <td class="text-center">
+                                            {{-- State --}}
+                                            -
                                         </td>
-                                        <td>
-                                            3
+                                        <td class="text-center">
+                                            {{-- Order --}}
+                                            -
                                         </td>
-                                        <td>
+                                        <td class="text-center">
+                                            {{-- OM --}}
                                             NCA
                                         </td>
-                                        <td>
-                                            Kolestrol, Jantung, Darah Tinggi
+                                        <td class="text-center">
+                                            {{-- Tagging --}}
+                                            {{ $row->additional_tags != null ? $row->additional_tags : '-' }}
                                         </td>
                                     </tr>
                                 @endforeach

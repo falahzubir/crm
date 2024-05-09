@@ -12,9 +12,7 @@ class CustomerListController extends Controller
     {
         // Queries
         $states = State::all();
-        $customers = Customer::join('states', 'customers.state_id', '=', 'states.id')
-            ->join('countries', 'states.country_id', '=', 'countries.id')
-            ->select('customers.*', 'states.id as state_id', 'states.name as state_name', 'countries.flag as flag')
+        $customers = Customer::select('customers.*')
             ->whereNull('customers.deleted_at')
             ->paginate(10);
 
