@@ -20,7 +20,7 @@ class CustomerListController extends Controller
 
         return view('customer_list/customer_list', [
             'customers' => $customers,
-            'states' => $states
+            'states' => $states,
         ]);
     }
 
@@ -40,7 +40,8 @@ class CustomerListController extends Controller
         // Variable
         $search = $request->input('search');
         $gender = $request->input('gender');
-        $state = $request->input('state');
+        $age = $request->input('age_range');
+        $state_filter = $request->input('state');
 
         // Queries
         $states = State::all();
@@ -56,16 +57,44 @@ class CustomerListController extends Controller
             });
         }
 
-        // Filter State
+        // Filter
         if ($request->filled('state') && $request->filled('gender')) {
             $query->where('gender', $gender)
-                ->where('state_id', $state);
+                ->where('state_id', $state_filter);
         } elseif ($request->filled('state')) {
             // Only filter State
-            $query->where('state_id', $state);
+            $query->where('state_id', $state_filter);
         } elseif ($request->filled('gender')) {
             // Only filter Gender
             $query->where('gender', $gender);
+        } elseif ($request->filled('age_range')) {
+            // Only filter Age
+            switch ($age) {
+                case '1':
+                    $query->where('age', '<=', '17');
+                    break;
+                case '2':
+                    $query->whereBetween('age', ['18', '24']);
+                    break;
+                case '3':
+                    $query->whereBetween('age', ['25', '34']);
+                    break;
+                case '4':
+                    $query->whereBetween('age', ['35', '44']);
+                    break;
+                case '5':
+                    $query->whereBetween('age', ['45', '54']);
+                    break;
+                case '6':
+                    $query->whereBetween('age', ['55', '64']);
+                    break;
+                case '7':
+                    $query->whereBetween('age', ['65', '74']);
+                    break;
+                case '8':
+                    $query->where('age', '>=', '75');
+                    break;
+            }
         }
 
         // Put all together and apply paginate
@@ -74,7 +103,8 @@ class CustomerListController extends Controller
         // Send back what user filters
         $filters = [
             'gender' => $gender,
-            'state' => $state
+            'state_filter' => $state_filter,
+            'age' => $age,
         ];
 
         return view('customer_list/customer_list', [

@@ -31,13 +31,6 @@
                                     <option value=""></option>
                                 </select>
                             </div>
-
-                            {{-- <div class="col">
-                                <label>Ranking</label>
-                                <select name="ranking" id="ranking" class="form-select mt-2">
-                                    <option value=""></option>
-                                </select>
-                            </div> --}}
                         </div>
 
                         <div class="row">
@@ -57,7 +50,15 @@
                             <div class="col">
                                 <label>Age Range</label>
                                 <select name="age_range" id="age_range" class="form-select mt-2">
-                                    <option value=""></option>
+                                    <option selected disabled></option>
+                                    <option value="1" {{ isset($filters['age']) && '1' == $filters['age'] ? 'selected' : '' }}>Under 17</option>
+                                    <option value="2" {{ isset($filters['age']) && '2' == $filters['age'] ? 'selected' : '' }}>18 - 24 years old</option>
+                                    <option value="3" {{ isset($filters['age']) && '3' == $filters['age'] ? 'selected' : '' }}>25 - 34 years old</option>
+                                    <option value="4" {{ isset($filters['age']) && '4' == $filters['age'] ? 'selected' : '' }}>35 - 44 years old</option>
+                                    <option value="5" {{ isset($filters['age']) && '5' == $filters['age'] ? 'selected' : '' }}>45 - 54 years old</option>
+                                    <option value="6" {{ isset($filters['age']) && '6' == $filters['age'] ? 'selected' : '' }}>55 - 64 years old</option>
+                                    <option value="7" {{ isset($filters['age']) && '7' == $filters['age'] ? 'selected' : '' }}>65 - 74 years old</option>
+                                    <option value="8" {{ isset($filters['age']) && '8' == $filters['age'] ? 'selected' : '' }}>75 years old and above</option>
                                 </select>
                             </div>
 
@@ -65,10 +66,10 @@
                                 <label>State</label>
                                 <select name="state" id="state" class="form-select mt-2">
                                     <option selected disabled></option>
-                                    @foreach ($states as $state)
-                                        <option value="{{ $state->id }}"
-                                            {{ isset($filters['state']) && $state->id == $filters['state'] ? 'selected' : '' }}>
-                                            {{ $state->name }}
+                                    @foreach ($states as $row)
+                                        <option value="{{ $row->id }}"
+                                            {{ isset($filters['state_filter']) && $row->id == $filters['state_filter'] ? 'selected' : '' }}>
+                                            {{ $row->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -116,8 +117,8 @@
                                                 <div class="col-sm-4">
                                                     <ul class="navbar-nav flex-row align-items-center">
                                                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                                            <div class="avatar avatar-online">
-                                                                <img src="../assets/img/avatars/5.png"
+                                                            <div class="avatar">
+                                                                <img src="{{ $row->photo }}"
                                                                     class="w-px-45 h-100 rounded-circle" />
                                                             </div>
                                                         </li>

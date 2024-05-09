@@ -8,10 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 // -------------------------------------------------- AUTHENTICATION --------------------------------------------------
 
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('/', [AuthController::class, 'login'])->name('login');
-    Route::post('/', [AuthController::class, 'login_post'])->name('login.post');
-});
+Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::post('/', [AuthController::class, 'login_post'])->name('login.post');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/customer-list', [CustomerListController::class, 'customer_list'])->name('customer.list');
