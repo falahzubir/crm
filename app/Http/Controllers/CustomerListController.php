@@ -121,6 +121,7 @@ class CustomerListController extends Controller
         ]);
     }
 
+    // Get customers data using api
     public function fetchDataFromAnalytics()
     {
         // Fetch customers data
