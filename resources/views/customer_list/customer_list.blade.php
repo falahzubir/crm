@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <h3 class="text-dark">Customer List</h3>
     </div>
-    {{-- @dd($customers) --}}
+
     <div class="container">
         <div class="card mt-3 p-3">
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -66,12 +66,12 @@
                                 <label>State</label>
                                 <select name="state" id="state" class="form-select mt-2">
                                     <option selected disabled></option>
-                                    {{-- @foreach ($states as $row)
-                                        <option value="{{ $row->id }}"
-                                            {{ isset($filters['state_filter']) && $row->id == $filters['state_filter'] ? 'selected' : '' }}>
-                                            {{ $row->name }}
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state->id }}"
+                                            {{ isset($filters['state']) && $state->id == $filters['state'] ? 'selected' : '' }}>
+                                            {{ $state->name }}
                                         </option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -84,14 +84,14 @@
 
         <div class="card mt-5">
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive text-nowrap">
                     <table class="table table-borderless">
                         <thead class="table-light">
                             <tr>
                                 <th>ACTION</th>
                                 <th>NAME</th>
                                 <th>PHONE</th>
-                                <th style="width: 150px;">SPENT (MYR)</th>
+                                <th>SPENT (MYR)</th>
                                 <th>STATE</th>
                                 <th>ORDER</th>
                                 <th>OM</th>
@@ -99,38 +99,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-                                @foreach ($customers['data'] as $customer)
+                            @if ($customers->isEmpty())
+                                <tr class="text-center">
+                                    <td colspan="8" class="bg-light">No data</td>
+                                </tr>
+                            @else
+                                @foreach ($customers as $row)
                                     <tr>
                                         <td>
-                                            {{-- <a href="{{ route('customer.edit', ['id' => $row->id]) }}" class="text-secondary"><i class='bx bx-pencil'></i></a>
-                                            <a href="{{ route('customer.profile', ['id' => $row->id]) }}" class="text-secondary"><i
-                                                    class='bx bx-show-alt'></i></a> --}}
+                                            <a href="{{ route('customer.edit') }}" class="text-secondary"><i
+                                                    class='bx bx-pencil'></i></a>
+                                            <a href="{{ route('customer.profile') }}" class="text-secondary"><i
+                                                    class='bx bx-show-alt'></i></a>
                                         </td>
                                         <td>
                                             <div class="row flex-row align-items-center">
-                                                <div class="col-sm-3">
+                                                <div class="col-sm-4">
                                                     <ul class="navbar-nav flex-row align-items-center">
                                                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                                             <div class="avatar">
-                                                                <img src="../assets/img/avatars/user.jpeg" class="w-px-45 h-100 rounded-circle" />
+                                                                <img src="{{ $row->photo }}"
+                                                                    class="w-px-45 h-100 rounded-circle" />
                                                             </div>
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <div class="col-sm-9">
-                                                    <strong>{{ $customer['customer_name'] }}</strong>
+                                                <div class="col-sm-8">
+                                                    <strong>{{ $row->name }}</strong>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            {{ $customer['customer_tel'] }}
+                                            {{ $row->phone }}
                                         </td>
                                         <td>
                                             <div class="text-success"><strong>2,249.88</strong></div>
                                         </td>
                                         <td>
-                                            {{-- {{ $row->flag }} {{ $row->state_name }} --}}
+                                            {{ $row->flag }} {{ $row->state_name }}
                                         </td>
                                         <td>
                                             3
@@ -143,10 +149,10 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                           
+                            @endif
                         </tbody>
                     </table>
-                    {{-- {{ $customers->links('pagination::bootstrap-5') }} --}}
+                    {{ $customers->links('pagination::bootstrap-5') }}
                 </div>
             </div>
         </div>
