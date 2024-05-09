@@ -109,6 +109,26 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        "ANALYTIC-STG" => [
+            'driver'    => 'mysql',
+            'host'      => "128.199.249.168",
+            'database'  => "the_analytics",
+            'username'  => "admin_analytics",
+            'password'  => "ANALYTICS@2023",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+        
+        "CRM-STG" => [
+            'driver'    => 'mysql',
+            'host'      => "206.189.144.234",
+            'database'  => "crm_staging",
+            'username'  => "admin_crm",
+            'password'  => "EMZI@2023",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+
     ],
 
     /*
