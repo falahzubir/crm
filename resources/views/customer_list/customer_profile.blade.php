@@ -29,12 +29,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-1">
-                        <img src="../assets/img/avatars/5.png" class="w-px-100 h-px-100 rounded-circle" />
+                        <img src="../{{ $customer->photo }}" class="w-px-100 h-px-100 rounded-circle" />
                     </div>
 
                     <div class="col-md-4 float-start" style="margin-left: 50px;">
                         <div class="mb-1">
-                            <h3>Muhammad Sumbul</h3>
+                            <h3>{{ $customer->name }}</h3>
                         </div>
 
                         <div class="mb-0">
@@ -66,7 +66,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2" for="basic-default-name">Name :</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" readonly/>
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -74,7 +74,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-4" for="basic-default-name">Nick Name :</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->nickname }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -82,7 +82,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2" for="basic-default-name">Titles :</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -90,7 +90,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3" for="basic-default-name">Gender :</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->gender }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -98,7 +98,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-4" for="basic-default-name">Marital Status :</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -106,7 +106,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2" for="basic-default-name">Age :</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->age }}" />
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-4" for="basic-default-name">IC Number :</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->identification_number }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -123,7 +123,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-4" for="basic-default-name">Phone Number :</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->phone }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -131,7 +131,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3" for="basic-default-name">Weight (KG) : </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -139,7 +139,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3" for="basic-default-name">Height (cm) :</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -147,7 +147,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2" for="basic-default-name">BMI :</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -155,7 +155,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3" for="basic-default-name">Blood Type :</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                                     <label class="col-sm-6" for="basic-default-name">Customer Address
                                         :</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -190,7 +190,7 @@
                                     <label class="col-sm-4" for="basic-default-name">Place of Birth
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -199,7 +199,7 @@
                                     <label class="col-sm-4" for="basic-default-name">State of Birth
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +222,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-4" for="basic-default-name">Occupation :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -231,7 +231,7 @@
                                     <label class="col-sm-4" for="basic-default-name">Sector
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -241,7 +241,7 @@
                                         Military
                                         :</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -250,7 +250,7 @@
                                     <label class="col-sm-4" for="basic-default-name">Salary Range
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -259,7 +259,7 @@
                                     <label class="col-sm-4" for="basic-default-name">Working Hour
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                 </div>
                             </div>
@@ -285,7 +285,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Child Birth Order
                                     :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -294,7 +294,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Number of children
                                     :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -302,7 +302,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-6" for="basic-default-name">Spouse Name :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -311,7 +311,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Spouse Occupation
                                     :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -319,7 +319,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-4" for="basic-default-name">Spouse Age :</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                             </div>
                         </div>
@@ -330,7 +330,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-4 mt-3" for="basic-default-name">Name :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -338,7 +338,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-4" for="basic-default-name">Age :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -347,7 +347,7 @@
                                     <label class="col-sm-6 mb-3" for="basic-default-name">Education
                                         Institution/ Workplace :</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                 </div>
                             </div>
@@ -374,7 +374,7 @@
                                     <label class="col-sm-6" for="basic-default-name">Hobby
                                         :</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -383,7 +383,7 @@
                                     <label class="col-sm-4" for="basic-default-name">Favourite Colour
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -392,7 +392,7 @@
                                     <label class="col-sm-4" for="basic-default-name">Favourite Pet
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -401,7 +401,7 @@
                                     <label class="col-sm-4" for="basic-default-name">Favourite Food
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -410,7 +410,7 @@
                                     <label class="col-sm-4" for="basic-default-name">Favourite Drinks
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0" id="basic-default-name" />
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                     </div>
                                 </div>
                             </div>
@@ -455,7 +455,7 @@
                                 <label class="col-sm-7" for="basic-default-name">Does EMZI familiar to you?
                                     :</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -464,7 +464,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Where did you know about
                                     EMZI? :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -473,7 +473,7 @@
                                 <label class="col-sm-7" for="basic-default-name">First EMZI Product
                                     Purchased? :</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -482,7 +482,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Reason of buying EMZI
                                     Products? :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -491,7 +491,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Why Support EMZI product?
                                     :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                             </div>
                         </div>
@@ -501,7 +501,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Purchase Frequency
                                     :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -510,7 +510,7 @@
                                 <label class="col-sm-6" for="basic-default-name">What Products Does EMZI
                                     Have? :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -519,7 +519,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Do you know that EMZI has
                                     its own factory? : </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -528,7 +528,7 @@
                                 <label class="col-sm-6" for="basic-default-name">Do you know that EMZI has
                                     a laboratory at the university? :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -537,7 +537,7 @@
                                 <label class="col-sm-7" for="basic-default-name">Does EMZI Products
                                     Effective? :</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control border-0" id="basic-default-name" />
+                                    <input type="text" class="form-control border-0 text-end bg-white" value="{{ $customer->name }}" />
                                 </div>
                             </div>
                         </div>
@@ -600,6 +600,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

@@ -24,14 +24,20 @@ class CustomerListController extends Controller
         ]);
     }
 
-    public function customer_profile()
+    public function customer_profile($id)
     {
-        return view('customer_list/customer_profile');
+        $customer = Customer::select('customers.*', 'states.name as state_name', 'countries.flag as flag')
+            ->join('states', 'customers.state_id', '=', 'states.id')
+            ->join('countries', 'states.country_id', '=', 'countries.id')
+            ->findOrFail($id);
+
+        return view('customer_list/customer_profile', ['customer' => $customer]);
     }
 
-    public function customer_edit()
+    public function customer_edit($id)
     {
-        return view('customer_list/customer_edit');
+        $customer = Customer::findOrFail($id);
+        return view('customer_list/customer_edit', ['customer' => $customer]);
     }
 
     // For Search & Filters
@@ -113,5 +119,36 @@ class CustomerListController extends Controller
             'search' => $search,
             'filters' => $filters
         ]);
+    }
+
+    public function fetchDataFromAnalytics()
+    {
+        // Fetch customers data
+        $customersResponse = $this->makeRequest('http://127.0.0.1:8001/api/customers');
+        $customers = json_decode($customersResponse, true);
+
+        // Process data as needed
+        return view('customer_list/customer_list', [
+            'customers' => $customers,
+        ]);
+    }
+
+    private function makeRequest($url)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        return $response;
     }
 }
