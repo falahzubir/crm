@@ -28,10 +28,10 @@ class TransferDataSeeder extends Seeder
         // Insert data into CRM
         foreach ($customers as $customer) {
             // Insert the customer data into CRM
-            DB::connection('CRM-STG')->table('customers_test')->insert([
+            DB::connection('CRM-STG')->table('customers')->insert([
+                'id' => $customer->id,
                 'name' => $customer->customer_name,
                 'phone' => $customer->customer_tel,
-                // Map other columns as needed
             ]);
 
             // Update the last processed row
