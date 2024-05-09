@@ -21,43 +21,10 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
-        // Queries
-        // $customersResponse = $this->makeRequest('http://127.0.0.1:8001/api/customers');
-        // $customers = json_decode($customersResponse, true);
-
-        $states = State::all();
-        $customers = Customer::join('states', 'customers.state_id', '=', 'states.id')
-            ->join('countries', 'states.country_id', '=', 'countries.id')
-            ->select('customers.*', 'states.id as state_id', 'states.name as state_name', 'countries.flag as flag')
-            ->whereNull('customers.deleted_at')
-            ->paginate(10);
-
         if (Auth::attempt($credetials)) {
-             return view('customer_list/customer_list', [
-                'customers' => $customers,
-                'states' => $states,
-            ]);
+            return redirect()->route('customer.list');
         }
         
         return back()->with('error', 'Wrong email or password');
-    }
-
-    private function makeRequest($url)
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-        ]);
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        return $response;
     }
 }
