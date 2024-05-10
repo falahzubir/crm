@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BloodType;
+use App\Models\Country;
 use App\Models\Customer;
+use App\Models\CustomerTitle;
+use App\Models\MaritalStatus;
 use App\Models\State;
 use Illuminate\Http\Request;
 
@@ -35,7 +39,20 @@ class CustomerListController extends Controller
     public function customer_edit($id)
     {
         $customer = Customer::findOrFail($id);
-        return view('customer_list/customer_edit', ['customer' => $customer]);
+        $titles = CustomerTitle::all();
+        $maritalStatus = MaritalStatus::all();
+        $bloodTypes = BloodType::all();
+        $states = State::all();
+        $countries = Country::all();
+
+        return view('customer_list/customer_edit', [
+            'customer' => $customer,
+            'titles' => $titles,
+            'maritalStatus' => $maritalStatus,
+            'bloodTypes' => $bloodTypes,
+            'states' => $states,
+            'countries' => $countries,
+        ]);
     }
 
     // For Search & Filters

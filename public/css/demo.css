@@ -4,6 +4,7 @@
 ******************************************************************************/
 body {
   font-size: 10pt;
+  overflow-x: hidden;
 }
 
 .menu .app-brand.demo {
@@ -19,6 +20,10 @@ body {
   font-size: 1.0rem;
   letter-spacing: -0.5px;
   text-transform: uppercase;
+}
+
+.form-control, .form-select {
+  font-size: 10pt;
 }
 
 /* ! For .layout-navbar-fixed added fix padding top tpo .layout-page */

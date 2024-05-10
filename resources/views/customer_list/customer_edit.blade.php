@@ -77,19 +77,22 @@
                                 <label class="mb-3">Titles :</label>
                                 <select name="titles" class="form-select">
                                     <option selected disabled>Please Select</option>
-                                    <option value="">Miss</option>
-                                    <option value="">Mrs.</option>
-                                    <option value="">Ms.</option>
-                                    <option value="">Madam</option>
-                                    <option value="">Mr.</option>
+                                    @foreach ($titles as $row)
+                                        <option value="{{ $row->id }}"
+                                            {{ isset($customer->title_id) && $row->id == $customer->title_id ? 'selected' : '' }}>
+                                            {{ $row->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="col mb-3">
                                 <label class="mb-4">Gender :</label>
                                 <div class="d-flex justify-content-start">
-                                    <input type="radio" name="gender"> <label class="ms-1">Male</label>
-                                    <input type="radio" name="gender" class="ms-3"> <label
+                                    <input type="radio" name="gender" value="M"
+                                        {{ $customer->gender === 'M' ? 'checked' : '' }}> <label class="ms-1">Male</label>
+                                    <input type="radio" name="gender" value="F" class="ms-3"
+                                        {{ $customer->gender === 'F' ? 'checked' : '' }}> <label
                                         class="ms-1">Female</label>
                                 </div>
                             </div>
@@ -98,46 +101,60 @@
                                 <label class="mb-3">Marital Status :</label>
                                 <select name="marital_status" class="form-select">
                                     <option selected disabled>Select Status</option>
-                                    <option value="">Single</option>
-                                    <option value="">Married</option>
-                                    <option value="">Divorced</option>
-                                    <option value="">Widowed</option>
-                                    <option value="">Seperated</option>
+                                    @foreach ($maritalStatus as $row)
+                                        <option value="{{ $row->id }}"
+                                            {{ isset($customer->marital_status_id) && $row->id == $customer->marital_status_id ? 'selected' : '' }}>
+                                            {{ $row->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="mb-3">
+                        <div class="row d-flex align-items-center justify-content-between">
+                            <div class="col mb-3">
                                 <label class="mb-3">Age :</label>
-                                <input type="number" class="form-control" name="age">
+                                <input type="number" class="form-control" name="age" min="1"
+                                    value="{{ $customer->age }}">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="col mb-3">
                                 <label class="mb-3">IC Number :</label>
-                                <input type="text" class="form-control" name="ic_number">
+                                <input type="text" class="form-control" name="ic_number"
+                                    value="{{ $customer->identification_number }}">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="col mb-3">
                                 <label class="mb-3">Phone Number :</label>
-                                <input type="tel" class="form-control" name="phone_number">
+                                <input type="tel" class="form-control" name="phone_number"
+                                    value="{{ $customer->phone }}">
                             </div>
                         </div>
 
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="mb-3">
+                        <div class="row d-flex align-items-center justify-content-between">
+                            <div class="col mb-3">
                                 <label class="mb-3">Weight (kg) :</label>
-                                <input type="number" class="form-control" name="weight">
+                                <input type="number" class="form-control" name="weight" min="1"
+                                    value="{{ $customer->weight }}">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="col mb-3">
                                 <label class="mb-3">Height (cm) :</label>
-                                <input type="text" class="form-control" name="height">
+                                <input type="number" class="form-control" name="height" min="1"
+                                    value="{{ $customer->height }}">
                             </div>
 
-                            <div class="mb-3">
+                            <div class="col mb-3">
                                 <label class="mb-3">Blood Type :</label>
-                                <input type="tel" class="form-control" name="blood_type">
+                                <select name="blood_type" class="form-select">
+                                    <option selected disabled>Select Blood Type</option>
+                                    @foreach ($bloodTypes as $row)
+                                        <option value="{{ $row->id }}"
+                                            {{ isset($customer->blood_type_id) && $row->id == $customer->blood_type_id ? 'selected' : '' }}>
+                                            {{ $row->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -148,55 +165,69 @@
             <div class="card mt-5">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5><strong>Customer Address</strong></h5>
-                    <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#customerAddress">
                         <strong><i class='bx bx-chevron-down'></i></strong>
                     </a>
                 </div>
-                <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
+                <div class="card-body" id="customerAddress" data-bs-parent="#accordion">
                     <div class="mb-3">
                         <label class="mb-3">Address :</label>
                         <div>
-                            <textarea name="address" class="form-control" cols="50" rows="4"></textarea>
+                            <textarea name="address" class="form-control" cols="50" rows="4">
+                                {{ $customer->address }}
+                            </textarea>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-3">City :</label>
                         <div>
-                            <input type="text" class="form-control" name="city">
+                            <input type="text" class="form-control" name="city" value="{{ $customer->city }}">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col mb-3">
                             <label class="mb-3">Postcode :</label>
-                            <input type="number" class="form-control" name="postcode">
+                            <input type="number" class="form-control" name="postcode"
+                                value="{{ $customer->postcode }}">
                         </div>
 
                         <div class="col mb-3">
                             <label class="mb-3">State :</label>
-                            <input type="text" class="form-control" name="state">
+                            <select name="state" class="form-select">
+                                <option selected disabled></option>
+                                @foreach ($states as $row)
+                                    <option value="{{ $row->id }}"
+                                        {{ isset($customer->state_id) && $row->id == $customer->state_id ? 'selected' : '' }}>
+                                        {{ $row->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col mb-3">
                             <label class="mb-3">Country :</label>
-                            <input type="tel" class="form-control" name="country">
+                            <input type="text" class="form-control" name="country" value="">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col mb-3">
                             <label class="mb-3">Place of Birth :</label>
-                            <input type="number" class="form-control" name="place_of_birth">
+                            <input type="number" class="form-control" name="place_of_birth" value="{{ $customer->birth_place }}">
                         </div>
 
                         <div class="col mb-3">
                             <label class="mb-3">State of Birth :</label>
                             <select name="state_of_birth" class="form-select">
                                 <option selected disabled>Please Select</option>
-                                <option value="">Johor</option>
-                                <option value="">Kedah</option>
-                                <option value="">Kelantan</option>
+                                @foreach ($states as $row)
+                                    <option value="{{ $row->id }}"
+                                        {{ isset($customer->state_id) && $row->id == $customer->state_id ? 'selected' : '' }}>
+                                        {{ $row->name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
