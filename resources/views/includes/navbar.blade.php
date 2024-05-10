@@ -12,18 +12,18 @@
             <li class="nav-item">
                 <div class="p-2">
                     <div class="mb-0">
-                        <label><strong>Muhammad Sumbul</strong></label>
+                        <label><strong>{{ Auth::user()->name }}</strong></label>
                     </div>
 
                     <div class="mb-0">
-                        <label class="float-end">Marketer</label>
+                        <label class="float-end">{{ Auth::user()->role }}</label>
                     </div>
                 </div>
             </li>
 
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <div class="avatar avatar-online">
-                    <img src="../assets/img/avatars/5.png" class="w-px-45 h-100 rounded-circle" />
+                    <img src="{{ asset('assets/img/avatars/user.jpeg') }}" class="w-px-45 h-100 rounded-circle" />
                 </div>
             </li>
         </ul>

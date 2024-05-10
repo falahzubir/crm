@@ -25,7 +25,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-1">
-                        <img src="{{ $customer->photo }}" class="w-px-100 h-px-100 rounded-circle" />
+                        <img src="{{ $customer->photo != null ? $customer->photo : asset('assets/img/avatars/user.jpeg') }}"
+                            class="w-px-100 h-px-100 rounded-circle" />
                     </div>
 
                     <div class="col-md-4 float-start" style="margin-left: 50px;">
@@ -70,9 +71,9 @@
                         <input type="text" class="form-control" name="nick_name" value="{{ $customer->nickname }}">
                     </div>
 
-                    <div class="row d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="mb-3">
+                    <div class="row d-flex align-items-center justify-content-around">
+                        <div class="row">
+                            <div class="col mb-3">
                                 <label class="mb-3">Titles :</label>
                                 <select name="titles" class="form-select">
                                     <option selected disabled>Please Select</option>
@@ -84,15 +85,16 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="mb-3">Gender :</label>
-                                <div>
-                                    <input type="radio" name="gender"> Male
-                                    <input type="radio" name="gender"> Female
+                            <div class="col mb-3">
+                                <label class="mb-4">Gender :</label>
+                                <div class="d-flex justify-content-start">
+                                    <input type="radio" name="gender"> <label class="ms-1">Male</label>
+                                    <input type="radio" name="gender" class="ms-3"> <label
+                                        class="ms-1">Female</label>
                                 </div>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="col mb-3">
                                 <label class="mb-3">Marital Status :</label>
                                 <select name="marital_status" class="form-select">
                                     <option selected disabled>Select Status</option>
@@ -151,53 +153,51 @@
                     </a>
                 </div>
                 <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
-                    <div class="p-4">
-                        <div class="mb-3">
-                            <label class="mb-3">Address :</label>
-                            <div>
-                                <textarea name="address" class="form-control" cols="50" rows="4"></textarea>
-                            </div>
+                    <div class="mb-3">
+                        <label class="mb-3">Address :</label>
+                        <div>
+                            <textarea name="address" class="form-control" cols="50" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="mb-3">City :</label>
+                        <div>
+                            <input type="text" class="form-control" name="city">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label class="mb-3">Postcode :</label>
+                            <input type="number" class="form-control" name="postcode">
                         </div>
 
-                        <div class="mb-3">
-                            <label class="mb-3">City :</label>
-                            <div>
-                                <input type="text" class="form-control" name="city">
-                            </div>
+                        <div class="col mb-3">
+                            <label class="mb-3">State :</label>
+                            <input type="text" class="form-control" name="state">
                         </div>
 
-                        <div class="row">
-                            <div class="col mb-3">
-                                <label class="mb-3">Postcode :</label>
-                                <input type="number" class="form-control" name="postcode">
-                            </div>
+                        <div class="col mb-3">
+                            <label class="mb-3">Country :</label>
+                            <input type="tel" class="form-control" name="country">
+                        </div>
+                    </div>
 
-                            <div class="col mb-3">
-                                <label class="mb-3">State :</label>
-                                <input type="text" class="form-control" name="state">
-                            </div>
-
-                            <div class="col mb-3">
-                                <label class="mb-3">Country :</label>
-                                <input type="tel" class="form-control" name="country">
-                            </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label class="mb-3">Place of Birth :</label>
+                            <input type="number" class="form-control" name="place_of_birth">
                         </div>
 
-                        <div class="row">
-                            <div class="col mb-3">
-                                <label class="mb-3">Place of Birth :</label>
-                                <input type="number" class="form-control" name="place_of_birth">
-                            </div>
-
-                            <div class="col mb-3">
-                                <label class="mb-3">State of Birth :</label>
-                                <select name="state_of_birth" class="form-select">
-                                    <option selected disabled>Please Select</option>
-                                    <option value="">Johor</option>
-                                    <option value="">Kedah</option>
-                                    <option value="">Kelantan</option>
-                                </select>
-                            </div>
+                        <div class="col mb-3">
+                            <label class="mb-3">State of Birth :</label>
+                            <select name="state_of_birth" class="form-select">
+                                <option selected disabled>Please Select</option>
+                                <option value="">Johor</option>
+                                <option value="">Kedah</option>
+                                <option value="">Kelantan</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -212,7 +212,7 @@
                     </a>
                 </div>
                 <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
-                    <div class="row p-4 d-flex align-items-center justify-content-between">
+                    <div class="row d-flex align-items-center justify-content-between">
                         <div class="mb-3">
                             <label class="mb-3">Occupation :</label>
                             <div>
@@ -222,10 +222,11 @@
 
                         <div class="row">
                             <div class="col mb-3">
-                                <label class="mb-3">Sector :</label>
-                                <div>
-                                    <input type="radio" name="sector"> Private
-                                    <input type="radio" name="sector"> Government
+                                <label class="mb-4">Sector :</label>
+                                <div class="d-flex justify-content-start">
+                                    <input type="radio" name="sector"> <label class="ms-1">Private</label>
+                                    <input type="radio" name="sector" class="ms-3"> <label
+                                        class="ms-1">Government</label>
                                 </div>
                             </div>
 
@@ -245,10 +246,11 @@
                             </div>
 
                             <div class="col mb-3">
-                                <label class="mb-3">Working Hour :</label>
-                                <div>
-                                    <input type="radio" name="sector"> Shift
-                                    <input type="radio" name="sector"> Normal
+                                <label class="mb-4">Working Hour :</label>
+                                <div class="d-flex justify-content-start">
+                                    <input type="radio" name="sector"> <label class="ms-1">Shift</label>
+                                    <input type="radio" name="sector" class="ms-3"> <label
+                                        class="ms-1">Normal</label>
                                 </div>
                             </div>
                         </div>
@@ -464,18 +466,18 @@
                 <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
                     <div class="mb-3">
                         <label class="mb-3">Aware or not about EMZI? :</label>
-                        <div>
-                            <input type="radio" name=""> Yes
-                            <input type="radio" name=""> No
+                        <div class="d-flex justify-content-start">
+                            <input type="radio" name="sector"> <label class="ms-1">Yes</label>
+                            <input type="radio" name="sector" class="ms-3"> <label class="ms-1">No</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">How do you know about EMZI? :</label>
-                        <div>
-                            <input type="checkbox" name=""> Social Media
-                            <input type="checkbox" name=""> Friends
-                            <input type="checkbox" name=""> Website
+                        <div class="d-flex justify-content-start">
+                            <input type="checkbox" name=""> <label class="ms-1">Social Media</label>
+                            <input type="checkbox" name="" class="ms-3"> <label class="ms-1">Friends</label>
+                            <input type="checkbox" name="" class="ms-3"> <label class="ms-1">Website</label>
                         </div>
                     </div>
 
@@ -506,28 +508,35 @@
 
                     <div class="mb-4">
                         <label class="mb-3">Do you EMZI has its own factory? :</label>
-                        <div>
-                            <input type="radio" name=""> Yes
-                            <input type="radio" name=""> No
+                        <div class="d-flex justify-content-start">
+                            <input type="radio" name=""> <label class="ms-1">Yes</label>
+                            <input type="radio" name="" class="ms-3"> <label class="ms-1">No</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Do you know EMZI has a laboratory at the university? :</label>
-                        <div>
-                            <input type="radio" name=""> Yes
-                            <input type="radio" name=""> No
+                        <div class="d-flex justify-content-start">
+                            <input type="radio" name=""> <label class="ms-1">Yes</label>
+                            <input type="radio" name="" class="ms-3"> <label class="ms-1">No</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Are EMZI Products Effective? :</label>
-                        <div>
-                            <input type="radio" name=""> Yes, Highly Effective
-                            <br>
-                            <input type="radio" name=""> Less Effective
-                            <br>
-                            <input type="radio" name=""> Not Effective
+                        <div class="d-flex flex-column">
+                            <div class="mb-2">
+                                <input type="radio" name="product_effectiveness" value="1">
+                                <label class="ms-1">Yes, Highly Effective</label>
+                            </div>
+                            <div class="mb-2">
+                                <input type="radio" name="product_effectiveness" value="2">
+                                <label class="ms-1">Less Effective</label>
+                            </div>
+                            <div class="mb-2">
+                                <input type="radio" name="product_effectiveness" value="3">
+                                <label class="ms-1">Not Effective</label>
+                            </div>
                         </div>
                     </div>
                 </div>

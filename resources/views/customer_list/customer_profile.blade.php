@@ -29,7 +29,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-1">
-                        <img src="../{{ $customer->photo }}" class="w-px-100 h-px-100 rounded-circle" />
+                        <img src="{{ $customer->photo != null ? $customer->photo : asset('assets/img/avatars/user.jpeg') }}" class="w-px-100 h-px-100 rounded-circle" />
                     </div>
 
                     <div class="col-md-4 float-start" style="margin-left: 50px;">
