@@ -269,7 +269,7 @@
 
                             <div class="col mb-3">
                                 <label class="mb-3">IC Number Police/ Military :</label>
-                                <input type="text" class="form-control" name="police_number"
+                                <input type="text" class="form-control" name="identification_number_police"
                                     value="{{ $customer->identification_number_police }}">
                             </div>
                         </div>
@@ -277,14 +277,14 @@
                         <div class="row">
                             <div class="col mb-3">
                                 <label class="mb-3">Salary :</label>
-                                <select name="salary" class="form-select">
+                                <select name="salary_range_id" class="form-select">
                                     <option selected disabled>Select Salary Range</option>
-                                    @foreach ($bloodTypes as $row)
+                                    {{-- @foreach ($salaryRange as $row)
                                         <option value="{{ $row->id }}"
-                                            {{ isset($customer->blood_type_id) && $row->id == $customer->blood_type_id ? 'selected' : '' }}>
+                                            {{ isset($customer->salary_range_id) && $row->id == $customer->salary_range_id ? 'selected' : '' }}>
                                             {{ $row->name }}
                                         </option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
 
@@ -316,7 +316,7 @@
                     <div class="mb-3">
                         <label class="mb-3">Child Birth Order
                             :</label>
-                        <input type="text" class="form-control" name="child_birth_order"
+                        <input type="text" class="form-control" name="birth_order"
                             value="{{ $customer->birth_order }}">
                     </div>
 
@@ -353,89 +353,6 @@
             </div>
 
             <div id="child-list"></div>
-
-            <script>
-                const form = document.getElementById("child-list");
-
-                function addChildField() {
-                    // Card
-                    const card = document.createElement("div");
-                    card.classList.add("card");
-                    card.classList.add("mt-5");
-                    card.classList.add("p-3");
-
-                    // Card Header
-                    const cardHeader = document.createElement("div");
-                    cardHeader.classList.add("card-header");
-                    cardHeader.classList.add("d-flex");
-                    cardHeader.classList.add("align-items-center");
-                    cardHeader.classList.add("justify-content-between");
-                    card.appendChild(cardHeader);
-
-                    // Title
-                    const title = document.createElement("h5");
-                    title.textContent = "Child";
-                    card.appendChild(title);
-
-                    // Create remove button
-                    const removeButton = document.createElement("a");
-                    removeButton.textContent = "X";
-                    removeButton.onclick = function() {
-                        form.removeChild(card);
-                    };
-                    card.appendChild(removeButton);
-
-                    // Card Body
-                    const cardBody = document.createElement("div");
-                    cardBody.classList.add("card-body");
-                    card.appendChild(cardBody);
-
-                    // Name
-                    const nameLabel = document.createElement("label");
-                    nameLabel.classList.add("mb-3");
-                    nameLabel.textContent = "Name :";
-                    card.appendChild(nameLabel);
-
-                    const nameInput = document.createElement("input");
-                    nameInput.type = "text";
-                    nameInput.name = "child_name[]";
-                    nameInput.classList.add("form-control");
-                    nameInput.classList.add("mb-3");
-                    nameInput.required = true;
-                    card.appendChild(nameInput);
-
-                    // Age
-                    const ageLabel = document.createElement("label");
-                    ageLabel.classList.add("mb-3");
-                    ageLabel.textContent = "Age :";
-                    card.appendChild(ageLabel);
-
-                    const ageInput = document.createElement("input");
-                    ageInput.type = "number";
-                    ageInput.name = "child_age[]";
-                    ageInput.classList.add("form-control");
-                    ageInput.classList.add("mb-3");
-                    ageInput.required = true;
-                    card.appendChild(ageInput);
-
-                    // Education Institution/ Workplace
-                    const educationLabel = document.createElement("label");
-                    educationLabel.classList.add("mb-3");
-                    educationLabel.textContent = "Education Institution/ Workplace :";
-                    card.appendChild(educationLabel);
-
-                    const educationInput = document.createElement("input");
-                    educationInput.type = "text";
-                    educationInput.name = "child_education[]";
-                    educationInput.classList.add("form-control");
-                    educationInput.classList.add("mb-3");
-                    educationInput.required = true;
-                    card.appendChild(educationInput);
-
-                    // Append the new div to the form
-                    form.appendChild(card);
-                }
-            </script>
 
             {{-- Others --}}
             <div class="card mt-5">
@@ -689,5 +606,88 @@
                     })
                 });
         });
+    </script>
+
+    <script>
+        const form = document.getElementById("child-list");
+
+        function addChildField() {
+            // Card
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.classList.add("mt-5");
+            card.classList.add("p-3");
+
+            // Card Header
+            const cardHeader = document.createElement("div");
+            cardHeader.classList.add("card-header");
+            cardHeader.classList.add("d-flex");
+            cardHeader.classList.add("align-items-center");
+            cardHeader.classList.add("justify-content-between");
+            card.appendChild(cardHeader);
+
+            // Title
+            const title = document.createElement("h5");
+            title.textContent = "Child";
+            card.appendChild(title);
+
+            // Create remove button
+            const removeButton = document.createElement("a");
+            removeButton.textContent = "X";
+            removeButton.onclick = function() {
+                form.removeChild(card);
+            };
+            card.appendChild(removeButton);
+
+            // Card Body
+            const cardBody = document.createElement("div");
+            cardBody.classList.add("card-body");
+            card.appendChild(cardBody);
+
+            // Name
+            const nameLabel = document.createElement("label");
+            nameLabel.classList.add("mb-3");
+            nameLabel.textContent = "Name :";
+            card.appendChild(nameLabel);
+
+            const nameInput = document.createElement("input");
+            nameInput.type = "text";
+            nameInput.name = "child_name[]";
+            nameInput.classList.add("form-control");
+            nameInput.classList.add("mb-3");
+            nameInput.required = true;
+            card.appendChild(nameInput);
+
+            // Age
+            const ageLabel = document.createElement("label");
+            ageLabel.classList.add("mb-3");
+            ageLabel.textContent = "Age :";
+            card.appendChild(ageLabel);
+
+            const ageInput = document.createElement("input");
+            ageInput.type = "number";
+            ageInput.name = "child_age[]";
+            ageInput.classList.add("form-control");
+            ageInput.classList.add("mb-3");
+            ageInput.required = true;
+            card.appendChild(ageInput);
+
+            // Education Institution/ Workplace
+            const educationLabel = document.createElement("label");
+            educationLabel.classList.add("mb-3");
+            educationLabel.textContent = "Education Institution/ Workplace :";
+            card.appendChild(educationLabel);
+
+            const educationInput = document.createElement("input");
+            educationInput.type = "text";
+            educationInput.name = "child_education[]";
+            educationInput.classList.add("form-control");
+            educationInput.classList.add("mb-3");
+            educationInput.required = true;
+            card.appendChild(educationInput);
+
+            // Append the new div to the form
+            form.appendChild(card);
+        }
     </script>
 @endsection

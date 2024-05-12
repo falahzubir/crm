@@ -26,5 +26,10 @@ class Customer extends Model
         'postcode',
         'state_id',
         'birth_place',
+        'occupation',
+        'sector',
+        'identification_number_police',
+        'salary_range_id',
+        'working_hour',
     ];
 }
