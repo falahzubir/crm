@@ -31,5 +31,6 @@ class Customer extends Model
         'identification_number_police',
         'salary_range_id',
         'working_hour',
+        'updated_by',
     ];
 }
