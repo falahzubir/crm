@@ -21,6 +21,10 @@
     </style>
 
     <div class="container">
+        @if ($errors->any())
+            <p class="alert alert-danger text-center my-3">Please check your input</p>
+        @endif
+
         <div class="card mt-4 p-3">
             <div class="card-body">
                 <div class="row">
@@ -48,7 +52,7 @@
             </div>
         </div>
 
-        <form action="" method="POST">
+        <form id="updateForm" action="{{ route('customer.update', ['id' => $customer->id]) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -68,14 +72,14 @@
 
                     <div class="mb-3">
                         <label class="mb-3">Nick Name :</label>
-                        <input type="text" class="form-control" name="nick_name" value="{{ $customer->nickname }}">
+                        <input type="text" class="form-control" name="nickname" value="{{ $customer->nickname }}">
                     </div>
 
                     <div class="row d-flex align-items-center justify-content-around">
                         <div class="row">
                             <div class="col mb-3">
                                 <label class="mb-3">Titles :</label>
-                                <select name="titles" class="form-select">
+                                <select name="title_id" class="form-select">
                                     <option selected disabled>Please Select</option>
                                     @foreach ($titles as $row)
                                         <option value="{{ $row->id }}"
@@ -99,7 +103,7 @@
 
                             <div class="col mb-3">
                                 <label class="mb-3">Marital Status :</label>
-                                <select name="marital_status" class="form-select">
+                                <select name="marital_status_id" class="form-select">
                                     <option selected disabled>Select Status</option>
                                     @foreach ($maritalStatus as $row)
                                         <option value="{{ $row->id }}"
@@ -120,14 +124,13 @@
 
                             <div class="col mb-3">
                                 <label class="mb-3">IC Number :</label>
-                                <input type="text" class="form-control" name="ic_number"
+                                <input type="text" class="form-control" name="identification_number"
                                     value="{{ $customer->identification_number }}">
                             </div>
 
                             <div class="col mb-3">
                                 <label class="mb-3">Phone Number :</label>
-                                <input type="tel" class="form-control" name="phone_number"
-                                    value="{{ $customer->phone }}">
+                                <input type="tel" class="form-control" name="phone" value="{{ $customer->phone }}">
                             </div>
                         </div>
 
@@ -146,7 +149,7 @@
 
                             <div class="col mb-3">
                                 <label class="mb-3">Blood Type :</label>
-                                <select name="blood_type" class="form-select">
+                                <select name="blood_type_id" class="form-select">
                                     <option selected disabled>Select Blood Type</option>
                                     @foreach ($bloodTypes as $row)
                                         <option value="{{ $row->id }}"
@@ -173,9 +176,7 @@
                     <div class="mb-3">
                         <label class="mb-3">Address :</label>
                         <div>
-                            <textarea name="address" class="form-control" cols="50" rows="4">
-                                {{ $customer->address }}
-                            </textarea>
+                            <textarea name="address" class="form-control" cols="50" rows="4">{{ $customer->address }}</textarea>
                         </div>
                     </div>
 
@@ -195,7 +196,7 @@
 
                         <div class="col mb-3">
                             <label class="mb-3">State :</label>
-                            <select name="state" class="form-select">
+                            <select name="state_id" class="form-select">
                                 <option selected disabled></option>
                                 @foreach ($states as $row)
                                     <option value="{{ $row->id }}"
@@ -215,7 +216,8 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label class="mb-3">Place of Birth :</label>
-                            <input type="number" class="form-control" name="place_of_birth" value="{{ $customer->birth_place }}">
+                            <input type="text" class="form-control" name="birth_place"
+                                value="{{ $customer->birth_place }}">
                         </div>
 
                         <div class="col mb-3">
@@ -238,16 +240,17 @@
             <div class="card mt-5">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5><strong>Occupation</strong></h5>
-                    <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#occupation">
                         <strong><i class='bx bx-chevron-down'></i></strong>
                     </a>
                 </div>
-                <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
+                <div class="card-body" id="occupation" data-bs-parent="#accordion">
                     <div class="row d-flex align-items-center justify-content-between">
                         <div class="mb-3">
                             <label class="mb-3">Occupation :</label>
                             <div>
-                                <input type="text" class="form-control" name="occupation">
+                                <input type="text" class="form-control" name="occupation"
+                                    value="{{ $customer->occupation }}">
                             </div>
                         </div>
 
@@ -255,15 +258,19 @@
                             <div class="col mb-3">
                                 <label class="mb-4">Sector :</label>
                                 <div class="d-flex justify-content-start">
-                                    <input type="radio" name="sector"> <label class="ms-1">Private</label>
-                                    <input type="radio" name="sector" class="ms-3"> <label
+                                    <input type="radio" name="sector" value="P"
+                                        {{ $customer->sector === 'P' ? 'checked' : '' }}> <label
+                                        class="ms-1">Private</label>
+                                    <input type="radio" name="sector" value="G" class="ms-3"
+                                        {{ $customer->sector === 'G' ? 'checked' : '' }}> <label
                                         class="ms-1">Government</label>
                                 </div>
                             </div>
 
                             <div class="col mb-3">
                                 <label class="mb-3">IC Number Police/ Military :</label>
-                                <input type="text" class="form-control" name="police_number">
+                                <input type="text" class="form-control" name="police_number"
+                                    value="{{ $customer->identification_number_police }}">
                             </div>
                         </div>
 
@@ -272,15 +279,23 @@
                                 <label class="mb-3">Salary :</label>
                                 <select name="salary" class="form-select">
                                     <option selected disabled>Select Salary Range</option>
-                                    <option value=""></option>
+                                    @foreach ($bloodTypes as $row)
+                                        <option value="{{ $row->id }}"
+                                            {{ isset($customer->blood_type_id) && $row->id == $customer->blood_type_id ? 'selected' : '' }}>
+                                            {{ $row->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="col mb-3">
                                 <label class="mb-4">Working Hour :</label>
                                 <div class="d-flex justify-content-start">
-                                    <input type="radio" name="sector"> <label class="ms-1">Shift</label>
-                                    <input type="radio" name="sector" class="ms-3"> <label
+                                    <input type="radio" name="working_hour" value="S"
+                                        {{ $customer->working_hour === 'S' ? 'checked' : '' }}> <label
+                                        class="ms-1">Shift</label>
+                                    <input type="radio" name="working_hour" value="N" class="ms-3"
+                                        {{ $customer->working_hour === 'N' ? 'checked' : '' }}> <label
                                         class="ms-1">Normal</label>
                                 </div>
                             </div>
@@ -293,38 +308,39 @@
             <div class="card mt-5">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5><strong>Family</strong></h5>
-                    <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#family">
                         <strong><i class='bx bx-chevron-down'></i></strong>
                     </a>
                 </div>
-                <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
+                <div class="card-body" id="family" data-bs-parent="#accordion">
                     <div class="mb-3">
                         <label class="mb-3">Child Birth Order
                             :</label>
-                        <input type="text" class="form-control" name="child_birth_order">
+                        <input type="text" class="form-control" name="child_birth_order"
+                            value="{{ $customer->birth_order }}">
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
                             <label class="mb-3">Spouse Name :</label>
-                            <input type="text" class="form-control" name="spouse_name">
+                            <input type="text" class="form-control" name="spouse_name" value="">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Spouse Occupation :</label>
-                            <input type="text" class="form-control" name="spouse_occupation">
+                            <input type="text" class="form-control" name="spouse_occupation" value="">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-3">Spouse Age :</label>
-                        <input type="text" class="form-control" name="spouse_age">
+                        <input type="text" class="form-control" name="spouse_age" value="">
                     </div>
 
                     <div class="mb-3 d-flex align-items-center justify-content-between">
                         <div>
                             <label class="mb-3">Number of children :</label>
-                            <input type="text" class="form-control" name="spouse_name">
+                            <input type="text" class="form-control" name="number_of_children">
                         </div>
 
                         <div class="mt-4">
@@ -425,39 +441,39 @@
             <div class="card mt-5">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5><strong>Others</strong></h5>
-                    <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#others">
                         <strong><i class='bx bx-chevron-down'></i></strong>
                     </a>
                 </div>
-                <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
+                <div class="card-body" id="others" data-bs-parent="#accordion">
                     <div class="row mb-3">
                         <div class="col">
                             <label class="mb-3">Hobby :</label>
-                            <input type="text" class="form-control" name="hobby">
+                            <input type="text" class="form-control" name="hobby" value="">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Favourite Colour :</label>
-                            <input type="text" class="form-control" name="favourite_colour">
+                            <input type="text" class="form-control" name="favourite_colour" value="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
                             <label class="mb-3">Favourite Pet :</label>
-                            <input type="text" class="form-control" name="favourite_pet">
+                            <input type="text" class="form-control" name="favourite_pet" value="">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Favourite Food :</label>
-                            <input type="text" class="form-control" name="favourite_food">
+                            <input type="text" class="form-control" name="favourite_food" value="">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="mb-3">Favourite Drinks :</label>
-                            <input type="text" class="form-control" name="favourite_drinks">
+                            <input type="text" class="form-control" name="favourite_drinks" value="">
                         </div>
                     </div>
                 </div>
@@ -467,11 +483,11 @@
             <div class="card mt-5">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5><strong>Suffering Disease</strong></h5>
-                    <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#sufferingDisease">
                         <strong><i class='bx bx-chevron-down'></i></strong>
                     </a>
                 </div>
-                <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
+                <div class="card-body" id="sufferingDisease" data-bs-parent="#accordion">
                     <div class="mb-3">
                         <label class="mb-3">Disease :</label>
                         <select name="disease" class="form-select">
@@ -481,7 +497,7 @@
 
                     <div class="mb-3">
                         <label class="mb-3">Other Disease :</label>
-                        <input type="text" class="form-control" name="other_disease">
+                        <input type="text" class="form-control" name="other_disease" value="">
                     </div>
                 </div>
             </div>
@@ -498,58 +514,67 @@
                     <div class="mb-3">
                         <label class="mb-3">Aware or not about EMZI? :</label>
                         <div class="d-flex justify-content-start">
-                            <input type="radio" name="sector"> <label class="ms-1">Yes</label>
-                            <input type="radio" name="sector" class="ms-3"> <label class="ms-1">No</label>
+                            <input type="radio" name="aware_or_not_about_emzi"> <label class="ms-1">Yes</label>
+                            <input type="radio" name="aware_or_not_about_emzi" class="ms-3"> <label
+                                class="ms-1">No</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">How do you know about EMZI? :</label>
                         <div class="d-flex justify-content-start">
-                            <input type="checkbox" name=""> <label class="ms-1">Social Media</label>
-                            <input type="checkbox" name="" class="ms-3"> <label class="ms-1">Friends</label>
-                            <input type="checkbox" name="" class="ms-3"> <label class="ms-1">Website</label>
+                            <input type="checkbox" name="how_did_you_know_about_emzi"> <label class="ms-1">Social
+                                Media</label>
+                            <input type="checkbox" name="how_did_you_know_about_emzi" class="ms-3"> <label
+                                class="ms-1">Friends</label>
+                            <input type="checkbox" name="how_did_you_know_about_emzi" class="ms-3"> <label
+                                class="ms-1">Website</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">First EMZI Product Purchased? :</label>
-                        <input type="text" class="form-control" name="">
+                        <input type="text" class="form-control" name="first_product_purchased_from_emzi"
+                            value="">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Why Buying EMZI Products? :</label>
-                        <input type="text" class="form-control" name="">
+                        <input type="text" class="form-control" name="why_buying_emzi_products" value="">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Why Support EMZI Products? :</label>
-                        <input type="text" class="form-control" name="">
+                        <input type="text" class="form-control" name="why_support_emzi_products" value="">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Purchase Frequency :</label>
-                        <input type="text" class="form-control" name="">
+                        <input type="number" class="form-control" name="frequency_of_purchase" value="">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">What Products Does EMZI Have? :</label>
-                        <input type="text" class="form-control" name="">
+                        <input type="text" class="form-control" name="what_products_does_emzi_have" value="">
                     </div>
 
                     <div class="mb-4">
-                        <label class="mb-3">Do you EMZI has its own factory? :</label>
+                        <label class="mb-3">Do you know EMZI has its own factory? :</label>
                         <div class="d-flex justify-content-start">
-                            <input type="radio" name=""> <label class="ms-1">Yes</label>
-                            <input type="radio" name="" class="ms-3"> <label class="ms-1">No</label>
+                            <input type="radio" name="do_you_know_emzi_has_its_own_factory"> <label
+                                class="ms-1">Yes</label>
+                            <input type="radio" name="do_you_know_emzi_has_its_own_factory" class="ms-3"> <label
+                                class="ms-1">No</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Do you know EMZI has a laboratory at the university? :</label>
                         <div class="d-flex justify-content-start">
-                            <input type="radio" name=""> <label class="ms-1">Yes</label>
-                            <input type="radio" name="" class="ms-3"> <label class="ms-1">No</label>
+                            <input type="radio" name="do_you_know_emzi_has_a_laboratory_at_the_university"> <label
+                                class="ms-1">Yes</label>
+                            <input type="radio" name="do_you_know_emzi_has_a_laboratory_at_the_university"
+                                class="ms-3"> <label class="ms-1">No</label>
                         </div>
                     </div>
 
@@ -557,15 +582,15 @@
                         <label class="mb-3">Are EMZI Products Effective? :</label>
                         <div class="d-flex flex-column">
                             <div class="mb-2">
-                                <input type="radio" name="product_effectiveness" value="1">
+                                <input type="radio" name="are_emzi_products_effective" value="1">
                                 <label class="ms-1">Yes, Highly Effective</label>
                             </div>
                             <div class="mb-2">
-                                <input type="radio" name="product_effectiveness" value="2">
+                                <input type="radio" name="are_emzi_products_effective" value="2">
                                 <label class="ms-1">Less Effective</label>
                             </div>
                             <div class="mb-2">
-                                <input type="radio" name="product_effectiveness" value="3">
+                                <input type="radio" name="are_emzi_products_effective" value="3">
                                 <label class="ms-1">Not Effective</label>
                             </div>
                         </div>
@@ -632,4 +657,37 @@
             </div>
         </form>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            var form = this;
+
+            // Perform form submission via AJAX
+            axios.post(form.action, new FormData(form))
+                .then(function(response) {
+                    // Show SweetAlert success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: response.data.message,
+                        showConfirmButton: true
+                    }).then(function() {
+                        // Redirect to customer list page after SweetAlert is closed
+                        window.location.href = "{{ route('customer.list') }}";
+                    });
+                })
+                .catch(function(error) {
+                    // Show SweetAlert error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: error.response.data.message,
+                        showConfirmButton: true
+                    })
+                });
+        });
+    </script>
 @endsection

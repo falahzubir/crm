@@ -9,6 +9,7 @@ use App\Models\CustomerTitle;
 use App\Models\MaritalStatus;
 use App\Models\State;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerListController extends Controller
 {
@@ -134,6 +135,24 @@ class CustomerListController extends Controller
             'search' => $search,
             'filters' => $filters
         ]);
+    }
+
+    public function customer_update(Request $request, $id)
+    {
+        $customer = Customer::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required',
+        ]);
+
+        // Get the currently authenticated user
+        $user = Auth::user();
+
+        // Update the customer data and set the updated_by column
+        $customer->update(array_merge($request->all(), ['updated_by' => $user->id]));
+
+        return response()->json(['message' => 'Customer updated successfully.'], 200);
     }
 
     // Get customers data using api
