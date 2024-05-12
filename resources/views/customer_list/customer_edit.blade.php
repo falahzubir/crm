@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="mt-3">
-                                <label>Last Updated 10 h by Iqbal</label>
+                                <label>Last updated {{ $customer->updated_at->diffForHumans() }} by {{ $customer->updated_by }}</label>
                             </div>
                         </div>
                     </div>

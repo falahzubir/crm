@@ -29,9 +29,10 @@ class CustomerListController extends Controller
 
     public function customer_profile($id)
     {
-        $customer = Customer::select('customers.*', 'states.name as state_name', 'countries.flag as flag')
+        $customer = Customer::select('customers.*', 'states.name as state_name', 'countries.flag as flag', 'users.name as updated_by')
             ->join('states', 'customers.state_id', '=', 'states.id')
             ->join('countries', 'states.country_id', '=', 'countries.id')
+            ->join('users', 'customers.updated_by', '=', 'users.id')
             ->findOrFail($id);
 
         return view('customer_list/customer_profile', ['customer' => $customer]);
@@ -39,7 +40,9 @@ class CustomerListController extends Controller
 
     public function customer_edit($id)
     {
-        $customer = Customer::findOrFail($id);
+        $customer = Customer::select('customers.*', 'users.name as updated_by')
+            ->join('users', 'customers.updated_by', '=', 'users.id')
+            ->findOrFail($id);
         $titles = CustomerTitle::all();
         $maritalStatus = MaritalStatus::all();
         $bloodTypes = BloodType::all();
