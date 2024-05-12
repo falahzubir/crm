@@ -41,39 +41,6 @@
 
     <script src="{{ asset('assets/js/config.js') }}"></script>
 
-    {{-- <style>
-        #nama,
-        #details {
-            text-decoration: none;
-            color: #566a7f;
-        }
-
-        #nama:hover,
-        #details:hover {
-            text-decoration: underline;
-            color: #696cff;
-        }
-
-        .layout-menu {
-            /* display: none; */
-            /* Hide sidebar by default */
-            width: 110px;
-        }
-
-        .layout-menu.sidebar-open {
-            display: block;
-            /* Show sidebar when opened */
-        }
-
-        .sidebar-text {
-            display: none;
-        }
-
-        .menu-icon {
-            margin-left: 20px;
-        }
-    </style> --}}
-
     <script>
         window.addEventListener("load", () => {
             const loader = document.querySelector(".loader");
@@ -152,6 +119,10 @@
 
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     @if (session('success'))
         <script>
             swal({
@@ -177,12 +148,24 @@
     @endif
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const sidebar = document.getElementById("layout-menu");
-            const sidebarToggle = document.getElementById("sidebar-toggle");
+        $('#logout-link').click(function(e) {
+            e.preventDefault(); // Prevent default link behavior
 
-            sidebarToggle.addEventListener("click", function() {
-                sidebar.classList.toggle("sidebar-open");
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                icon: 'warning',
+                title: 'Logout',
+                text: 'Are you sure you want to logout?',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, logout',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                // If user confirms logout, proceed with logout action
+                if (result.isConfirmed) {
+                    $('#logout-form').submit();
+                }
             });
         });
     </script>

@@ -40,10 +40,13 @@
         </li>
 
         <li class="menu-item">
-            <a href="" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-log-in"></i>
-                <div class="sidebar-text">Logout</div>
-            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <a href="#" id="logout-link" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-log-in"></i>
+                    <div class="sidebar-text">Logout</div>
+                </a>
+            </form>
         </li>
     </ul>
 </aside>

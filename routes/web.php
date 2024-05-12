@@ -18,5 +18,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/customer/{id}', [CustomerListController::class, 'customer_update'])->name('customer.update');
     Route::get('/search', [CustomerListController::class, 'handle_search'])->name('search');
 
-    Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

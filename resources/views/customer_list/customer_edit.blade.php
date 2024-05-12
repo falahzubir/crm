@@ -25,36 +25,38 @@
             <p class="alert alert-danger text-center my-3">Please check your input</p>
         @endif
 
-        <div class="card mt-4 p-3">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-1">
-                        <img src="{{ $customer->photo != null ? $customer->photo : asset('assets/img/avatars/user.jpeg') }}"
-                            class="w-px-100 h-px-100 rounded-circle" />
-                    </div>
+        <form id="updateForm" action="{{ route('customer.update', ['id' => $customer->id]) }}" method="POST"
+            enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-                    <div class="col-md-4 float-start" style="margin-left: 50px;">
-                        <div class="mb-1">
-                            <h3>{{ $customer->name }}</h3>
+            <div class="card mt-4 p-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-1 position-relative">
+                            <img id="customer-photo"
+                                src="{{ $customer->photo != null ? $customer->photo : asset('assets/img/avatars/user.jpeg') }}"
+                                class="w-px-100 h-px-100 rounded-circle" />
                         </div>
 
-                        <div class="mb-0">
-                            <label>LAST PURCHASE</label>
-                            &nbsp;
-                            <label class="text-success">10 days ago</label>
-                        </div>
+                        <div class="col-md-4 float-start" style="margin-left: 50px;">
+                            <div class="mb-1">
+                                <h3>{{ $customer->name }}</h3>
+                            </div>
 
-                        <div class="mt-3">
-                            <label>Last Updated 10 h by Iqbal</label>
+                            <div class="mb-0">
+                                <label>LAST PURCHASE</label>
+                                &nbsp;
+                                <label class="text-success">10 days ago</label>
+                            </div>
+
+                            <div class="mt-3">
+                                <label>Last Updated 10 h by Iqbal</label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <form id="updateForm" action="{{ route('customer.update', ['id' => $customer->id]) }}" method="POST">
-            @csrf
-            @method('PUT')
 
             {{-- Customer Details --}}
             <div class="card mt-4">
@@ -575,8 +577,6 @@
         </form>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.getElementById('updateForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent form submission

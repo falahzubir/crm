@@ -146,11 +146,13 @@ class CustomerListController extends Controller
             'phone' => 'required',
         ]);
 
+        $photoPath = $request->file('photo')->store('photos');
+
         // Get the currently authenticated user
         $user = Auth::user();
 
         // Update the customer data and set the updated_by column
-        $customer->update(array_merge($request->all(), ['updated_by' => $user->id]));
+        $customer->update(array_merge($request->all(), ['updated_by' => $user->id, 'photo' => $photoPath]));
 
         return response()->json(['message' => 'Customer updated successfully.'], 200);
     }

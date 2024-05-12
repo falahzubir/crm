@@ -21,6 +21,7 @@ class Customer extends Model
         'weight',
         'height',
         'blood_type_id',
+        'photo',
         'address',
         'city',
         'postcode',
