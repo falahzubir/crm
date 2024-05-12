@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Customer;
 use App\Models\CustomerTitle;
 use App\Models\MaritalStatus;
+use App\Models\SalaryRange;
 use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +30,21 @@ class CustomerListController extends Controller
 
     public function customer_profile($id)
     {
-        $customer = Customer::select('customers.*', 'states.name as state_name', 'countries.flag as flag', 'users.name as updated_by')
+        $customer = Customer::select(
+            'customers.*', 
+            'states.name as state_name', 
+            'countries.flag as flag', 
+            'users.name as updated_by', 
+            'customer_titles.name as title',
+            'marital_statuses.name as status',
+            'blood_types.name as blood_type',
+            )
             ->join('states', 'customers.state_id', '=', 'states.id')
             ->join('countries', 'states.country_id', '=', 'countries.id')
             ->join('users', 'customers.updated_by', '=', 'users.id')
+            ->join('customer_titles', 'customers.title_id', '=', 'customer_titles.id')
+            ->join('marital_statuses', 'customers.marital_status_id', '=', 'marital_statuses.id')
+            ->join('blood_types', 'customers.blood_type_id', '=', 'blood_types.id')
             ->findOrFail($id);
 
         return view('customer_list/customer_profile', ['customer' => $customer]);
@@ -48,6 +60,7 @@ class CustomerListController extends Controller
         $bloodTypes = BloodType::all();
         $states = State::all();
         $countries = Country::all();
+        $salaryRanges = SalaryRange::all();
 
         return view('customer_list/customer_edit', [
             'customer' => $customer,
@@ -56,6 +69,7 @@ class CustomerListController extends Controller
             'bloodTypes' => $bloodTypes,
             'states' => $states,
             'countries' => $countries,
+            'salaryRanges' => $salaryRanges,
         ]);
     }
 
@@ -149,13 +163,11 @@ class CustomerListController extends Controller
             'phone' => 'required',
         ]);
 
-        $photoPath = $request->file('photo')->store('photos');
-
         // Get the currently authenticated user
         $user = Auth::user();
 
         // Update the customer data and set the updated_by column
-        $customer->update(array_merge($request->all(), ['updated_by' => $user->id, 'photo' => $photoPath]));
+        $customer->update(array_merge($request->all(), ['updated_by' => $user->id]));
 
         return response()->json(['message' => 'Customer updated successfully.'], 200);
     }

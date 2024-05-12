@@ -51,7 +51,8 @@
                             </div>
 
                             <div class="mt-3">
-                                <label>Last updated {{ $customer->updated_at->diffForHumans() }} by {{ $customer->updated_by }}</label>
+                                <label>Last updated {{ $customer->updated_at->diffForHumans() }} by
+                                    {{ $customer->updated_by }}</label>
                             </div>
                         </div>
                     </div>
@@ -96,7 +97,8 @@
                                 <label class="mb-4">Gender :</label>
                                 <div class="d-flex justify-content-start">
                                     <input type="radio" name="gender" value="M"
-                                        {{ $customer->gender === 'M' ? 'checked' : '' }}> <label class="ms-1">Male</label>
+                                        {{ $customer->gender === 'M' ? 'checked' : '' }}> <label
+                                        class="ms-1">Male</label>
                                     <input type="radio" name="gender" value="F" class="ms-3"
                                         {{ $customer->gender === 'F' ? 'checked' : '' }}> <label
                                         class="ms-1">Female</label>
@@ -281,12 +283,12 @@
                                 <label class="mb-3">Salary :</label>
                                 <select name="salary_range_id" class="form-select">
                                     <option selected disabled>Select Salary Range</option>
-                                    {{-- @foreach ($salaryRange as $row)
+                                    @foreach ($salaryRanges as $row)
                                         <option value="{{ $row->id }}"
                                             {{ isset($customer->salary_range_id) && $row->id == $customer->salary_range_id ? 'selected' : '' }}>
                                             {{ $row->name }}
                                         </option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                             </div>
 
