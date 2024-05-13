@@ -349,18 +349,21 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label class="mb-3">Spouse Name :</label>
-                            <input type="text" class="form-control" name="spouse_name" value="{{ $customerSpouse->name }}">
+                            <input type="text" class="form-control" name="spouse_name"
+                                value="{{ $customerSpouse->name }}">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Spouse Occupation :</label>
-                            <input type="text" class="form-control" name="spouse_occupation" value="{{ $customerSpouse->occupation }}">
+                            <input type="text" class="form-control" name="spouse_occupation"
+                                value="{{ $customerSpouse->occupation }}">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-3">Spouse Age :</label>
-                        <input type="text" class="form-control" name="spouse_age" value="{{ $customerSpouse->age }}">
+                        <input type="text" class="form-control" name="spouse_age"
+                            value="{{ $customerSpouse->age }}">
                     </div>
 
                     <div class="mb-3 d-flex align-items-center justify-content-between">
@@ -378,7 +381,8 @@
                 </div>
             </div>
 
-            <div id="child-list"></div>
+            {{-- Child --}}
+            <div id="childContainer" style="display: flex; flex-wrap: wrap; justify-content: flex-end;"></div>
 
             {{-- Others --}}
             <div class="card mt-5">
@@ -626,6 +630,7 @@
         </form>
     </div>
 
+    {{-- For submit form --}}
     <script>
         document.getElementById('updateForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent form submission
@@ -657,89 +662,7 @@
         });
     </script>
 
-    <script>
-        const form = document.getElementById("child-list");
-
-        function addChildField() {
-            // Card
-            const card = document.createElement("div");
-            card.classList.add("card");
-            card.classList.add("mt-5");
-            card.classList.add("p-3");
-
-            // Card Header
-            const cardHeader = document.createElement("div");
-            cardHeader.classList.add("card-header");
-            cardHeader.classList.add("d-flex");
-            cardHeader.classList.add("align-items-center");
-            cardHeader.classList.add("justify-content-between");
-            card.appendChild(cardHeader);
-
-            // Title
-            const title = document.createElement("h5");
-            title.textContent = "Child";
-            card.appendChild(title);
-
-            // Create remove button
-            const removeButton = document.createElement("a");
-            removeButton.textContent = "X";
-            removeButton.onclick = function() {
-                form.removeChild(card);
-            };
-            card.appendChild(removeButton);
-
-            // Card Body
-            const cardBody = document.createElement("div");
-            cardBody.classList.add("card-body");
-            card.appendChild(cardBody);
-
-            // Name
-            const nameLabel = document.createElement("label");
-            nameLabel.classList.add("mb-3");
-            nameLabel.textContent = "Name :";
-            card.appendChild(nameLabel);
-
-            const nameInput = document.createElement("input");
-            nameInput.type = "text";
-            nameInput.name = "child_name[]";
-            nameInput.classList.add("form-control");
-            nameInput.classList.add("mb-3");
-            nameInput.required = true;
-            card.appendChild(nameInput);
-
-            // Age
-            const ageLabel = document.createElement("label");
-            ageLabel.classList.add("mb-3");
-            ageLabel.textContent = "Age :";
-            card.appendChild(ageLabel);
-
-            const ageInput = document.createElement("input");
-            ageInput.type = "number";
-            ageInput.name = "child_age[]";
-            ageInput.classList.add("form-control");
-            ageInput.classList.add("mb-3");
-            ageInput.required = true;
-            card.appendChild(ageInput);
-
-            // Education Institution/ Workplace
-            const educationLabel = document.createElement("label");
-            educationLabel.classList.add("mb-3");
-            educationLabel.textContent = "Education Institution/ Workplace :";
-            card.appendChild(educationLabel);
-
-            const educationInput = document.createElement("input");
-            educationInput.type = "text";
-            educationInput.name = "child_education[]";
-            educationInput.classList.add("form-control");
-            educationInput.classList.add("mb-3");
-            educationInput.required = true;
-            card.appendChild(educationInput);
-
-            // Append the new div to the form
-            form.appendChild(card);
-        }
-    </script>
-
+    {{-- For star rating --}}
     <script>
         // Function to update star classes based on database value
         function updateStars(value, starContainer) {
@@ -766,5 +689,78 @@
             const databaseValue = parseInt(starContainer.dataset.rating);
             updateStars(databaseValue, starContainer);
         });
+    </script>
+
+    {{-- For adding child --}}
+    <script>
+        let childCount = 1;
+
+        function addChildField() {
+            const container = document.getElementById('childContainer');
+            if (!container) {
+                console.error("Container element not found.");
+                return;
+            }
+
+            const card = document.createElement('div');
+            card.classList.add('card', 'mt-4');
+            card.style.width = '900px';
+
+            const cardHeader = document.createElement('div');
+            cardHeader.classList.add('card-header', 'd-flex', 'align-items-center', 'justify-content-between');
+            const headerTitle = document.createElement('h5');
+            const headerId = `childTitle_${childCount}`;
+            headerTitle.setAttribute('id', headerId);
+            headerTitle.innerHTML = `<strong>Child ${childCount}</strong>`;
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('btn', 'btn-danger', 'btn-sm');
+            removeButton.innerHTML = 'x';
+            removeButton.onclick = function() {
+                container.removeChild(card);
+                updateChildCount(); // Update the child count after removal
+            };
+
+            cardHeader.appendChild(headerTitle);
+            cardHeader.appendChild(removeButton);
+
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+
+            // Function to create input field with label and margin below
+            function createInputWithLabel(labelText, inputName) {
+                const label = document.createElement('label');
+                label.innerText = labelText + ':';
+                label.classList.add('mb-2');
+                const input = document.createElement('input');
+                input.setAttribute('type', 'text');
+                input.setAttribute('name', inputName);
+                input.classList.add('form-control', 'mb-3');
+                cardBody.appendChild(label);
+                cardBody.appendChild(input);
+            }
+
+            createInputWithLabel('Name', `childName_${childCount}`);
+            createInputWithLabel('Age', `childAge_${childCount}`);
+            createInputWithLabel('Education', `childEducation_${childCount}`);
+
+            card.appendChild(cardHeader);
+            card.appendChild(cardBody);
+
+            container.appendChild(card);
+
+            childCount++;
+        }
+
+        function updateChildCount() {
+            childCount--;
+            const cards = document.querySelectorAll('.card-header strong');
+            cards.forEach((card, index) => {
+                const headerId = `childTitle_${index + 1}`;
+                const header = document.getElementById(headerId);
+                if (header) {
+                    header.textContent = `Child ${index + 1}`;
+                }
+            });
+        }
     </script>
 @endsection
