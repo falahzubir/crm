@@ -66,7 +66,7 @@
                     <div class="row p-4 d-flex align-items-center justify-content-between">
                         <div class="col-md-5">
                             <div class="row mb-3">
-                                <label class="col-sm-2" for="basic-default-name">Name :</label>
+                                <label class="col-sm-2">Name :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->name }}" readonly />
@@ -75,7 +75,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-4" for="basic-default-name">Nick Name :</label>
+                                <label class="col-sm-4">Nick Name :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->nickname }}" readonly />
@@ -84,7 +84,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2" for="basic-default-name">Titles :</label>
+                                <label class="col-sm-2">Titles :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->title }}" readonly />
@@ -93,7 +93,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-3" for="basic-default-name">Gender :</label>
+                                <label class="col-sm-3">Gender :</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->gender == 'M' ? 'Male' : 'Female' }}" readonly />
@@ -102,7 +102,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-4" for="basic-default-name">Marital Status :</label>
+                                <label class="col-sm-4">Marital Status :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->status }}" readonly />
@@ -111,7 +111,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2" for="basic-default-name">Age :</label>
+                                <label class="col-sm-2">Age :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->age }}" readonly />
@@ -121,7 +121,7 @@
 
                         <div class="col-md-5">
                             <div class="row mb-3">
-                                <label class="col-sm-4" for="basic-default-name">IC Number :</label>
+                                <label class="col-sm-4">IC Number :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->identification_number }}" readonly />
@@ -130,7 +130,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-4" for="basic-default-name">Phone Number :</label>
+                                <label class="col-sm-4">Phone Number :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->phone }}" readonly />
@@ -139,7 +139,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-3" for="basic-default-name">Weight (KG) : </label>
+                                <label class="col-sm-3">Weight (KG) : </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->weight }}" readonly />
@@ -148,7 +148,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-3" for="basic-default-name">Height (cm) :</label>
+                                <label class="col-sm-3">Height (cm) :</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->height }}" readonly />
@@ -157,7 +157,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-2" for="basic-default-name">BMI :</label>
+                                <label class="col-sm-2">BMI :</label>
                                 @if ($customer->height != null && $customer->weight != null)
                                     @php
                                         $heightInMeters = $customer->height / 100; // Convert height from cm to meters
@@ -178,7 +178,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-3" for="basic-default-name">Blood Type :</label>
+                                <label class="col-sm-3">Blood Type :</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->blood_type }}" readonly />
@@ -204,7 +204,7 @@
                         <form action="">
                             <div class="row p-4 d-flex align-items-center justify-content-between">
                                 <div class="row mb-3">
-                                    <label class="col-sm-6" for="basic-default-name">Customer Address
+                                    <label class="col-sm-6">Customer Address
                                         :</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control border-0 text-end bg-white"
@@ -214,7 +214,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Place of Birth
+                                    <label class="col-sm-4">Place of Birth
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
@@ -224,7 +224,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">State of Birth
+                                    <label class="col-sm-4">State of Birth
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
@@ -249,7 +249,7 @@
                         <form action="">
                             <div class="row p-4 d-flex align-items-center justify-content-between">
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Occupation :</label>
+                                    <label class="col-sm-4">Occupation :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
                                             value="{{ $customer->occupation }}" readonly />
@@ -258,7 +258,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Sector
+                                    <label class="col-sm-4">Sector
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
@@ -268,7 +268,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-6" for="basic-default-name">IC Number Police/
+                                    <label class="col-sm-6">IC Number Police/
                                         Military
                                         :</label>
                                     <div class="col-sm-6">
@@ -280,7 +280,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Salary Range
+                                    <label class="col-sm-4">Salary Range
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
@@ -290,11 +290,11 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Working Hour
+                                    <label class="col-sm-4">Working Hour
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->working_hour == 'S' ? 'Shift' : 'Normal' }}" />
+                                            value="{{ $customer->working_hour == 'S' ? 'Shift' : 'Normal' }}" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -317,49 +317,49 @@
                     <div class="row p-3 d-flex align-items-center justify-content-between">
                         <div class="col-md-5">
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Child Birth Order
+                                <label class="col-sm-6">Child Birth Order
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->birth_order }}" />
+                                        value="{{ $customer->birth_order }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Number of children
+                                <label class="col-sm-6">Number of children
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $numberOfChild }}" />
+                                        value="{{ $numberOfChild }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Spouse Name :</label>
+                                <label class="col-sm-6">Spouse Name :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerSpouse->name }}" />
+                                        value="{{ $customerSpouse->name }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Spouse Occupation
+                                <label class="col-sm-6">Spouse Occupation
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerSpouse->occupation }}" />
+                                        value="{{ $customerSpouse->occupation }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-4" for="basic-default-name">Spouse Age :</label>
+                                <label class="col-sm-4">Spouse Age :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerSpouse->age }}" />
+                                        value="{{ $customerSpouse->age }}" readonly />
                                 </div>
                             </div>
                         </div>
@@ -369,29 +369,29 @@
                             @foreach ($customerChildren as $row)
                                 <div class="container border rounded my-3 p-3">
                                     <div class="row mb-3">
-                                        <label class="col-sm-4 mt-2" for="basic-default-name">Name :</label>
+                                        <label class="col-sm-4 mt-2">Name :</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="{{ $row->name }}" />
+                                                value="{{ $row->name }}" readonly />
                                         </div>
                                         <hr class="border-light mt-2" />
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label class="col-sm-4" for="basic-default-name">Age :</label>
+                                        <label class="col-sm-4">Age :</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="{{ $row->age }}" />
+                                                value="{{ $row->age }}" readonly />
                                         </div>
                                         <hr class="border-light mt-2" />
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label class="col-sm-6 mb-3" for="basic-default-name">Education
+                                        <label class="col-sm-6 mb-3">Education
                                             Institution/ Workplace :</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="{{ $row->institution }}" />
+                                                value="{{ $row->institution }}" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -416,51 +416,51 @@
                         <form action="">
                             <div class="row p-4 d-flex align-items-center justify-content-between">
                                 <div class="row mb-3">
-                                    <label class="col-sm-6" for="basic-default-name">Hobby
+                                    <label class="col-sm-6">Hobby
                                         :</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->hobby }}" />
+                                            value="{{ $customerAdditionalInfo->hobby }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Favourite Colour
+                                    <label class="col-sm-4">Favourite Colour
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->fav_color }}" />
+                                            value="{{ $customerAdditionalInfo->fav_color }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Favourite Pet
+                                    <label class="col-sm-4">Favourite Pet
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->fav_pet }}" />
+                                            value="{{ $customerAdditionalInfo->fav_pet }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Favourite Food
+                                    <label class="col-sm-4">Favourite Food
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->fav_food }}" />
+                                            value="{{ $customerAdditionalInfo->fav_food }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label class="col-sm-4" for="basic-default-name">Favourite Drinks
+                                    <label class="col-sm-4">Favourite Drinks
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->fav_beverage }}" />
+                                            value="{{ $customerAdditionalInfo->fav_beverage }}" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -502,102 +502,148 @@
                     <div class="row p-4 d-flex align-items-center justify-content-between">
                         <div class="col-md-5">
                             <div class="row mb-3">
-                                <label class="col-sm-7" for="basic-default-name">Does EMZI familiar to you?
+                                <label class="col-sm-7">Does EMZI familiar to you?
                                     :</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first()->value === 'Y' ? 'Yes': 'No' }}" />
+                                        value="{{ $customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first()->value === 'Y'? 'Yes': 'No' }}"
+                                        readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Where did you know about
+                                <label class="col-sm-6">Where did you know about
                                     EMZI? :</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                    @switch($customerAnswers->where('question_id', 2)->where('customer_id',
+                                        $customer->id)->first()->value)
+                                        @case(1)
+                                            <input type="text" class="form-control border-0 text-end bg-white"
+                                                value="Social Media" readonly />
+                                        @break
+
+                                        @case(2)
+                                            <input type="text" class="form-control border-0 text-end bg-white" value="Friends"
+                                                readonly />
+                                        @break
+
+                                        @case(3)
+                                            <input type="text" class="form-control border-0 text-end bg-white" value="Website"
+                                                readonly />
+                                        @break
+
+                                        @default
+                                            <input type="text" class="form-control border-0 text-end bg-white" value="N/A"
+                                                readonly />
+                                    @endswitch
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-7" for="basic-default-name">First EMZI Product
+                                <label class="col-sm-7">First EMZI Product
                                     Purchased? :</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                        value="{{ $customerAnswers->where('question_id', 3)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
+                                        readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Reason of buying EMZI
+                                <label class="col-sm-6">Reason of buying EMZI
                                     Products? :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                        value="{{ $customerAnswers->where('question_id', 4)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
+                                        readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Why Support EMZI product?
+                                <label class="col-sm-6">Why Support EMZI product?
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                        value="{{ $customerAnswers->where('question_id', 5)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
+                                        readonly />
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-5">
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Purchase Frequency
+                                <label class="col-sm-6">Purchase Frequency
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                        value="{{ $customerAnswers->where('question_id', 6)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
+                                        readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">What Products Does EMZI
+                                <label class="col-sm-6">What Products Does EMZI
                                     Have? :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                        value="{{ $customerAnswers->where('question_id', 7)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
+                                        readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Do you know that EMZI has
+                                <label class="col-sm-6">Do you know that EMZI has
                                     its own factory? : </label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                        value="{{ $customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first()->value === 'Y'? 'Yes': 'No' }}"
+                                        readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6" for="basic-default-name">Do you know that EMZI has
+                                <label class="col-sm-6">Do you know that EMZI has
                                     a laboratory at the university? :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                        value="{{ $customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first()->value === 'Y'? 'Yes': 'No' }}"
+                                        readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-7" for="basic-default-name">Does EMZI Products
+                                <label class="col-sm-7">Does EMZI Products
                                     Effective? :</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" />
+                                    @switch($customerAnswers->where('question_id', 10)->where('customer_id',
+                                        $customer->id)->first()->value)
+                                        @case(1)
+                                            <input type="text" class="form-control border-0 text-end bg-white"
+                                                value="Yes, Highly Effective" readonly />
+                                        @break
+
+                                        @case(2)
+                                            <input type="text" class="form-control border-0 text-end bg-white" value="Less Effective"
+                                                readonly />
+                                        @break
+
+                                        @case(3)
+                                            <input type="text" class="form-control border-0 text-end bg-white" value="Not Effective"
+                                                readonly />
+                                        @break
+
+                                        @default
+                                            <input type="text" class="form-control border-0 text-end bg-white" value="N/A"
+                                                readonly />
+                                    @endswitch
                                 </div>
                             </div>
                         </div>
