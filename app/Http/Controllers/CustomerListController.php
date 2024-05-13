@@ -42,6 +42,7 @@ class CustomerListController extends Controller
             'customer_titles.name as title',
             'marital_statuses.name as status',
             'blood_types.name as blood_type',
+            'salary_ranges.name as salary',
             )
             ->join('states', 'customers.state_id', '=', 'states.id')
             ->join('countries', 'states.country_id', '=', 'countries.id')
@@ -49,9 +50,25 @@ class CustomerListController extends Controller
             ->join('customer_titles', 'customers.title_id', '=', 'customer_titles.id')
             ->join('marital_statuses', 'customers.marital_status_id', '=', 'marital_statuses.id')
             ->join('blood_types', 'customers.blood_type_id', '=', 'blood_types.id')
+            ->join('salary_ranges', 'customers.salary_range_id', '=', 'salary_ranges.id')
             ->findOrFail($id);
 
-        return view('customer_list/customer_profile', ['customer' => $customer]);
+        // Children numbers
+        $customerChildren = CustomerChildren::where('customer_id', $id)->whereNull('deleted_at')->get();
+        $numberOfChild = $customerChildren->sum('customer_id');
+
+        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
+        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
+        $customerAnswers = CustomerAnswer::where('customer_id', $id)->firstOrNew();
+
+        return view('customer_list/customer_profile', [
+            'customer' => $customer,
+            'numberOfChild' => $numberOfChild,
+            'customerSpouse' => $customerSpouse,
+            'customerChildren' => $customerChildren,
+            'customerAdditionalInfo' => $customerAdditionalInfo,
+            'customerAnswers' => $customerAnswers,
+        ]);
     }
 
     public function customer_edit($id)
