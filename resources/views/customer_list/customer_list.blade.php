@@ -84,7 +84,7 @@
                                     <option selected disabled></option>
                                     @foreach ($states as $state)
                                         <option value="{{ $state->id }}"
-                                            {{ isset($filters['state']) && $state->id == $filters['state'] ? 'selected' : '' }}>
+                                            {{ isset($filters['state_filter']) && $state->id == $filters['state_filter'] ? 'selected' : '' }}>
                                             {{ $state->name }}
                                         </option>
                                     @endforeach
