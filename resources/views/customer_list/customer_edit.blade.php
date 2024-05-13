@@ -575,11 +575,11 @@
             <div class="card mt-5">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5><strong>Service Rating</strong></h5>
-                    <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                    <a class="collapsed btn" data-bs-toggle="collapse" href="#serviceRating">
                         <strong><i class='bx bx-chevron-down'></i></strong>
                     </a>
                 </div>
-                <div class="card-body ms-4" id="customerDetails" data-bs-parent="#accordion">
+                <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
                     <div class="row mb-3">
                         <label for="deliveryService">Delivery Service:</label>
                         <div class="star-rating" name="delivery_service" data-rating="{{ $customerAnswers->where('question_id', 11)->first()->value ?? 0 }}">
@@ -641,152 +641,4 @@
             </div>
         </form>
     </div>
-
-    {{-- For submit form --}}
-    <script>
-        document.getElementById('updateForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
-            var form = this;
-
-            // Perform form submission via AJAX
-            axios.post(form.action, new FormData(form))
-                .then(function(response) {
-                    // Show SweetAlert success message
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: response.data.message,
-                        showConfirmButton: true
-                    }).then(function() {
-                        // Redirect to customer list page after SweetAlert is closed
-                        window.location.href = "{{ route('customer.list') }}";
-                    });
-                })
-                .catch(function(error) {
-                    // Show SweetAlert error message
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: error.response.data.message,
-                        showConfirmButton: true
-                    })
-                });
-        });
-    </script>
-
-    {{-- For star rating --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Function to update star classes based on database value
-            function updateStars(value, starContainer) {
-                const stars = starContainer.querySelectorAll('.star');
-                stars.forEach((star, index) => {
-                    if (index < value) {
-                        star.classList.add('active');
-                    } else {
-                        star.classList.remove('active');
-                    }
-                });
-            }
-
-            // Function to handle user click on stars
-            document.querySelectorAll('.star-rating').forEach(starContainer => {
-                starContainer.querySelectorAll('.star').forEach(star => {
-                    star.addEventListener('click', function() {
-                        const value = parseInt(this.getAttribute('data-value'));
-                        updateStars(value, starContainer);
-                    });
-                });
-
-                // Assume you retrieve the value from the database here for each rating
-                const databaseValue = parseInt(starContainer.dataset.rating);
-                updateStars(databaseValue, starContainer);
-            });
-
-            document.querySelectorAll('.star-rating .star').forEach(star => {
-                star.addEventListener('click', function() {
-                    const value = parseInt(this.getAttribute('data-value'));
-                    const ratingInput = this.closest('.star-rating').querySelector(
-                        'input[type="hidden"]');
-                    if (ratingInput) {
-                        ratingInput.value = value;
-                    }
-                });
-            });
-        });
-    </script>
-
-
-    {{-- For adding child --}}
-    <script>
-        let childCount = 1;
-
-        function addChildField() {
-            const container = document.getElementById('childContainer');
-            if (!container) {
-                console.error("Container element not found.");
-                return;
-            }
-
-            const card = document.createElement('div');
-            card.classList.add('card', 'mt-4');
-            card.style.width = '900px';
-
-            const cardHeader = document.createElement('div');
-            cardHeader.classList.add('card-header', 'd-flex', 'align-items-center', 'justify-content-between');
-            const headerTitle = document.createElement('h5');
-            const headerId = `childTitle_${childCount}`;
-            headerTitle.setAttribute('id', headerId);
-            headerTitle.innerHTML = `<strong>Child ${childCount}</strong>`;
-            const removeButton = document.createElement('button');
-            removeButton.classList.add('btn', 'btn-danger', 'btn-sm');
-            removeButton.innerHTML = 'x';
-            removeButton.onclick = function() {
-                container.removeChild(card);
-                updateChildCount(); // Update the child count after removal
-            };
-
-            cardHeader.appendChild(headerTitle);
-            cardHeader.appendChild(removeButton);
-
-            const cardBody = document.createElement('div');
-            cardBody.classList.add('card-body');
-
-            // Function to create input field with label and margin below
-            function createInputWithLabel(labelText, inputName) {
-                const label = document.createElement('label');
-                label.innerText = labelText + ':';
-                label.classList.add('mb-2');
-                const input = document.createElement('input');
-                input.setAttribute('type', 'text');
-                input.setAttribute('name', inputName);
-                input.classList.add('form-control', 'mb-3');
-                cardBody.appendChild(label);
-                cardBody.appendChild(input);
-            }
-
-            createInputWithLabel('Name', `childName_${childCount}`);
-            createInputWithLabel('Age', `childAge_${childCount}`);
-            createInputWithLabel('Education', `childEducation_${childCount}`);
-
-            card.appendChild(cardHeader);
-            card.appendChild(cardBody);
-
-            container.appendChild(card);
-
-            childCount++;
-        }
-
-        function updateChildCount() {
-            childCount--;
-            const cards = document.querySelectorAll('.card-header strong');
-            cards.forEach((card, index) => {
-                const headerId = `childTitle_${index + 1}`;
-                const header = document.getElementById(headerId);
-                if (header) {
-                    header.textContent = `Child ${index + 1}`;
-                }
-            });
-        }
-    </script>
 @endsection

@@ -619,7 +619,7 @@
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="form-group row mb-3">
                                 <label class="col-sm-7">Does EMZI Products
                                     Effective? :</label>
                                 <div class="col-sm-5">
@@ -656,15 +656,15 @@
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Service Rating</strong></h5>
-                <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#serviceRating">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
-            <div class="card-body ms-4" id="customerDetails" data-bs-parent="#accordion">
+            <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
                 <div class="row mb-3">
                     <label for="deliveryService">Delivery Service:</label>
-                    <div class="star-rating" data-rating="">
-                        <span class="star active" data-value="1">&#9733;</span>
+                    <div class="star-rating" data-rating="{{ $customerAnswers->where('question_id', 11)->first()->value ?? 0 }}">
+                        <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
                         <span class="star" data-value="4">&#9733;</span>
@@ -674,7 +674,7 @@
 
                 <div class="row mb-3">
                     <label for="deliveryService">Customer Service:</label>
-                    <div class="star-rating" data-rating="">
+                    <div class="star-rating" data-rating="{{ $customerAnswers->where('question_id', 12)->first()->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -685,7 +685,7 @@
 
                 <div class="row mb-3">
                     <label for="deliveryService">Product Quality:</label>
-                    <div class="star-rating" data-rating="">
+                    <div class="star-rating" data-rating="{{ $customerAnswers->where('question_id', 13)->first()->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -696,7 +696,7 @@
 
                 <div class="row mb-3">
                     <label for="deliveryService">Product Quantity:</label>
-                    <div class="star-rating" data-rating="">
+                    <div class="star-rating" data-rating="{{ $customerAnswers->where('question_id', 14)->first()->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
