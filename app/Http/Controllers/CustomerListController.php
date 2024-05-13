@@ -177,15 +177,13 @@ class CustomerListController extends Controller
 
     public function customer_update(Request $request, $id)
     {
-        $customer = Customer::findOrFail($id);
-        $customerAnswer = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
-
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required',
         ]);
 
-        // Get the currently authenticated user
+        $customer = Customer::findOrFail($id);
+        $customerAnswer = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
         $user = Auth::user();
 
         // Update the customer data and set the updated_by column
