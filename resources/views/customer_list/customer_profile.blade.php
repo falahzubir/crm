@@ -564,7 +564,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-6">Why Support EMZI product?
+                                <label class="col-sm-6 mt-1">Why Support EMZI product?
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
@@ -620,7 +620,7 @@
                             </div>
 
                             <div class="form-group row mb-3">
-                                <label class="col-sm-7">Does EMZI Products
+                                <label class="col-sm-7 mt-2">Does EMZI Products
                                     Effective? :</label>
                                 <div class="col-sm-5">
                                     @switch($customerAnswers->where('question_id', 10)->where('customer_id',
