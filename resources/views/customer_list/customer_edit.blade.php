@@ -235,7 +235,7 @@
 
                         <div class="col mb-3">
                             <label class="mb-3">Country :</label>
-                            <input type="text" class="form-control" name="country" value="">
+                            <input type="text" class="form-control" value="{{ $customer->country }}" readonly>
                         </div>
                     </div>
 
@@ -369,7 +369,7 @@
                     <div class="mb-3 d-flex align-items-center justify-content-between">
                         <div>
                             <label class="mb-3">Number of children :</label>
-                            <input type="text" class="form-control" name="number_of_children">
+                            <input type="text" class="form-control" name="number_of_children" value="{{ $numberOfChild }}" readonly>
                         </div>
 
                         <div class="mt-4">

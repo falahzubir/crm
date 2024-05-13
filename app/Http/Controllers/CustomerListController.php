@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Customer;
 use App\Models\CustomerAdditionalInfo;
 use App\Models\CustomerAnswer;
+use App\Models\CustomerChildren;
 use App\Models\CustomerSpouse;
 use App\Models\CustomerTitle;
 use App\Models\MaritalStatus;
@@ -55,8 +56,10 @@ class CustomerListController extends Controller
 
     public function customer_edit($id)
     {
-        $customer = Customer::select('customers.*', 'users.name as updated_by')
+        $customer = Customer::select('customers.*', 'users.name as updated_by', 'countries.name as country')
             ->join('users', 'customers.updated_by', '=', 'users.id')
+            ->join('states', 'customers.state_id', '=', 'states.id')
+            ->join('countries', 'states.country_id', '=', 'countries.id')
             ->findOrFail($id);
 
         $titles = CustomerTitle::all();
@@ -69,6 +72,10 @@ class CustomerListController extends Controller
         $customerAnswers = CustomerAnswer::where('customer_id', $id)->firstOrNew();
         $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
 
+        // Children numbers
+        $customerChildren = CustomerChildren::where('customer_id', $id)->whereNull('deleted_at')->get();
+        $numberOfChild = $customerChildren->sum('customer_id');
+
         return view('customer_list/customer_edit', [
             'customer' => $customer,
             'titles' => $titles,
@@ -80,6 +87,7 @@ class CustomerListController extends Controller
             'customerAdditionalInfo' => $customerAdditionalInfo,
             'customerAnswers' => $customerAnswers,
             'customerSpouse' => $customerSpouse,
+            'numberOfChild' => $numberOfChild,
         ]);
     }
 
@@ -212,6 +220,31 @@ class CustomerListController extends Controller
                 ['customer_id' => $id, 'question_id' => $questionId],
                 ['value' => $request->input($field)]
             );
+        }
+
+        // Handle child card input
+        $childData = [];
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'childName_') === 0) {
+                $index = substr($key, strlen('childName_'));
+                $childData[$index]['name'] = $value;
+            } elseif (strpos($key, 'childAge_') === 0) {
+                $index = substr($key, strlen('childAge_'));
+                $childData[$index]['age'] = $value;
+            } elseif (strpos($key, 'childEducation_') === 0) {
+                $index = substr($key, strlen('childEducation_'));
+                $childData[$index]['education'] = $value;
+            }
+        }
+
+        if (!empty($childData)) {
+            foreach ($childData as $child) {
+                // Create or update child record
+                $childRecord = CustomerChildren::updateOrCreate(
+                    ['customer_id' => $id, 'name' => $child['name']],
+                    ['age' => $child['age'], 'institution' => $child['education']]
+                );
+            }
         }
 
         return response()->json(['message' => 'Customer updated successfully.'], 200);
