@@ -349,18 +349,18 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label class="mb-3">Spouse Name :</label>
-                            <input type="text" class="form-control" name="spouse_name" value="">
+                            <input type="text" class="form-control" name="spouse_name" value="{{ $customerSpouse->name }}">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Spouse Occupation :</label>
-                            <input type="text" class="form-control" name="spouse_occupation" value="">
+                            <input type="text" class="form-control" name="spouse_occupation" value="{{ $customerSpouse->occupation }}">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-3">Spouse Age :</label>
-                        <input type="text" class="form-control" name="spouse_age" value="">
+                        <input type="text" class="form-control" name="spouse_age" value="{{ $customerSpouse->age }}">
                     </div>
 
                     <div class="mb-3 d-flex align-items-center justify-content-between">

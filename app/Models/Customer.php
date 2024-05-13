@@ -33,5 +33,6 @@ class Customer extends Model
         'salary_range_id',
         'working_hour',
         'updated_by',
+        'birth_order',
     ];
 }

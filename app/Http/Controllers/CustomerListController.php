@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Customer;
 use App\Models\CustomerAdditionalInfo;
 use App\Models\CustomerAnswer;
+use App\Models\CustomerSpouse;
 use App\Models\CustomerTitle;
 use App\Models\MaritalStatus;
 use App\Models\SalaryRange;
@@ -64,22 +65,9 @@ class CustomerListController extends Controller
         $states = State::all();
         $countries = Country::all();
         $salaryRanges = SalaryRange::all();
-
-        // Find CustomerAdditionalInfo if it exists
-        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->first();
-
-        // If CustomerAdditionalInfo does not exist, initialize it as an empty object
-        if (!$customerAdditionalInfo) {
-            $customerAdditionalInfo = new CustomerAdditionalInfo();
-        }
-
-        // Find CustomerAnswer if it exists
-        $customerAnswers = CustomerAnswer::where('customer_id', $id)->first();
-
-        // If CustomerAnswer does not exist, initialize it as an empty object
-        if (!$customerAnswers) {
-            $customerAnswers = new CustomerAnswer();
-        }
+        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
+        $customerAnswers = CustomerAnswer::where('customer_id', $id)->firstOrNew();
+        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
 
         return view('customer_list/customer_edit', [
             'customer' => $customer,
@@ -91,6 +79,7 @@ class CustomerListController extends Controller
             'salaryRanges' => $salaryRanges,
             'customerAdditionalInfo' => $customerAdditionalInfo,
             'customerAnswers' => $customerAnswers,
+            'customerSpouse' => $customerSpouse,
         ]);
     }
 
@@ -185,10 +174,19 @@ class CustomerListController extends Controller
         $customer = Customer::findOrFail($id);
         $customerAnswer = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
         $user = Auth::user();
+        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
+
+        $customerSpouseData = [
+            'customer_id' => $id,
+            'name' => $request->input('spouse_name'),
+            'age' => $request->input('spouse_age'),
+            'occupation' => $request->input('spouse_occupation'),
+        ];
 
         // Update the customer data and set the updated_by column
         $customer->update(array_merge($request->all(), ['updated_by' => $user->id]));
         $customerAnswer->update($request->all());
+        $customerSpouse->updateOrCreate($customerSpouseData);
 
         // Define an array to map question field names to their corresponding question IDs
         $questions = [
