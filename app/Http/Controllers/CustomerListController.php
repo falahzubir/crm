@@ -111,37 +111,47 @@ class CustomerListController extends Controller
     // For Search & Filters
     public function handle_search(Request $request)
     {
-        // Variable
-        $search = $request->input('search');
-        $gender = $request->input('gender');
-        $age = $request->input('age_range');
-        $state_filter = $request->input('state');
+        // Initialize $search variable
+        $search = '';
 
-        // Queries
+        // State
         $states = State::all();
+
+        // Start with the base query
         $query = Customer::select('customers.*')
             ->whereNull('customers.deleted_at');
 
-        // Search
+        // Array to hold filter conditions
+        $filters = [];
+
+        // Handle search filter
         if ($request->filled('search')) {
+            $search = $request->input('search');
             $query->where(function ($query) use ($search) {
-                $query->where('customers.name', 'like', "%$search%")->orWhere('customers.phone', 'like', "%$search%");
+                $query->where('customers.name', 'like', "%$search%")
+                    ->orWhere('customers.phone', 'like', "%$search%");
             });
         }
 
-        // Filter
-        if ($request->filled('state') && $request->filled('gender')) {
-            $query->where('gender', $gender)
-                ->where('state_id', $state_filter);
-        } elseif ($request->filled('state')) {
-            // Only filter State
+        // Handle state filter
+        if ($request->filled('state')) {
+            $state_filter = $request->input('state');
+            $filters['state_filter'] = $state_filter;
             $query->where('state_id', $state_filter);
-        } elseif ($request->filled('gender')) {
-            // Only filter Gender
+        }
+
+        // Handle gender filter
+        if ($request->filled('gender')) {
+            $gender = $request->input('gender');
+            $filters['gender'] = $gender;
             $query->where('gender', $gender);
-        } elseif ($request->filled('age_range')) {
-            // Only filter Age
-            switch ($age) {
+        }
+
+        // Handle age range filter
+        if ($request->filled('age_range')) {
+            $age_range = $request->input('age_range');
+            $filters['age'] = $age_range;
+            switch ($age_range) {
                 case '1':
                     $query->where('age', '<=', '17');
                     break;
@@ -169,16 +179,10 @@ class CustomerListController extends Controller
             }
         }
 
-        // Put all together and apply paginate
+        // Pagination
         $customers = $query->paginate(10);
 
-        // Send back what user filters
-        $filters = [
-            'gender' => $gender,
-            'state_filter' => $state_filter,
-            'age' => $age,
-        ];
-
+        // Pass filters to the view
         return view('customer_list/customer_list', [
             'customers' => $customers,
             'states' => $states,

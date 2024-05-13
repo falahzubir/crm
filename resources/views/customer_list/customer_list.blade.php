@@ -38,11 +38,11 @@
                                 <label>Gender</label>
                                 <select name="gender" id="gender" class="form-select mt-2">
                                     <option selected disabled></option>
-                                    <option value="Male"
-                                        {{ isset($filters['gender']) && 'Male' == $filters['gender'] ? 'selected' : '' }}>
+                                    <option value="M"
+                                        {{ isset($filters['gender']) && 'M' == $filters['gender'] ? 'selected' : '' }}>
                                         Male</option>
-                                    <option value="Female"
-                                        {{ isset($filters['gender']) && 'Female' == $filters['gender'] ? 'selected' : '' }}>
+                                    <option value="F"
+                                        {{ isset($filters['gender']) && 'F' == $filters['gender'] ? 'selected' : '' }}>
                                         Female</option>
                                 </select>
                             </div>
@@ -159,11 +159,7 @@
                                         </td>
                                         <td class="text-center">
                                             {{-- State --}}
-                                            @foreach ($states as $state)
-                                                @if ($row->state_id == $state->id)
-                                                    {{ $state->name }}
-                                                @endif
-                                            @endforeach
+                                            {{ $states->where('id', $row->state_id)->first()->name ?? '-' }}
                                         </td>
                                         <td class="text-center">
                                             {{-- Order --}}
