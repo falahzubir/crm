@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class TransferDataSeeder extends Seeder
+class TagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,26 +15,22 @@ class TransferDataSeeder extends Seeder
     public function run(): void
     {
         // Last table row
-        $lastProcessedRow = 19389;
+        $lastProcessedRow = 10;
 
         // Get data from the analytic table starting from the last processed row
-        $customers = DB::connection('ANALYTIC-STG')
-            ->table('customers')
+        $tags = DB::connection('ANALYTIC-STG')
+            ->table('tags')
             ->where('id', '>', $lastProcessedRow)
-            ->take(1000) // Insert 1000 rows at a time
+            ->take(1000)
             ->get();
 
         // Insert data into CRM
-        foreach ($customers as $customer) {
+        foreach ($tags as $tag) {
             // Insert the customer data into CRM
-            DB::connection('CRM-STG')->table('customers')->insert([
-                'id' => $customer->id,
-                'name' => $customer->customer_name,
-                'phone' => $customer->customer_tel,
+            DB::connection('CRM-STG')->table('tags')->insert([
+                'id' => $tag->id,
+                'name' => $tag->name,
             ]);
-
-            // Update the last processed row
-            $lastProcessedRow = $customer->id;
         }
     }
 }
