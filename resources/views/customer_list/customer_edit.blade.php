@@ -433,7 +433,7 @@
             </div>
 
             {{-- Suffering Disease --}}
-            <div class="card mt-5">
+            {{-- <div class="card mt-5">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5><strong>Suffering Disease</strong></h5>
                     <a class="collapsed btn" data-bs-toggle="collapse" href="#sufferingDisease">
@@ -453,7 +453,7 @@
                         <input type="text" class="form-control" name="other_disease" value="">
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Product & Service --}}
             <div class="card mt-5">
