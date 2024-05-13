@@ -61,15 +61,15 @@
                         </div>
 
                         <div class="col-md-4 float-start" style="margin-left: 50px;">
-                            <div class="mb-1">
+                            <div class="mb-1 mt-3">
                                 <h3>{{ $customer->name }}</h3>
                             </div>
 
-                            <div class="mb-0">
+                            {{-- <div class="mb-0">
                                 <label>LAST PURCHASE</label>
                                 &nbsp;
                                 <label class="text-success">10 days ago</label>
-                            </div>
+                            </div> --}}
 
                             <div class="mt-3">
                                 <label>Last updated {{ $customer->updated_at->diffForHumans() }} by
