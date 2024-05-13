@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\BloodType;
 use App\Models\Country;
 use App\Models\Customer;
+use App\Models\CustomerAdditionalInfo;
+use App\Models\CustomerAnswer;
 use App\Models\CustomerTitle;
 use App\Models\MaritalStatus;
 use App\Models\SalaryRange;
@@ -55,12 +57,29 @@ class CustomerListController extends Controller
         $customer = Customer::select('customers.*', 'users.name as updated_by')
             ->join('users', 'customers.updated_by', '=', 'users.id')
             ->findOrFail($id);
+
         $titles = CustomerTitle::all();
         $maritalStatus = MaritalStatus::all();
         $bloodTypes = BloodType::all();
         $states = State::all();
         $countries = Country::all();
         $salaryRanges = SalaryRange::all();
+
+        // Find CustomerAdditionalInfo if it exists
+        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->first();
+
+        // If CustomerAdditionalInfo does not exist, initialize it as an empty object
+        if (!$customerAdditionalInfo) {
+            $customerAdditionalInfo = new CustomerAdditionalInfo();
+        }
+
+        // Find CustomerAnswer if it exists
+        $customerAnswers = CustomerAnswer::where('customer_id', $id)->first();
+
+        // If CustomerAnswer does not exist, initialize it as an empty object
+        if (!$customerAnswers) {
+            $customerAnswers = new CustomerAnswer();
+        }
 
         return view('customer_list/customer_edit', [
             'customer' => $customer,
@@ -70,6 +89,8 @@ class CustomerListController extends Controller
             'states' => $states,
             'countries' => $countries,
             'salaryRanges' => $salaryRanges,
+            'customerAdditionalInfo' => $customerAdditionalInfo,
+            'customerAnswers' => $customerAnswers,
         ]);
     }
 
@@ -157,6 +178,7 @@ class CustomerListController extends Controller
     public function customer_update(Request $request, $id)
     {
         $customer = Customer::findOrFail($id);
+        $customerAnswer = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -168,6 +190,33 @@ class CustomerListController extends Controller
 
         // Update the customer data and set the updated_by column
         $customer->update(array_merge($request->all(), ['updated_by' => $user->id]));
+        $customerAnswer->update($request->all());
+
+        // Define an array to map question field names to their corresponding question IDs
+        $questions = [
+            'aware_or_not_about_emzi' => 1,
+            'how_did_you_know_about_emzi' => 2,
+            'first_product_purchased_from_emzi' => 3,
+            'why_buying_emzi_products' => 4,
+            'why_support_emzi_products' => 5,
+            'frequency_of_purchase' => 6,
+            'what_products_does_emzi_have' => 7,
+            'do_you_know_emzi_has_its_own_factory' => 8,
+            'do_you_know_emzi_has_a_laboratory_at_the_university' => 9,
+            'are_emzi_products_effective' => 10,
+            'delivery_service' => 11,
+            'customer_service' => 12,
+            'product_quality' => 13,
+            'product_quantity' => 14,
+        ];
+
+        // Iterate over the questions array to set question_id and value for each CustomerAnswer record
+        foreach ($questions as $field => $questionId) {
+            $customerAnswer = CustomerAnswer::updateOrCreate(
+                ['customer_id' => $id, 'question_id' => $questionId],
+                ['value' => $request->input($field)]
+            );
+        }
 
         return response()->json(['message' => 'Customer updated successfully.'], 200);
     }

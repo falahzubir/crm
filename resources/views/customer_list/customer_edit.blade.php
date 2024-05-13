@@ -18,6 +18,26 @@
         .star-rating .star.active {
             color: orange;
         }
+
+        /* Hide radio buttons */
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        /* Style labels as stars */
+        .star-rating label {
+            font-size: 30px;
+            /* Adjust size as needed */
+            color: #ccc;
+            /* Default star color */
+            cursor: pointer;
+        }
+
+        /* Style labels when radio button is checked */
+        .star-rating input[type="radio"]:checked~label {
+            color: #ffcc00;
+            /* Change color to represent selected star */
+        }
     </style>
 
     <div class="container">
@@ -30,6 +50,7 @@
             @csrf
             @method('PUT')
 
+            {{-- Customer Photo --}}
             <div class="card mt-4 p-3">
                 <div class="card-body">
                     <div class="row">
@@ -134,7 +155,8 @@
 
                             <div class="col mb-3">
                                 <label class="mb-3">Phone Number :</label>
-                                <input type="tel" class="form-control" name="phone" value="{{ $customer->phone }}">
+                                <input type="tel" class="form-control" name="phone" value="{{ $customer->phone }}"
+                                    readonly>
                             </div>
                         </div>
 
@@ -370,31 +392,36 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label class="mb-3">Hobby :</label>
-                            <input type="text" class="form-control" name="hobby" value="">
+                            <input type="text" class="form-control" name="hobby"
+                                value="{{ $customerAdditionalInfo->hobby }}">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Favourite Colour :</label>
-                            <input type="text" class="form-control" name="favourite_colour" value="">
+                            <input type="text" class="form-control" name="fav_color"
+                                value="{{ $customerAdditionalInfo->fav_color }}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
                             <label class="mb-3">Favourite Pet :</label>
-                            <input type="text" class="form-control" name="favourite_pet" value="">
+                            <input type="text" class="form-control" name="fav_pet"
+                                value="{{ $customerAdditionalInfo->fav_pet }}">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Favourite Food :</label>
-                            <input type="text" class="form-control" name="favourite_food" value="">
+                            <input type="text" class="form-control" name="fav_food"
+                                value="{{ $customerAdditionalInfo->fav_food }}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="mb-3">Favourite Drinks :</label>
-                            <input type="text" class="form-control" name="favourite_drinks" value="">
+                            <input type="text" class="form-control" name="fav_beverage"
+                                value="{{ $customerAdditionalInfo->fav_beverage }}">
                         </div>
                     </div>
                 </div>
@@ -435,67 +462,84 @@
                     <div class="mb-3">
                         <label class="mb-3">Aware or not about EMZI? :</label>
                         <div class="d-flex justify-content-start">
-                            <input type="radio" name="aware_or_not_about_emzi"> <label class="ms-1">Yes</label>
-                            <input type="radio" name="aware_or_not_about_emzi" class="ms-3"> <label
-                                class="ms-1">No</label>
+                            <input type="radio" name="aware_or_not_about_emzi" value="Y"
+                                {{ $customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first()->value === 'Y'? 'checked': '' }}>
+                            <label class="ms-1">Yes</label>
+                            <input type="radio" name="aware_or_not_about_emzi" value="N" class="ms-3"
+                                {{ $customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first()->value === 'N'? 'checked': '' }}>
+                            <label class="ms-1">No</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">How do you know about EMZI? :</label>
                         <div class="d-flex justify-content-start">
-                            <input type="checkbox" name="how_did_you_know_about_emzi"> <label class="ms-1">Social
-                                Media</label>
-                            <input type="checkbox" name="how_did_you_know_about_emzi" class="ms-3"> <label
-                                class="ms-1">Friends</label>
-                            <input type="checkbox" name="how_did_you_know_about_emzi" class="ms-3"> <label
-                                class="ms-1">Website</label>
+                            <input type="checkbox" name="how_did_you_know_about_emzi" value="1"
+                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->pluck('value')->contains('1')? 'checked': '' }}>
+                            <label class="ms-1">Social Media</label>
+                            <input type="checkbox" name="how_did_you_know_about_emzi" class="ms-3" value="2"
+                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->pluck('value')->contains('2')? 'checked': '' }}>
+                            <label class="ms-1">Friends</label>
+                            <input type="checkbox" name="how_did_you_know_about_emzi" class="ms-3" value="3"
+                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->pluck('value')->contains('3')? 'checked': '' }}>
+                            <label class="ms-1">Website</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">First EMZI Product Purchased? :</label>
                         <input type="text" class="form-control" name="first_product_purchased_from_emzi"
-                            value="">
+                            value="{{ $customerAnswers->where('question_id', 3)->where('customer_id', $customer->id)->first()->value ?? '' }}">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Why Buying EMZI Products? :</label>
-                        <input type="text" class="form-control" name="why_buying_emzi_products" value="">
+                        <input type="text" class="form-control" name="why_buying_emzi_products"
+                            value="{{ $customerAnswers->where('question_id', 4)->where('customer_id', $customer->id)->first()->value ?? '' }}">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Why Support EMZI Products? :</label>
-                        <input type="text" class="form-control" name="why_support_emzi_products" value="">
+                        <input type="text" class="form-control" name="why_support_emzi_products"
+                            value="{{ $customerAnswers->where('question_id', 5)->where('customer_id', $customer->id)->first()->value ?? '' }}">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Purchase Frequency :</label>
-                        <input type="number" class="form-control" name="frequency_of_purchase" value="">
+                        <input type="number" class="form-control" name="frequency_of_purchase"
+                            value="{{ $customerAnswers->where('question_id', 6)->where('customer_id', $customer->id)->first()->value ?? '' }}">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">What Products Does EMZI Have? :</label>
-                        <input type="text" class="form-control" name="what_products_does_emzi_have" value="">
+                        <input type="text" class="form-control" name="what_products_does_emzi_have"
+                            value="{{ $customerAnswers->where('question_id', 7)->where('customer_id', $customer->id)->first()->value ?? '' }}">
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Do you know EMZI has its own factory? :</label>
                         <div class="d-flex justify-content-start">
-                            <input type="radio" name="do_you_know_emzi_has_its_own_factory"> <label
-                                class="ms-1">Yes</label>
-                            <input type="radio" name="do_you_know_emzi_has_its_own_factory" class="ms-3"> <label
-                                class="ms-1">No</label>
+                            <input type="radio" name="do_you_know_emzi_has_its_own_factory" value="Y"
+                                {{ $customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first()->value === 'Y'? 'checked': '' }}>
+                            <label class="ms-1">Yes</label>
+                            <input type="radio" name="do_you_know_emzi_has_its_own_factory" value="N"
+                                class="ms-3"
+                                {{ $customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first()->value === 'N'? 'checked': '' }}>
+                            <label class="ms-1">No</label>
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label class="mb-3">Do you know EMZI has a laboratory at the university? :</label>
                         <div class="d-flex justify-content-start">
-                            <input type="radio" name="do_you_know_emzi_has_a_laboratory_at_the_university"> <label
-                                class="ms-1">Yes</label>
                             <input type="radio" name="do_you_know_emzi_has_a_laboratory_at_the_university"
-                                class="ms-3"> <label class="ms-1">No</label>
+                                value="Y"
+                                {{ $customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first()->value === 'Y'? 'checked': '' }}>
+                            <label class="ms-1">Yes</label>
+                            <input type="radio" name="do_you_know_emzi_has_a_laboratory_at_the_university"
+                                value="N" class="ms-3"
+                                {{ $customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first()->value === 'N'? 'checked': '' }}>
+                            <label class="ms-1">No</label>
                         </div>
                     </div>
 
@@ -503,15 +547,18 @@
                         <label class="mb-3">Are EMZI Products Effective? :</label>
                         <div class="d-flex flex-column">
                             <div class="mb-2">
-                                <input type="radio" name="are_emzi_products_effective" value="1">
+                                <input type="radio" name="are_emzi_products_effective" value="1"
+                                    {{ $customerAnswers->where('question_id', 10)->where('customer_id', $customer->id)->pluck('value')->contains('1')? 'checked': '' }}>
                                 <label class="ms-1">Yes, Highly Effective</label>
                             </div>
                             <div class="mb-2">
-                                <input type="radio" name="are_emzi_products_effective" value="2">
+                                <input type="radio" name="are_emzi_products_effective" value="2"
+                                    {{ $customerAnswers->where('question_id', 10)->where('customer_id', $customer->id)->pluck('value')->contains('2')? 'checked': '' }}>
                                 <label class="ms-1">Less Effective</label>
                             </div>
                             <div class="mb-2">
-                                <input type="radio" name="are_emzi_products_effective" value="3">
+                                <input type="radio" name="are_emzi_products_effective" value="3"
+                                    {{ $customerAnswers->where('question_id', 10)->where('customer_id', $customer->id)->pluck('value')->contains('3')? 'checked': '' }}>
                                 <label class="ms-1">Not Effective</label>
                             </div>
                         </div>
@@ -530,8 +577,8 @@
                 <div class="card-body ms-4" id="customerDetails" data-bs-parent="#accordion">
                     <div class="row mb-3">
                         <label for="deliveryService">Delivery Service:</label>
-                        <div class="star-rating" data-rating="">
-                            <span class="star active" data-value="1">&#9733;</span>
+                        <div class="star-rating" data-rating="" name="delivery_service">
+                            <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
@@ -541,7 +588,7 @@
 
                     <div class="row mb-3">
                         <label for="deliveryService">Customer Service:</label>
-                        <div class="star-rating" data-rating="">
+                        <div class="star-rating" data-rating="" name="customer_service">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
@@ -552,7 +599,7 @@
 
                     <div class="row mb-3">
                         <label for="deliveryService">Product Quality:</label>
-                        <div class="star-rating" data-rating="">
+                        <div class="star-rating" data-rating="" name="product_quality">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
@@ -563,7 +610,7 @@
 
                     <div class="row mb-3">
                         <label for="deliveryService">Product Quantity:</label>
-                        <div class="star-rating" data-rating="">
+                        <div class="star-rating" data-rating="" name="product_quantity">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
@@ -691,5 +738,33 @@
             // Append the new div to the form
             form.appendChild(card);
         }
+    </script>
+
+    <script>
+        // Function to update star classes based on database value
+        function updateStars(value, starContainer) {
+            const stars = starContainer.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < value) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Function to handle user click on stars
+        document.querySelectorAll('.star-rating').forEach(starContainer => {
+            starContainer.querySelectorAll('.star').forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    updateStars(value, starContainer);
+                });
+            });
+
+            // Assume you retrieve the value from the database here for each rating
+            const databaseValue = parseInt(starContainer.dataset.rating);
+            updateStars(databaseValue, starContainer);
+        });
     </script>
 @endsection

@@ -9,4 +9,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CustomerAnswer extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'question_id',
+        'customer_id',
+        'value',
+    ];
 }
