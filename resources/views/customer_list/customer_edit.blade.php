@@ -369,7 +369,8 @@
                     <div class="mb-3 d-flex align-items-center justify-content-between">
                         <div>
                             <label class="mb-3">Number of children :</label>
-                            <input type="text" class="form-control" name="number_of_children" value="{{ $numberOfChild }}" readonly>
+                            <input type="text" class="form-control" name="number_of_children"
+                                value="{{ $numberOfChild }}" readonly>
                         </div>
 
                         <div class="mt-4">
@@ -581,49 +582,60 @@
                 <div class="card-body ms-4" id="customerDetails" data-bs-parent="#accordion">
                     <div class="row mb-3">
                         <label for="deliveryService">Delivery Service:</label>
-                        <div class="star-rating" data-rating="" name="delivery_service">
+                        <div class="star-rating" name="delivery_service" data-rating="{{ $customerAnswers->where('question_id', 11)->first()->value ?? 0 }}">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
+                            <input type="hidden" id="delivery_service_rating" name="delivery_service_rating"
+                                value="{{ $customerAnswers->where('question_id', 11)->first()->value ?? 0 }}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <label for="deliveryService">Customer Service:</label>
-                        <div class="star-rating" data-rating="" name="customer_service">
+                        <label for="customerService">Customer Service:</label>
+                        <div class="star-rating" name="customer_service" data-rating="{{ $customerAnswers->where('question_id', 12)->first()->value ?? 0 }}">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
+                            <input type="hidden" id="customer_service_rating" name="customer_service_rating"
+                                value="{{ $customerAnswers->where('question_id', 12)->first()->value ?? 0 }}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <label for="deliveryService">Product Quality:</label>
-                        <div class="star-rating" data-rating="" name="product_quality">
+                        <label for="productQuality">Product Quality:</label>
+                        <div class="star-rating" name="product_quality" data-rating="{{ $customerAnswers->where('question_id', 13)->first()->value ?? 0 }}">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
+                            <input type="hidden" id="product_quality_rating" name="product_quality_rating"
+                                value="{{ $customerAnswers->where('question_id', 13)->first()->value ?? 0 }}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <label for="deliveryService">Product Quantity:</label>
-                        <div class="star-rating" data-rating="" name="product_quantity">
+                        <label for="productQuantity">Product Quantity:</label>
+                        <div class="star-rating" name="product_quantity" data-rating="{{ $customerAnswers->where('question_id', 14)->first()->value ?? 0 }}">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
+                            <input type="hidden" id="product_quantity_rating" name="product_quantity_rating"
+                                value="{{ $customerAnswers->where('question_id', 14)->first()->value ?? 0 }}">
                         </div>
                     </div>
                 </div>
             </div>
+
+
+            {{-- Save Button --}}
             <div class="buy-now">
                 <button type="submit" class="btn btn-primary btn-lg btn-buy-now">SAVE CHANGES</button>
             </div>
@@ -664,32 +676,46 @@
 
     {{-- For star rating --}}
     <script>
-        // Function to update star classes based on database value
-        function updateStars(value, starContainer) {
-            const stars = starContainer.querySelectorAll('.star');
-            stars.forEach((star, index) => {
-                if (index < value) {
-                    star.classList.add('active');
-                } else {
-                    star.classList.remove('active');
-                }
-            });
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to update star classes based on database value
+            function updateStars(value, starContainer) {
+                const stars = starContainer.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < value) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
 
-        // Function to handle user click on stars
-        document.querySelectorAll('.star-rating').forEach(starContainer => {
-            starContainer.querySelectorAll('.star').forEach(star => {
+            // Function to handle user click on stars
+            document.querySelectorAll('.star-rating').forEach(starContainer => {
+                starContainer.querySelectorAll('.star').forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = parseInt(this.getAttribute('data-value'));
+                        updateStars(value, starContainer);
+                    });
+                });
+
+                // Assume you retrieve the value from the database here for each rating
+                const databaseValue = parseInt(starContainer.dataset.rating);
+                updateStars(databaseValue, starContainer);
+            });
+
+            document.querySelectorAll('.star-rating .star').forEach(star => {
                 star.addEventListener('click', function() {
                     const value = parseInt(this.getAttribute('data-value'));
-                    updateStars(value, starContainer);
+                    const ratingInput = this.closest('.star-rating').querySelector(
+                        'input[type="hidden"]');
+                    if (ratingInput) {
+                        ratingInput.value = value;
+                    }
                 });
             });
-
-            // Assume you retrieve the value from the database here for each rating
-            const databaseValue = parseInt(starContainer.dataset.rating);
-            updateStars(databaseValue, starContainer);
         });
     </script>
+
 
     {{-- For adding child --}}
     <script>

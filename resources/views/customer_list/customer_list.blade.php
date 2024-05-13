@@ -51,14 +51,30 @@
                                 <label>Age Range</label>
                                 <select name="age_range" id="age_range" class="form-select mt-2">
                                     <option selected disabled></option>
-                                    <option value="1" {{ isset($filters['age']) && '1' == $filters['age'] ? 'selected' : '' }}>Under 17</option>
-                                    <option value="2" {{ isset($filters['age']) && '2' == $filters['age'] ? 'selected' : '' }}>18 - 24 years old</option>
-                                    <option value="3" {{ isset($filters['age']) && '3' == $filters['age'] ? 'selected' : '' }}>25 - 34 years old</option>
-                                    <option value="4" {{ isset($filters['age']) && '4' == $filters['age'] ? 'selected' : '' }}>35 - 44 years old</option>
-                                    <option value="5" {{ isset($filters['age']) && '5' == $filters['age'] ? 'selected' : '' }}>45 - 54 years old</option>
-                                    <option value="6" {{ isset($filters['age']) && '6' == $filters['age'] ? 'selected' : '' }}>55 - 64 years old</option>
-                                    <option value="7" {{ isset($filters['age']) && '7' == $filters['age'] ? 'selected' : '' }}>65 - 74 years old</option>
-                                    <option value="8" {{ isset($filters['age']) && '8' == $filters['age'] ? 'selected' : '' }}>75 years old and above</option>
+                                    <option value="1"
+                                        {{ isset($filters['age']) && '1' == $filters['age'] ? 'selected' : '' }}>Under 17
+                                    </option>
+                                    <option value="2"
+                                        {{ isset($filters['age']) && '2' == $filters['age'] ? 'selected' : '' }}>18 - 24
+                                        years old</option>
+                                    <option value="3"
+                                        {{ isset($filters['age']) && '3' == $filters['age'] ? 'selected' : '' }}>25 - 34
+                                        years old</option>
+                                    <option value="4"
+                                        {{ isset($filters['age']) && '4' == $filters['age'] ? 'selected' : '' }}>35 - 44
+                                        years old</option>
+                                    <option value="5"
+                                        {{ isset($filters['age']) && '5' == $filters['age'] ? 'selected' : '' }}>45 - 54
+                                        years old</option>
+                                    <option value="6"
+                                        {{ isset($filters['age']) && '6' == $filters['age'] ? 'selected' : '' }}>55 - 64
+                                        years old</option>
+                                    <option value="7"
+                                        {{ isset($filters['age']) && '7' == $filters['age'] ? 'selected' : '' }}>65 - 74
+                                        years old</option>
+                                    <option value="8"
+                                        {{ isset($filters['age']) && '8' == $filters['age'] ? 'selected' : '' }}>75 years
+                                        old and above</option>
                                 </select>
                             </div>
 
@@ -108,10 +124,10 @@
                                     <tr>
                                         <td class="text-center">
                                             {{-- Action --}}
-                                            <a href="{{ route('customer.edit', ['id' =>  $row->id]) }}" class="text-secondary"><i
-                                                    class='bx bx-pencil'></i></a>
-                                            <a href="{{ route('customer.profile', ['id' =>  $row->id]) }}" class="text-secondary"><i
-                                                    class='bx bx-show-alt'></i></a>
+                                            <a href="{{ route('customer.edit', ['id' => $row->id]) }}"
+                                                class="text-secondary"><i class='bx bx-pencil'></i></a>
+                                            <a href="{{ route('customer.profile', ['id' => $row->id]) }}"
+                                                class="text-secondary"><i class='bx bx-show-alt'></i></a>
                                         </td>
                                         <td>
                                             {{-- Name --}}
@@ -143,7 +159,11 @@
                                         </td>
                                         <td class="text-center">
                                             {{-- State --}}
-                                            -
+                                            @foreach ($states as $state)
+                                                @if ($row->state_id == $state->id)
+                                                    {{ $state->name }}
+                                                @endif
+                                            @endforeach
                                         </td>
                                         <td class="text-center">
                                             {{-- Order --}}

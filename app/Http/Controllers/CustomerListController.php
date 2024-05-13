@@ -208,10 +208,10 @@ class CustomerListController extends Controller
             'do_you_know_emzi_has_its_own_factory' => 8,
             'do_you_know_emzi_has_a_laboratory_at_the_university' => 9,
             'are_emzi_products_effective' => 10,
-            'delivery_service' => 11,
-            'customer_service' => 12,
-            'product_quality' => 13,
-            'product_quantity' => 14,
+            'delivery_service_rating' => 11,
+            'customer_service_rating' => 12,
+            'product_quality_rating' => 13,
+            'product_quantity_rating' => 14,
         ];
 
         // Iterate over the questions array to set question_id and value for each CustomerAnswer record
