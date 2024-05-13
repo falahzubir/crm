@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h3 class="text-dark">Customer List</h3>
+        <h3 class="text-dark"><strong>Customer List</strong></h3>
     </div>
 
     <div class="container">
