@@ -79,7 +79,6 @@
                                     @else
                                         
                                     @endif
-                                    
                                 </label>
                             </div>
                         </div>
