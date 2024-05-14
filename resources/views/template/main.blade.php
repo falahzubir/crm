@@ -247,6 +247,59 @@
 
     {{-- For adding child --}}
     <script>
+        function addChildFields() {
+            const container = document.getElementById('childContainer');
+            const numberOfChildren = parseInt(document.getElementById('number_of_children').value);
+
+            if (isNaN(numberOfChildren) || numberOfChildren <= 0) {
+                alert('Please enter a valid number of children.');
+                return;
+            }
+
+            container.innerHTML = ''; // Clear existing child fields
+
+            for (let i = 1; i <= numberOfChildren; i++) {
+                const card = document.createElement('div');
+                card.classList.add('card', 'mt-4');
+                card.style.width = '900px';
+
+                const cardHeader = document.createElement('div');
+                cardHeader.classList.add('card-header', 'd-flex', 'align-items-center', 'justify-content-between');
+
+                const headerTitle = document.createElement('h5');
+                headerTitle.innerHTML = `<strong>Child ${i}</strong>`;
+
+                cardHeader.appendChild(headerTitle);
+
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+
+                createInputWithLabel(cardBody, 'Name', `childName_${i}`);
+                createInputWithLabel(cardBody, 'Age', `childAge_${i}`);
+                createInputWithLabel(cardBody, 'Education', `childEducation_${i}`);
+
+                card.appendChild(cardHeader);
+                card.appendChild(cardBody);
+
+                container.appendChild(card);
+            }
+        }
+
+        function createInputWithLabel(parentElement, labelText, inputName) {
+            const label = document.createElement('label');
+            label.innerText = labelText + ':';
+            label.classList.add('mb-2');
+
+            const input = document.createElement('input');
+            input.setAttribute('type', 'text');
+            input.setAttribute('name', inputName);
+            input.classList.add('form-control', 'mb-3');
+
+            parentElement.appendChild(label);
+            parentElement.appendChild(input);
+        }
+    </script>
+    {{-- <script>
         let childCount = 1;
 
         function addChildField() {
@@ -316,7 +369,7 @@
                 }
             });
         }
-    </script>
+    </script> --}}
 
 </body>
 

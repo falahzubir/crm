@@ -101,7 +101,8 @@
 
                     <div class="mb-3">
                         <label class="mb-3">Nick Name :</label>
-                        <input type="text" class="form-control" name="nickname" value="{{ $customer->nickname ?? null }}">
+                        <input type="text" class="form-control" name="nickname"
+                            value="{{ $customer->nickname ?? null }}">
                     </div>
 
                     <div class="row d-flex align-items-center justify-content-around">
@@ -214,7 +215,8 @@
                     <div class="mb-3">
                         <label class="mb-3">City :</label>
                         <div>
-                            <input type="text" class="form-control" name="city" value="{{ $customer->city ?? null }}">
+                            <input type="text" class="form-control" name="city"
+                                value="{{ $customer->city ?? null }}">
                         </div>
                     </div>
 
@@ -240,7 +242,8 @@
 
                         <div class="col mb-3">
                             <label class="mb-3">Country :</label>
-                            <input type="text" class="form-control" value="{{ $customer->country ?? null }}" readonly>
+                            <input type="text" class="form-control" value="{{ $customer->country ?? null }}"
+                                readonly>
                         </div>
                     </div>
 
@@ -301,7 +304,7 @@
                             <div class="col mb-3">
                                 <label class="mb-3">IC Number Police/ Military :</label>
                                 <input type="text" class="form-control" name="identification_number_police"
-                                    value="{{ $customer->identification_number_police ?? null}}">
+                                    value="{{ $customer->identification_number_police ?? null }}">
                             </div>
                         </div>
 
@@ -374,12 +377,12 @@
                     <div class="mb-3 d-flex align-items-center justify-content-between">
                         <div>
                             <label class="mb-3">Number of children :</label>
-                            <input type="text" class="form-control" name="number_of_children"
-                                value="{{ $numberOfChild }}" readonly>
+                            <input type="number" class="form-control" name="number_of_children"
+                                id="number_of_children">
                         </div>
 
                         <div class="mt-4">
-                            <button class="btn btn-secondary btn-lg" onclick="addChildField()" type="button">
+                            <button class="btn btn-secondary btn-lg" onclick="addChildFields()" type="button">
                                 <i class='bx bx-child'></i> Add Child Information
                             </button>
                         </div>
