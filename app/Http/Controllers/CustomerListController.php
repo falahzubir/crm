@@ -123,10 +123,19 @@ class CustomerListController extends Controller
         ]);
 
         $customer = Customer::findOrFail($id);
-        $customerAnswer = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
+        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
         $user = Auth::user();
         $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
         $customerTags = CustomerTag::where('customer_id', $id)->firstOrNew();
+
+        $customerAdditionalInfoData = [
+            'customer_id' => $id,
+            'hobby' => $request->input('hobby'),
+            'fav_color' => $request->input('fav_color'),
+            'fav_pet' => $request->input('fav_pet'),
+            'fav_food' => $request->input('fav_food'),
+            'fav_beverage' => $request->input('fav_beverage'),
+        ];
 
         $customerSpouseData = [
             'customer_id' => $id,
@@ -141,8 +150,8 @@ class CustomerListController extends Controller
         ];
 
         // Update the customer data and set the updated_by column
-        $customer->update(array_merge($request->all(), ['updated_by' => $user->id]));
-        $customerAnswer->updateOrCreate($request->all());
+        $customer->update(array_merge($request->all(), ['updated_by' => $user->id, 'additional_tags' => $request->input('additional_tags')]));
+        $customerAdditionalInfo->updateOrCreate($customerAdditionalInfoData);
         $customerSpouse->updateOrCreate($customerSpouseData);
         $customerTags->updateOrCreate($customerTagsData);
 

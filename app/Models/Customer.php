@@ -34,6 +34,7 @@ class Customer extends Model
         'working_hour',
         'updated_by',
         'birth_order',
+        'additional_tags',
     ];
 
     public function tags()

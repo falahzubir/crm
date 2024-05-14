@@ -452,7 +452,7 @@
                             <option selected disabled></option>
                             @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}"
-                                    {{ isset($filters['tag_filter']) && $tag->id == $filters['tag_filter'] ? 'selected' : '' }}>
+                                    {{ $customer->tags->contains('id', $tag->id) ? 'selected' : '' }}>
                                     {{ $tag->name }}
                                 </option>
                             @endforeach
@@ -461,7 +461,8 @@
 
                     <div class="mb-3">
                         <label class="mb-3">Other Disease :</label>
-                        <input type="text" class="form-control" name="additional_tags" value="{{ $customer->additional_tags }}">
+                        <input type="text" class="form-control" name="additional_tags"
+                            value="{{ $customer->additional_tags }}">
                     </div>
                 </div>
             </div>
