@@ -123,12 +123,6 @@ class CustomerListController extends Controller
             'phone' => 'required',
         ]);
 
-        $customer = Customer::findOrFail($id);
-        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
-        $user = Auth::user();
-        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
-        $customerTags = CustomerTag::where('customer_id', $id)->firstOrNew();
-
         $customerAdditionalInfoData = [
             'customer_id' => $id,
             'hobby' => $request->input('hobby'),
@@ -150,21 +144,17 @@ class CustomerListController extends Controller
             'tag_id' => $request->input('tag_id'),
         ];
 
-        // Update the customer data and set the updated_by column
+        $customer = Customer::findOrFail($id);
+        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
+        $user = Auth::user();
+        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
+        $customerTags = CustomerTag::where('customer_id', $id)->firstOrNew();
+
+        // Update the customer data
         $customer->update(array_merge($request->all(), ['updated_by' => $user->id, 'additional_tags' => $request->input('additional_tags')]));
-
-        // Customer Additional Info
-        if ($request->filled('hobby')) {
-            $customerAdditionalInfo->updateOrCreate($customerAdditionalInfoData);
-        }
-        
-        if ($request->filled('spouse_name')) {
-            $customerSpouse->updateOrCreate($customerSpouseData);
-        }
-
-        if ($request->filled('tag_id')) {
-            $customerTags->updateOrCreate($customerTagsData);
-        }
+        $customerAdditionalInfo->updateOrCreate($customerAdditionalInfoData);
+        $customerSpouse->updateOrCreate($customerSpouseData);
+        $customerTags->updateOrCreate($customerTagsData);
 
         // Define an array to map question field names to their corresponding question IDs
         $questions = [

@@ -101,7 +101,7 @@
 
                     <div class="mb-3">
                         <label class="mb-3">Nick Name :</label>
-                        <input type="text" class="form-control" name="nickname" value="{{ $customer->nickname }}">
+                        <input type="text" class="form-control" name="nickname" value="{{ $customer->nickname ?? null }}">
                     </div>
 
                     <div class="row d-flex align-items-center justify-content-around">
@@ -149,13 +149,13 @@
                             <div class="col mb-3">
                                 <label class="mb-3">Age :</label>
                                 <input type="number" class="form-control" name="age" min="1"
-                                    value="{{ $customer->age }}">
+                                    value="{{ $customer->age ?? null }}">
                             </div>
 
                             <div class="col mb-3">
                                 <label class="mb-3">IC Number :</label>
                                 <input type="text" class="form-control" name="identification_number"
-                                    value="{{ $customer->identification_number }}">
+                                    value="{{ $customer->identification_number ?? null }}">
                             </div>
 
                             <div class="col mb-3">
@@ -169,13 +169,13 @@
                             <div class="col mb-3">
                                 <label class="mb-3">Weight (kg) :</label>
                                 <input type="number" class="form-control" name="weight" min="1"
-                                    value="{{ $customer->weight }}">
+                                    value="{{ $customer->weight ?? null }}">
                             </div>
 
                             <div class="col mb-3">
                                 <label class="mb-3">Height (cm) :</label>
                                 <input type="number" class="form-control" name="height" min="1"
-                                    value="{{ $customer->height }}">
+                                    value="{{ $customer->height ?? null }}">
                             </div>
 
                             <div class="col mb-3">
@@ -207,14 +207,14 @@
                     <div class="mb-3">
                         <label class="mb-3">Address :</label>
                         <div>
-                            <textarea name="address" class="form-control" cols="50" rows="4">{{ $customer->address }}</textarea>
+                            <textarea name="address" class="form-control" cols="50" rows="4">{{ $customer->address ?? null }}</textarea>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-3">City :</label>
                         <div>
-                            <input type="text" class="form-control" name="city" value="{{ $customer->city }}">
+                            <input type="text" class="form-control" name="city" value="{{ $customer->city ?? null }}">
                         </div>
                     </div>
 
@@ -222,7 +222,7 @@
                         <div class="col mb-3">
                             <label class="mb-3">Postcode :</label>
                             <input type="number" class="form-control" name="postcode"
-                                value="{{ $customer->postcode }}">
+                                value="{{ $customer->postcode ?? null }}">
                         </div>
 
                         <div class="col mb-3">
@@ -240,7 +240,7 @@
 
                         <div class="col mb-3">
                             <label class="mb-3">Country :</label>
-                            <input type="text" class="form-control" value="{{ $customer->country }}" readonly>
+                            <input type="text" class="form-control" value="{{ $customer->country ?? null }}" readonly>
                         </div>
                     </div>
 
@@ -248,7 +248,7 @@
                         <div class="col mb-3">
                             <label class="mb-3">Place of Birth :</label>
                             <input type="text" class="form-control" name="birth_place"
-                                value="{{ $customer->birth_place }}">
+                                value="{{ $customer->birth_place ?? null }}">
                         </div>
 
                         <div class="col mb-3">
@@ -281,7 +281,7 @@
                             <label class="mb-3">Occupation :</label>
                             <div>
                                 <input type="text" class="form-control" name="occupation"
-                                    value="{{ $customer->occupation }}">
+                                    value="{{ $customer->occupation ?? null }}">
                             </div>
                         </div>
 
@@ -301,7 +301,7 @@
                             <div class="col mb-3">
                                 <label class="mb-3">IC Number Police/ Military :</label>
                                 <input type="text" class="form-control" name="identification_number_police"
-                                    value="{{ $customer->identification_number_police }}">
+                                    value="{{ $customer->identification_number_police ?? null}}">
                             </div>
                         </div>
 
@@ -348,27 +348,27 @@
                         <label class="mb-3">Child Birth Order
                             :</label>
                         <input type="text" class="form-control" name="birth_order"
-                            value="{{ $customer->birth_order }}">
+                            value="{{ $customer->birth_order ?? null }}">
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
                             <label class="mb-3">Spouse Name :</label>
                             <input type="text" class="form-control" name="spouse_name"
-                                value="{{ $customerSpouse->name }}">
+                                value="{{ $customerSpouse->name ?? null }}">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Spouse Occupation :</label>
                             <input type="text" class="form-control" name="spouse_occupation"
-                                value="{{ $customerSpouse->occupation }}">
+                                value="{{ $customerSpouse->occupation ?? null }}">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-3">Spouse Age :</label>
                         <input type="text" class="form-control" name="spouse_age"
-                            value="{{ $customerSpouse->age }}">
+                            value="{{ $customerSpouse->age ?? null }}">
                     </div>
 
                     <div class="mb-3 d-flex align-items-center justify-content-between">
@@ -403,13 +403,13 @@
                         <div class="col">
                             <label class="mb-3">Hobby :</label>
                             <input type="text" class="form-control" name="hobby"
-                                value="{{ $customerAdditionalInfo->hobby }}">
+                                value="{{ $customerAdditionalInfo->hobby ?? null }}">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Favourite Colour :</label>
                             <input type="text" class="form-control" name="fav_color"
-                                value="{{ $customerAdditionalInfo->fav_color }}">
+                                value="{{ $customerAdditionalInfo->fav_color ?? null }}">
                         </div>
                     </div>
 
@@ -417,13 +417,13 @@
                         <div class="col">
                             <label class="mb-3">Favourite Pet :</label>
                             <input type="text" class="form-control" name="fav_pet"
-                                value="{{ $customerAdditionalInfo->fav_pet }}">
+                                value="{{ $customerAdditionalInfo->fav_pet ?? null }}">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Favourite Food :</label>
                             <input type="text" class="form-control" name="fav_food"
-                                value="{{ $customerAdditionalInfo->fav_food }}">
+                                value="{{ $customerAdditionalInfo->fav_food ?? null }}">
                         </div>
                     </div>
 
@@ -431,7 +431,7 @@
                         <div class="col-md-6">
                             <label class="mb-3">Favourite Drinks :</label>
                             <input type="text" class="form-control" name="fav_beverage"
-                                value="{{ $customerAdditionalInfo->fav_beverage }}">
+                                value="{{ $customerAdditionalInfo->fav_beverage ?? null }}">
                         </div>
                     </div>
                 </div>
@@ -462,7 +462,7 @@
                     <div class="mb-3">
                         <label class="mb-3">Other Disease :</label>
                         <input type="text" class="form-control" name="additional_tags"
-                            value="{{ $customer->additional_tags }}">
+                            value="{{ $customer->additional_tags ?? null }}">
                     </div>
                 </div>
             </div>
