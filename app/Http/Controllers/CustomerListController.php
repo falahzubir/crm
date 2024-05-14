@@ -47,13 +47,13 @@ class CustomerListController extends Controller
             'blood_types.name as blood_type',
             'salary_ranges.name as salary',
             )
-            ->join('states', 'customers.state_id', '=', 'states.id')
-            ->join('countries', 'states.country_id', '=', 'countries.id')
-            ->join('users', 'customers.updated_by', '=', 'users.id')
-            ->join('customer_titles', 'customers.title_id', '=', 'customer_titles.id')
-            ->join('marital_statuses', 'customers.marital_status_id', '=', 'marital_statuses.id')
-            ->join('blood_types', 'customers.blood_type_id', '=', 'blood_types.id')
-            ->join('salary_ranges', 'customers.salary_range_id', '=', 'salary_ranges.id')
+            ->leftJoin('states', 'customers.state_id', '=', 'states.id')
+            ->leftJoin('countries', 'states.country_id', '=', 'countries.id')
+            ->leftJoin('users', 'customers.updated_by', '=', 'users.id')
+            ->leftJoin('customer_titles', 'customers.title_id', '=', 'customer_titles.id')
+            ->leftJoin('marital_statuses', 'customers.marital_status_id', '=', 'marital_statuses.id')
+            ->leftJoin('blood_types', 'customers.blood_type_id', '=', 'blood_types.id')
+            ->leftJoin('salary_ranges', 'customers.salary_range_id', '=', 'salary_ranges.id')
             ->findOrFail($id);
 
         // Children numbers

@@ -366,13 +366,13 @@
 
                         <div class="col-md-6">
                             <label class="text-dark">Children Information</label>
-                            @foreach ($customerChildren as $row)
+                            @if ($customerChildren->isEmpty())
                                 <div class="container border rounded my-3 p-3">
                                     <div class="row mb-3">
                                         <label class="col-sm-4 mt-2">Name :</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="{{ $row->name }}" readonly />
+                                                value="N/A" readonly />
                                         </div>
                                         <hr class="border-light mt-2" />
                                     </div>
@@ -381,22 +381,52 @@
                                         <label class="col-sm-4">Age :</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="{{ $row->age }}" readonly />
+                                                value="N/A" readonly />
                                         </div>
                                         <hr class="border-light mt-2" />
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label class="col-sm-6 mb-3">Education
-                                            Institution/ Workplace :</label>
+                                        <label class="col-sm-6 mb-3">Education Institution/ Workplace :</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="{{ $row->institution }}" readonly />
+                                                value="N/A" readonly />
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            @else
+                                @foreach ($customerChildren as $row)
+                                    <div class="container border rounded my-3 p-3">
+                                        <div class="row mb-3">
+                                            <label class="col-sm-4 mt-2">Name :</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control border-0 text-end bg-white"
+                                                    value="{{ $row->name }}" readonly />
+                                            </div>
+                                            <hr class="border-light mt-2" />
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label class="col-sm-4">Age :</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control border-0 text-end bg-white"
+                                                    value="{{ $row->age }}" readonly />
+                                            </div>
+                                            <hr class="border-light mt-2" />
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label class="col-sm-6 mb-3">Education Institution/ Workplace :</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control border-0 text-end bg-white"
+                                                    value="{{ $row->institution }}" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
+
                     </div>
                 </form>
             </div>
@@ -506,7 +536,7 @@
                                     :</label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first()->value === 'Y'? 'Yes': 'No' }}"
+                                        value="{{ optional($customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first())->value === 'Y'? 'Yes': 'No' }}"
                                         readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
@@ -516,8 +546,8 @@
                                 <label class="col-sm-6">Where did you know about
                                     EMZI? :</label>
                                 <div class="col-sm-6">
-                                    @switch($customerAnswers->where('question_id', 2)->where('customer_id',
-                                        $customer->id)->first()->value)
+                                    @switch(optional($customerAnswers->where('question_id', 2)->where('customer_id',
+                                        $customer->id)->first())->value)
                                         @case(1)
                                             <input type="text" class="form-control border-0 text-end bg-white"
                                                 value="Social Media" readonly />
@@ -602,7 +632,7 @@
                                     its own factory? : </label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first()->value === 'Y'? 'Yes': 'No' }}"
+                                        value="{{ optional($customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first())->value === 'Y'? 'Yes': 'No' }}"
                                         readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
@@ -613,7 +643,7 @@
                                     a laboratory at the university? :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first()->value === 'Y'? 'Yes': 'No' }}"
+                                        value="{{ optional($customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first())->value === 'Y'? 'Yes': 'No' }}"
                                         readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
@@ -623,21 +653,21 @@
                                 <label class="col-sm-7 mt-2">Does EMZI Products
                                     Effective? :</label>
                                 <div class="col-sm-5">
-                                    @switch($customerAnswers->where('question_id', 10)->where('customer_id',
-                                        $customer->id)->first()->value)
+                                    @switch(optional($customerAnswers->where('question_id', 10)->where('customer_id',
+                                        $customer->id)->first())->value)
                                         @case(1)
                                             <input type="text" class="form-control border-0 text-end bg-white"
                                                 value="Yes, Highly Effective" readonly />
                                         @break
 
                                         @case(2)
-                                            <input type="text" class="form-control border-0 text-end bg-white" value="Less Effective"
-                                                readonly />
+                                            <input type="text" class="form-control border-0 text-end bg-white"
+                                                value="Less Effective" readonly />
                                         @break
 
                                         @case(3)
-                                            <input type="text" class="form-control border-0 text-end bg-white" value="Not Effective"
-                                                readonly />
+                                            <input type="text" class="form-control border-0 text-end bg-white"
+                                                value="Not Effective" readonly />
                                         @break
 
                                         @default
@@ -663,7 +693,8 @@
             <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
                 <div class="row mb-3">
                     <label for="deliveryService">Delivery Service:</label>
-                    <div class="star-rating" data-rating="{{ $customerAnswers->where('question_id', 11)->first()->value ?? 0 }}">
+                    <div class="star-rating"
+                        data-rating="{{ optional($customerAnswers->where('question_id', 11)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -674,7 +705,8 @@
 
                 <div class="row mb-3">
                     <label for="deliveryService">Customer Service:</label>
-                    <div class="star-rating" data-rating="{{ $customerAnswers->where('question_id', 12)->first()->value ?? 0 }}">
+                    <div class="star-rating"
+                        data-rating="{{ optional($customerAnswers->where('question_id', 12)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -685,7 +717,8 @@
 
                 <div class="row mb-3">
                     <label for="deliveryService">Product Quality:</label>
-                    <div class="star-rating" data-rating="{{ $customerAnswers->where('question_id', 13)->first()->value ?? 0 }}">
+                    <div class="star-rating"
+                        data-rating="{{ optional($customerAnswers->where('question_id', 13)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -696,7 +729,8 @@
 
                 <div class="row mb-3">
                     <label for="deliveryService">Product Quantity:</label>
-                    <div class="star-rating" data-rating="{{ $customerAnswers->where('question_id', 14)->first()->value ?? 0 }}">
+                    <div class="star-rating"
+                        data-rating="{{ optional($customerAnswers->where('question_id', 14)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
