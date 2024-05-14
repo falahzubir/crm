@@ -13,6 +13,7 @@ use App\Models\CustomerTitle;
 use App\Models\MaritalStatus;
 use App\Models\SalaryRange;
 use App\Models\State;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,7 @@ class CustomerListController extends Controller
     {
         // Queries
         $states = State::all();
+        $tags = Tag::all();
         $customers = Customer::select('customers.*')
             ->whereNull('customers.deleted_at')
             ->paginate(10);
@@ -29,6 +31,7 @@ class CustomerListController extends Controller
         return view('customer_list/customer_list', [
             'customers' => $customers,
             'states' => $states,
+            'tags' => $tags,
         ]);
     }
 
@@ -131,6 +134,17 @@ class CustomerListController extends Controller
                 $query->where('customers.name', 'like', "%$search%")
                     ->orWhere('customers.phone', 'like', "%$search%");
             });
+        }
+
+        // Handle tags filter
+        if ($request->filled('tag')) {
+            $tag_filter = $request->input('tag');
+            $filters['tag_filter'] = $tag_filter;
+
+            // Join with customer_tags and tags table
+            $query->join('customer_tags', 'customers.id', '=', 'customer_tags.customer_id')
+                ->join('tags', 'customer_tags.tag_id', '=', 'tags.id')
+                ->where('tags.id', $tag_filter);
         }
 
         // Handle state filter

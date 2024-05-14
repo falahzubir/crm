@@ -20,17 +20,23 @@
                         <div class="row mb-4">
                             <div class="col">
                                 <label>Tagging</label>
-                                <select name="tagging" id="tagging" class="form-select mt-2">
-                                    <option value=""></option>
+                                <select name="tag" class="form-select mt-2">
+                                    <option selected disabled></option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}"
+                                            {{ isset($filters['tag_filter']) && $tag->id == $filters['tag_filter'] ? 'selected' : '' }}>
+                                            {{ $tag->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
 
-                            <div class="col">
+                            {{-- <div class="col">
                                 <label>Basket Value</label>
                                 <select name="basket_value" id="basket_value" class="form-select mt-2">
                                     <option value=""></option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="row">
@@ -107,10 +113,10 @@
                                 <th>ACTION</th>
                                 <th>NAME</th>
                                 <th>PHONE</th>
-                                <th style="width: 150px;">SPENT (MYR)</th>
+                                {{-- <th style="width: 150px;">SPENT (MYR)</th> --}}
                                 <th>STATE</th>
-                                <th>ORDER</th>
-                                <th>OM</th>
+                                {{-- <th>ORDER</th> --}}
+                                {{-- <th>OM</th> --}}
                                 <th>TAGGING</th>
                             </tr>
                         </thead>
@@ -151,24 +157,21 @@
                                             {{-- Phone --}}
                                             {{ $row->phone != null ? $row->phone : '-' }}
                                         </td>
-                                        <td class="text-center">
-                                            {{-- Spent --}}
+                                        {{-- <td class="text-center">
                                             <div class="text-success">
                                                 <strong>-</strong>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                         <td class="text-center">
                                             {{-- State --}}
                                             {{ $states->where('id', $row->state_id)->first()->name ?? '-' }}
                                         </td>
-                                        <td class="text-center">
-                                            {{-- Order --}}
+                                        {{-- <td class="text-center">
                                             -
-                                        </td>
-                                        <td class="text-center">
-                                            {{-- OM --}}
+                                        </td> --}}
+                                        {{-- <td class="text-center">
                                             NCA
-                                        </td>
+                                        </td> --}}
                                         <td class="text-center">
                                             {{-- Tagging --}}
                                             {{ $row->additional_tags != null ? $row->additional_tags : '-' }}
