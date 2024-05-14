@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('customer_tags', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('set null');
             $table->unsignedBigInteger('tag_id');
             $table->foreign('tag_id')->references('id')->on('tags');
-            $table->unique(['customer_id', 'tag_id']);
             $table->timestamps();
             $table->softDeletes();
         });
