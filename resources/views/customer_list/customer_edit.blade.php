@@ -382,7 +382,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <button class="btn btn-secondary btn-lg" onclick="addChildFields()" type="button">
+                            <button class="btn btn-secondary btn-lg" onclick="addChildField()" type="button">
                                 <i class='bx bx-child'></i> Add Child Information
                             </button>
                         </div>
@@ -391,6 +391,27 @@
             </div>
 
             {{-- Child --}}
+            <div style="display: flex; flex-wrap: wrap; justify-content: flex-end;">
+                @foreach ($customerChildren as $index => $child)
+                    <div class="card mt-4" style="width: 900px;">
+                        <div class="card-header d-flex align-items-center justify-content-between childHeader">
+                            <h5><strong>Child {{ $index + 1 }}</strong></h5>
+                        </div>
+                        <div class="card-body">
+                            <label class="mb-2">Name:</label>
+                            <input type="text" name="childName_{{ $index + 1 }}" class="form-control mb-3"
+                                value="{{ $child->name }}">
+                            <label class="mb-2">Age:</label>
+                            <input type="text" name="childAge_{{ $index + 1 }}" class="form-control mb-3"
+                                value="{{ $child->age }}">
+                            <label class="mb-2">Education:</label>
+                            <input type="text" name="childEducation_{{ $index + 1 }}" class="form-control mb-3"
+                                value="{{ $child->education }}">
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
             <div id="childContainer" style="display: flex; flex-wrap: wrap; justify-content: flex-end;"></div>
 
             {{-- Others --}}
@@ -659,4 +680,71 @@
             </div>
         </form>
     </div>
+
+    {{-- For adding child --}}
+    <script>
+        let childCount = {{ $customerChildren->count() }};
+
+        function addChildField() {
+            const container = document.getElementById('childContainer');
+            if (!container) {
+                console.error("Container element not found.");
+                return;
+            }
+
+            const card = document.createElement('div');
+            card.classList.add('card', 'mt-4');
+            card.style.width = '900px';
+
+            const cardHeader = document.createElement('div');
+            cardHeader.classList.add('card-header', 'd-flex', 'align-items-center', 'justify-content-between');
+            const headerTitle = document.createElement('h5');
+            headerTitle.innerHTML = `<strong>Child ${childCount + 1}</strong>`;
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('btn', 'btn-danger', 'btn-sm');
+            removeButton.innerHTML = 'x';
+            removeButton.onclick = function() {
+                container.removeChild(card);
+                updateChildCount();
+            };
+
+            cardHeader.appendChild(headerTitle);
+            cardHeader.appendChild(removeButton);
+
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+
+            // Function to create input field with label and margin below
+            function createInputWithLabel(labelText, inputName) {
+                const label = document.createElement('label');
+                label.innerText = labelText + ':';
+                label.classList.add('mb-2');
+                const input = document.createElement('input');
+                input.setAttribute('type', 'text');
+                input.setAttribute('name', inputName);
+                input.classList.add('form-control', 'mb-3');
+                cardBody.appendChild(label);
+                cardBody.appendChild(input);
+            }
+
+            createInputWithLabel('Name', `childName_${childCount}`);
+            createInputWithLabel('Age', `childAge_${childCount}`);
+            createInputWithLabel('Education', `childEducation_${childCount}`);
+
+            card.appendChild(cardHeader);
+            card.appendChild(cardBody);
+
+            container.appendChild(card);
+
+            childCount++;
+        }
+
+        function updateChildCount() {
+            childCount--;
+            const cards = document.querySelectorAll('.childHeader strong');
+            cards.forEach((card, index) => {
+                card.textContent = `Child ${index + 1}`;
+            });
+        }
+    </script>
 @endsection

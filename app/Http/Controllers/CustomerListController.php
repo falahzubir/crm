@@ -97,7 +97,6 @@ class CustomerListController extends Controller
 
         // Children numbers
         $customerChildren = CustomerChildren::where('customer_id', $id)->whereNull('deleted_at')->get();
-        $numberOfChild = $customerChildren->count();
 
         return view('customer_list/customer_edit', [
             'customer' => $customer,
@@ -110,7 +109,7 @@ class CustomerListController extends Controller
             'customerAdditionalInfo' => $customerAdditionalInfo,
             'customerAnswers' => $customerAnswers,
             'customerSpouse' => $customerSpouse,
-            'numberOfChild' => $numberOfChild,
+            'customerChildren' => $customerChildren,
             'tags' => $tags,
         ]);
     }
