@@ -151,9 +151,19 @@ class CustomerListController extends Controller
 
         // Update the customer data and set the updated_by column
         $customer->update(array_merge($request->all(), ['updated_by' => $user->id, 'additional_tags' => $request->input('additional_tags')]));
-        $customerAdditionalInfo->updateOrCreate($customerAdditionalInfoData);
-        $customerSpouse->updateOrCreate($customerSpouseData);
-        $customerTags->updateOrCreate($customerTagsData);
+
+        // Customer Additional Info
+        if ($request->filled('hobby')) {
+            $customerAdditionalInfo->updateOrCreate($customerAdditionalInfoData);
+        }
+        
+        if ($request->filled('spouse_name')) {
+            $customerSpouse->updateOrCreate($customerSpouseData);
+        }
+
+        if ($request->filled('tag_id')) {
+            $customerTags->updateOrCreate($customerTagsData);
+        }
 
         // Define an array to map question field names to their corresponding question IDs
         $questions = [
