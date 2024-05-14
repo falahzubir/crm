@@ -37,7 +37,7 @@ class CustomerListController extends Controller
 
     public function customer_profile($id)
     {
-        $customer = Customer::select(
+        $customer = Customer::with('tags')->select(
             'customers.*', 
             'states.name as state_name', 
             'countries.flag as flag', 
