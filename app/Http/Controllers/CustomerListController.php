@@ -18,6 +18,7 @@ use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CustomerListController extends Controller
 {
@@ -207,14 +208,19 @@ class CustomerListController extends Controller
         }
 
         // Update Customers table in Analytics
-        if ($request->input('name') != $customer->name) {
+        if (!empty($request->input('name'))) {
             $newDate = Carbon::now();
             $customerAnalytics = [
                 'customer_name' => $request->input('name'),
                 'updated_at' => $newDate,
             ];
 
-            $this->update_customers_analytic($id, $customerAnalytics);
+            try {
+                $this->update_customers_analytic($id, $customerAnalytics);
+            } catch (\Exception $e) {
+                // Log error or handle accordingly
+                Log::error($e->getMessage());
+            }
         }
 
         return response()->json(['message' => 'Customer updated successfully.'], 200);
