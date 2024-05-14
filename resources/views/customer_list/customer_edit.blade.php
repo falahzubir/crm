@@ -406,7 +406,7 @@
                                 value="{{ $child->age }}">
                             <label class="mb-2">Education:</label>
                             <input type="text" name="childEducation_{{ $index + 1 }}" class="form-control mb-3"
-                                value="{{ $child->education }}">
+                                value="{{ $child->institution }}">
                         </div>
                     </div>
                 @endforeach
