@@ -73,11 +73,10 @@
 
                             <div class="mt-3">
                                 <label>
-                                    Last updated {{ $customer->updated_at->diffForHumans() }} 
+                                    Last updated {{ $customer->updated_at->diffForHumans() }}
                                     @if ($customer->updated_by)
                                         by {{ $customer->updated_by }}
                                     @else
-                                        
                                     @endif
                                 </label>
                             </div>
@@ -439,7 +438,7 @@
             </div>
 
             {{-- Suffering Disease --}}
-            {{-- <div class="card mt-5">
+            <div class="card mt-5">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h5><strong>Suffering Disease</strong></h5>
                     <a class="collapsed btn" data-bs-toggle="collapse" href="#sufferingDisease">
@@ -449,17 +448,23 @@
                 <div class="card-body" id="sufferingDisease" data-bs-parent="#accordion">
                     <div class="mb-3">
                         <label class="mb-3">Disease :</label>
-                        <select name="disease" class="form-select">
-                            <option value=""></option>
+                        <select name="tag_id" class="form-select">
+                            <option selected disabled></option>
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->id }}"
+                                    {{ isset($filters['tag_filter']) && $tag->id == $filters['tag_filter'] ? 'selected' : '' }}>
+                                    {{ $tag->name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-3">Other Disease :</label>
-                        <input type="text" class="form-control" name="other_disease" value="">
+                        <input type="text" class="form-control" name="additional_tags" value="{{ $customer->additional_tags }}">
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             {{-- Product & Service --}}
             <div class="card mt-5">
