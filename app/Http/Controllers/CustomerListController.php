@@ -15,6 +15,7 @@ use App\Models\MaritalStatus;
 use App\Models\SalaryRange;
 use App\Models\State;
 use App\Models\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -216,6 +217,17 @@ class CustomerListController extends Controller
             }
         }
 
+        // Update Customers table in Analytics
+        if ($request->input('name') != $customer->name) {
+            $newDate = Carbon::now();
+            $customerAnalytics = [
+                'customer_name' => $request->input('name'),
+                'updated_at' => $newDate,
+            ];
+
+            $this->update_customers_analytic($id, $customerAnalytics);
+        }
+
         return response()->json(['message' => 'Customer updated successfully.'], 200);
     }
 
@@ -312,6 +324,14 @@ class CustomerListController extends Controller
             'search' => $search,
             'filters' => $filters
         ]);
+    }
+
+    private function update_customers_analytic($customer_id, $data)
+    {
+        DB::connection('ANALYTIC-STG')
+            ->table('customers')
+            ->where('customers.id', $customer_id)
+            ->update($data);
     }
 
     // Get customers data using api
