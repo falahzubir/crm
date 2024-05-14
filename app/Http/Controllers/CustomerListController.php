@@ -324,34 +324,34 @@ class CustomerListController extends Controller
     }
 
     // Get customers data using api
-    public function fetchDataFromAnalytics()
-    {
-        // Fetch customers data
-        $customersResponse = $this->makeRequest('http://127.0.0.1:8001/api/customers');
-        $customers = json_decode($customersResponse, true);
+    // public function fetchDataFromAnalytics()
+    // {
+    //     // Fetch customers data
+    //     $customersResponse = $this->makeRequest('http://127.0.0.1:8001/api/customers');
+    //     $customers = json_decode($customersResponse, true);
 
-        // Process data as needed
-        return view('customer_list/customer_list', [
-            'customers' => $customers,
-        ]);
-    }
+    //     // Process data as needed
+    //     return view('customer_list/customer_list', [
+    //         'customers' => $customers,
+    //     ]);
+    // }
 
-    private function makeRequest($url)
-    {
-        $curl = curl_init();
+    // private function makeRequest($url)
+    // {
+    //     $curl = curl_init();
 
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-        ]);
+    //     curl_setopt_array($curl, [
+    //         CURLOPT_URL => $url,
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_FOLLOWLOCATION => true,
+    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //         CURLOPT_CUSTOMREQUEST => "GET",
+    //     ]);
 
-        $response = curl_exec($curl);
+    //     $response = curl_exec($curl);
 
-        curl_close($curl);
+    //     curl_close($curl);
 
-        return $response;
-    }
+    //     return $response;
+    // }
 }
