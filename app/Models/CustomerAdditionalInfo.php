@@ -10,6 +10,7 @@ class CustomerAdditionalInfo extends Model
     use HasFactory;
 
     protected $fillable = [
+        'customer_id',
         'hobby',
         'fav_color',
         'fav_pet',
