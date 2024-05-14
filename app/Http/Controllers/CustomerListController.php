@@ -24,7 +24,7 @@ class CustomerListController extends Controller
         // Queries
         $states = State::all();
         $tags = Tag::all();
-        $customers = Customer::select('customers.*')
+        $customers = Customer::with('tags')
             ->whereNull('customers.deleted_at')
             ->paginate(10);
 
@@ -77,9 +77,9 @@ class CustomerListController extends Controller
     public function customer_edit($id)
     {
         $customer = Customer::select('customers.*', 'users.name as updated_by', 'countries.name as country')
-            ->join('users', 'customers.updated_by', '=', 'users.id')
-            ->join('states', 'customers.state_id', '=', 'states.id')
-            ->join('countries', 'states.country_id', '=', 'countries.id')
+            ->leftJoin('users', 'customers.updated_by', '=', 'users.id')
+            ->leftJoin('states', 'customers.state_id', '=', 'states.id')
+            ->leftJoin('countries', 'states.country_id', '=', 'countries.id')
             ->findOrFail($id);
 
         $titles = CustomerTitle::all();
@@ -117,8 +117,8 @@ class CustomerListController extends Controller
         // Initialize $search variable
         $search = '';
 
-        // State
         $states = State::all();
+        $tags = Tag::all();
 
         // Start with the base query
         $query = Customer::select('customers.*')
@@ -200,6 +200,7 @@ class CustomerListController extends Controller
         return view('customer_list/customer_list', [
             'customers' => $customers,
             'states' => $states,
+            'tags' => $tags,
             'search' => $search,
             'filters' => $filters
         ]);

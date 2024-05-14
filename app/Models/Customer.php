@@ -35,4 +35,9 @@ class Customer extends Model
         'updated_by',
         'birth_order',
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'customer_tags', 'customer_id', 'tag_id');
+    }
 }

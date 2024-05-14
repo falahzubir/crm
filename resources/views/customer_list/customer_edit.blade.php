@@ -72,8 +72,15 @@
                             </div> --}}
 
                             <div class="mt-3">
-                                <label>Last updated {{ $customer->updated_at->diffForHumans() }} by
-                                    {{ $customer->updated_by }}</label>
+                                <label>
+                                    Last updated {{ $customer->updated_at->diffForHumans() }} 
+                                    @if ($customer->updated_by)
+                                        by {{ $customer->updated_by }}
+                                    @else
+                                        
+                                    @endif
+                                    
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -468,10 +475,10 @@
                         <label class="mb-3">Aware or not about EMZI? :</label>
                         <div class="d-flex justify-content-start">
                             <input type="radio" name="aware_or_not_about_emzi" value="Y"
-                                {{ $customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first()->value === 'Y'? 'checked': '' }}>
+                                {{ optional($customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first())->value === 'Y'? 'checked': '' }}>
                             <label class="ms-1">Yes</label>
                             <input type="radio" name="aware_or_not_about_emzi" value="N" class="ms-3"
-                                {{ $customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first()->value === 'N'? 'checked': '' }}>
+                                {{ optional($customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first())->value === 'N'? 'checked': '' }}>
                             <label class="ms-1">No</label>
                         </div>
                     </div>
@@ -525,11 +532,11 @@
                         <label class="mb-3">Do you know EMZI has its own factory? :</label>
                         <div class="d-flex justify-content-start">
                             <input type="radio" name="do_you_know_emzi_has_its_own_factory" value="Y"
-                                {{ $customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first()->value === 'Y'? 'checked': '' }}>
+                                {{ optional($customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first())->value === 'Y'? 'checked': '' }}>
                             <label class="ms-1">Yes</label>
                             <input type="radio" name="do_you_know_emzi_has_its_own_factory" value="N"
                                 class="ms-3"
-                                {{ $customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first()->value === 'N'? 'checked': '' }}>
+                                {{ optional($customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first())->value === 'N'? 'checked': '' }}>
                             <label class="ms-1">No</label>
                         </div>
                     </div>
@@ -539,11 +546,11 @@
                         <div class="d-flex justify-content-start">
                             <input type="radio" name="do_you_know_emzi_has_a_laboratory_at_the_university"
                                 value="Y"
-                                {{ $customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first()->value === 'Y'? 'checked': '' }}>
+                                {{ optional($customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first())->value === 'Y'? 'checked': '' }}>
                             <label class="ms-1">Yes</label>
                             <input type="radio" name="do_you_know_emzi_has_a_laboratory_at_the_university"
                                 value="N" class="ms-3"
-                                {{ $customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first()->value === 'N'? 'checked': '' }}>
+                                {{ optional($customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first())->value === 'N'? 'checked': '' }}>
                             <label class="ms-1">No</label>
                         </div>
                     </div>
@@ -582,58 +589,61 @@
                 <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
                     <div class="row mb-3">
                         <label for="deliveryService">Delivery Service:</label>
-                        <div class="star-rating" name="delivery_service" data-rating="{{ $customerAnswers->where('question_id', 11)->first()->value ?? 0 }}">
+                        <div class="star-rating" name="delivery_service"
+                            data-rating="{{ optional($customerAnswers->where('question_id', 11)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
                             <input type="hidden" id="delivery_service_rating" name="delivery_service_rating"
-                                value="{{ $customerAnswers->where('question_id', 11)->first()->value ?? 0 }}">
+                                value="{{ optional($customerAnswers->where('question_id', 11)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="customerService">Customer Service:</label>
-                        <div class="star-rating" name="customer_service" data-rating="{{ $customerAnswers->where('question_id', 12)->first()->value ?? 0 }}">
+                        <div class="star-rating" name="customer_service"
+                            data-rating="{{ optional($customerAnswers->where('question_id', 12)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
                             <input type="hidden" id="customer_service_rating" name="customer_service_rating"
-                                value="{{ $customerAnswers->where('question_id', 12)->first()->value ?? 0 }}">
+                                value="{{ optional($customerAnswers->where('question_id', 12)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="productQuality">Product Quality:</label>
-                        <div class="star-rating" name="product_quality" data-rating="{{ $customerAnswers->where('question_id', 13)->first()->value ?? 0 }}">
+                        <div class="star-rating" name="product_quality"
+                            data-rating="{{ optional($customerAnswers->where('question_id', 13)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
                             <input type="hidden" id="product_quality_rating" name="product_quality_rating"
-                                value="{{ $customerAnswers->where('question_id', 13)->first()->value ?? 0 }}">
+                                value="{{ optional($customerAnswers->where('question_id', 13)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label for="productQuantity">Product Quantity:</label>
-                        <div class="star-rating" name="product_quantity" data-rating="{{ $customerAnswers->where('question_id', 14)->first()->value ?? 0 }}">
+                        <div class="star-rating" name="product_quantity"
+                            data-rating="{{ optional($customerAnswers->where('question_id', 14)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
                             <span class="star" data-value="3">&#9733;</span>
                             <span class="star" data-value="4">&#9733;</span>
                             <span class="star" data-value="5">&#9733;</span>
                             <input type="hidden" id="product_quantity_rating" name="product_quantity_rating"
-                                value="{{ $customerAnswers->where('question_id', 14)->first()->value ?? 0 }}">
+                                value="{{ optional($customerAnswers->where('question_id', 14)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
                         </div>
                     </div>
                 </div>
             </div>
-
 
             {{-- Save Button --}}
             <div class="buy-now">

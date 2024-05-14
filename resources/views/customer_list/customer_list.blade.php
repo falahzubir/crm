@@ -113,10 +113,7 @@
                                 <th>ACTION</th>
                                 <th>NAME</th>
                                 <th>PHONE</th>
-                                {{-- <th style="width: 150px;">SPENT (MYR)</th> --}}
                                 <th>STATE</th>
-                                {{-- <th>ORDER</th> --}}
-                                {{-- <th>OM</th> --}}
                                 <th>TAGGING</th>
                             </tr>
                         </thead>
@@ -157,25 +154,21 @@
                                             {{-- Phone --}}
                                             {{ $row->phone != null ? $row->phone : '-' }}
                                         </td>
-                                        {{-- <td class="text-center">
-                                            <div class="text-success">
-                                                <strong>-</strong>
-                                            </div>
-                                        </td> --}}
                                         <td class="text-center">
                                             {{-- State --}}
                                             {{ $states->where('id', $row->state_id)->first()->name ?? '-' }}
                                         </td>
-                                        {{-- <td class="text-center">
-                                            -
-                                        </td> --}}
-                                        {{-- <td class="text-center">
-                                            NCA
-                                        </td> --}}
                                         <td class="text-center">
                                             {{-- Tagging --}}
-                                            {{ $row->additional_tags != null ? $row->additional_tags : '-' }}
+                                            @foreach ($row->tags as $tag)
+                                                {{ $tag->name }}
+                                                @if (!$loop->last)
+                                                    {{-- Add comma if it's not the last tag --}}
+                                                    ,
+                                                @endif
+                                            @endforeach
                                         </td>
+
                                     </tr>
                                 @endforeach
                             @endif
