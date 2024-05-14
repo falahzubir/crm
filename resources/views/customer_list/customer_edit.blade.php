@@ -355,20 +355,20 @@
                         <div class="col">
                             <label class="mb-3">Spouse Name :</label>
                             <input type="text" class="form-control" name="spouse_name"
-                                value="{{ $customerSpouse->name ?? null }}">
+                                value="{{ $customerSpouse->name }}">
                         </div>
 
                         <div class="col">
                             <label class="mb-3">Spouse Occupation :</label>
                             <input type="text" class="form-control" name="spouse_occupation"
-                                value="{{ $customerSpouse->occupation ?? null }}">
+                                value="{{ $customerSpouse->occupation }}">
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="mb-3">Spouse Age :</label>
                         <input type="text" class="form-control" name="spouse_age"
-                            value="{{ $customerSpouse->age ?? null }}">
+                            value="{{ $customerSpouse->age }}">
                     </div>
 
                     <div class="mb-3 d-flex align-items-center justify-content-between">

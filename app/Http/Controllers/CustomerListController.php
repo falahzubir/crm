@@ -97,7 +97,7 @@ class CustomerListController extends Controller
 
         // Children numbers
         $customerChildren = CustomerChildren::where('customer_id', $id)->whereNull('deleted_at')->get();
-        $numberOfChild = $customerChildren->sum('customer_id');
+        $numberOfChild = $customerChildren->count();
 
         return view('customer_list/customer_edit', [
             'customer' => $customer,
@@ -132,13 +132,6 @@ class CustomerListController extends Controller
             'fav_beverage' => $request->input('fav_beverage'),
         ];
 
-        $customerSpouseData = [
-            'customer_id' => $id,
-            'name' => $request->input('spouse_name'),
-            'age' => $request->input('spouse_age'),
-            'occupation' => $request->input('spouse_occupation'),
-        ];
-
         $customerTagsData = [
             'customer_id' => $id,
             'tag_id' => $request->input('tag_id'),
@@ -147,14 +140,21 @@ class CustomerListController extends Controller
         $customer = Customer::findOrFail($id);
         $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
         $user = Auth::user();
-        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
         $customerTags = CustomerTag::where('customer_id', $id)->firstOrNew();
 
         // Update the customer data
         $customer->update(array_merge($request->all(), ['updated_by' => $user->id, 'additional_tags' => $request->input('additional_tags')]));
         $customerAdditionalInfo->updateOrCreate($customerAdditionalInfoData);
-        $customerSpouse->updateOrCreate($customerSpouseData);
         $customerTags->updateOrCreate($customerTagsData);
+
+        // Update the fields if the record exists, otherwise set the values
+        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
+        $customerSpouse->customer_id = $id;
+        $customerSpouse->name = $request->input('spouse_name');
+        $customerSpouse->age = $request->input('spouse_age');
+        $customerSpouse->occupation = $request->input('spouse_occupation');
+        // Save the record
+        $customerSpouse->save();
 
         // Define an array to map question field names to their corresponding question IDs
         $questions = [
