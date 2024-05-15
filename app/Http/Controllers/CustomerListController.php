@@ -123,6 +123,8 @@ class CustomerListController extends Controller
             'phone' => 'required',
         ]);
 
+        $newDate = Carbon::now();
+
         $customerAdditionalInfoData = [
             'customer_id' => $id,
             'hobby' => $request->input('hobby'),
@@ -185,7 +187,10 @@ class CustomerListController extends Controller
         // Handle child card input
         $childData = [];
         foreach ($request->all() as $key => $value) {
-            if (strpos($key, 'childName_') === 0) {
+            if (strpos($key, 'childId_') === 0) {
+                $index = substr($key, strlen('childId_'));
+                $childData[$index]['id'] = $value;
+            } elseif (strpos($key, 'childName_') === 0) {
                 $index = substr($key, strlen('childName_'));
                 $childData[$index]['name'] = $value;
             } elseif (strpos($key, 'childAge_') === 0) {
@@ -198,18 +203,34 @@ class CustomerListController extends Controller
         }
 
         if (!empty($childData)) {
-            foreach ($childData as $child) {
-                // Create or update child record
-                $childRecord = CustomerChildren::updateOrCreate(
-                    ['customer_id' => $id, 'name' => $child['name']],
-                    ['age' => $child['age'], 'institution' => $child['education']]
-                );
+            foreach ($childData as $index => $child) {
+                // Find existing child record by name and customer_id
+                $existingChild = CustomerChildren::where('customer_id', $id)
+                    ->where('id', $child['id'])
+                    ->first();
+
+                if ($existingChild) {
+                    // Update existing child record
+                    $existingChild->update([
+                        'name' => $child['name'],
+                        'age' => $child['age'],
+                        'institution' => $child['education'],
+                        'updated_at' => $newDate,
+                    ]);
+                } else {
+                    // Create new child record
+                    CustomerChildren::create([
+                        'customer_id' => $id,
+                        'name' => $child['name'],
+                        'age' => $child['age'],
+                        'institution' => $child['education']
+                    ]);
+                }
             }
         }
 
         // Update Customers table in Analytics
         if (!empty($request->input('name'))) {
-            $newDate = Carbon::now();
             $customerAnalytics = [
                 'customer_name' => $request->input('name'),
                 'updated_at' => $newDate,

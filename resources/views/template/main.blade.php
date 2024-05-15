@@ -40,18 +40,6 @@
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
     <script src="{{ asset('assets/js/config.js') }}"></script>
-
-    <script>
-        window.addEventListener("load", () => {
-            const loader = document.querySelector(".loader");
-
-            loader.classList.add("loader--hidden");
-
-            loader.addEventListener("transitionend", () => {
-                document.body.removeChild(loader);
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -123,6 +111,22 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    {{-- For loader --}}
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.querySelector(".loader");
+
+            if (loader && document.body.contains(loader)) {
+                loader.classList.add("loader--hidden");
+
+                // Add a delay before removing the loader
+                setTimeout(() => {
+                    document.body.removeChild(loader);
+                }, 500); // Adjust the delay as needed
+            }
+        });
+    </script>
+
     @if (session('success'))
         <script>
             swal({
@@ -167,38 +171,6 @@
                     $('#logout-form').submit();
                 }
             });
-        });
-    </script>
-
-    {{-- For submit form --}}
-    <script>
-        document.getElementById('updateForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
-            var form = this;
-
-            // Perform form submission via AJAX
-            axios.post(form.action, new FormData(form))
-                .then(function(response) {
-                    // Show SweetAlert success message
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: response.data.message,
-                        showConfirmButton: true
-                    }).then(function() {
-                        // Redirect to customer list page after SweetAlert is closed
-                        window.location.href = "{{ route('customer.list') }}";
-                    });
-                })
-                .catch(function(error) {
-                    // Show SweetAlert error message
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: error.response.data.message,
-                        showConfirmButton: true
-                    })
-                });
         });
     </script>
 

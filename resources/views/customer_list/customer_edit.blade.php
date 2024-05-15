@@ -398,6 +398,7 @@
                             <h5><strong>Child {{ $index + 1 }}</strong></h5>
                         </div>
                         <div class="card-body">
+                            <input type="hidden" name="childId_{{ $index + 1 }}" value="{{ $child->id }}">
                             <label class="mb-2">Name:</label>
                             <input type="text" name="childName_{{ $index + 1 }}" class="form-control mb-3"
                                 value="{{ $child->name }}">
@@ -680,6 +681,38 @@
             </div>
         </form>
     </div>
+
+    {{-- For submit form --}}
+    <script>
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            var form = this;
+
+            // Perform form submission via AJAX
+            axios.post(form.action, new FormData(form))
+                .then(function(response) {
+                    // Show SweetAlert success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: response.data.message,
+                        showConfirmButton: true
+                    }).then(function() {
+                        // Redirect to customer list page after SweetAlert is closed
+                        window.location.href = "{{ route('customer.list') }}";
+                    });
+                })
+                .catch(function(error) {
+                    // Show SweetAlert error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: error.response.data.message,
+                        showConfirmButton: true
+                    })
+                });
+        });
+    </script>
 
     {{-- For adding child --}}
     <script>
