@@ -204,19 +204,20 @@ class CustomerListController extends Controller
 
         if (!empty($childData)) {
             foreach ($childData as $index => $child) {
-                // Find existing child record by name and customer_id
-                $existingChild = CustomerChildren::where('customer_id', $id)
-                    ->where('id', $child['id'])
-                    ->first();
+                // Ensure 'id' key exists before accessing it
+                if (isset($child['id'])) {
+                    // Find existing child record by id
+                    $existingChild = CustomerChildren::find($child['id']);
 
-                if ($existingChild) {
-                    // Update existing child record
-                    $existingChild->update([
-                        'name' => $child['name'],
-                        'age' => $child['age'],
-                        'institution' => $child['education'],
-                        'updated_at' => $newDate,
-                    ]);
+                    if ($existingChild) {
+                        // Update existing child record
+                        $existingChild->update([
+                            'name' => $child['name'],
+                            'age' => $child['age'],
+                            'institution' => $child['education'],
+                            'updated_at' => $newDate,
+                        ]);
+                    }
                 } else {
                     // Create new child record
                     CustomerChildren::create([
