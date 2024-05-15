@@ -382,7 +382,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <button class="btn btn-secondary btn-lg" onclick="addChildField()" type="button">
+                            <button class="btn btn-secondary btn-lg" onclick="addChildFields()" type="button">
                                 <i class='bx bx-child'></i> Add Child Information
                             </button>
                         </div>
@@ -685,66 +685,58 @@
     <script>
         let childCount = {{ $customerChildren->count() }};
 
-        function addChildField() {
+        function addChildFields() {
             const container = document.getElementById('childContainer');
-            if (!container) {
-                console.error("Container element not found.");
-                return;
+            const numberOfChildren = parseInt(document.getElementById('number_of_children').value);
+
+            // Clear existing children
+            container.innerHTML = '';
+
+            // Start the loop from childCount + 1
+            for (let i = childCount + 1; i <= childCount + numberOfChildren; i++) {
+                const card = document.createElement('div');
+                card.classList.add('card', 'mt-4');
+                card.style.width = '900px';
+
+                const cardHeader = document.createElement('div');
+                cardHeader.classList.add('card-header', 'd-flex', 'align-items-center', 'justify-content-between');
+                const headerTitle = document.createElement('h5');
+                headerTitle.innerHTML = `<strong>Child ${i}</strong>`; // Adjusted title here
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('btn', 'btn-danger', 'btn-sm');
+                removeButton.innerHTML = 'x';
+                removeButton.onclick = function() {
+                    container.removeChild(card);
+                };
+
+                cardHeader.appendChild(headerTitle);
+                cardHeader.appendChild(removeButton);
+
+                const cardBody = document.createElement('div');
+                cardBody.classList.add('card-body');
+
+                // Function to create input field with label and margin below
+                function createInputWithLabel(labelText, inputName) {
+                    const label = document.createElement('label');
+                    label.innerText = labelText + ':';
+                    label.classList.add('mb-2');
+                    const input = document.createElement('input');
+                    input.setAttribute('type', 'text');
+                    input.setAttribute('name', inputName);
+                    input.classList.add('form-control', 'mb-3');
+                    cardBody.appendChild(label);
+                    cardBody.appendChild(input);
+                }
+
+                createInputWithLabel('Name', `childName_${i}`);
+                createInputWithLabel('Age', `childAge_${i}`);
+                createInputWithLabel('Education', `childEducation_${i}`);
+
+                card.appendChild(cardHeader);
+                card.appendChild(cardBody);
+
+                container.appendChild(card);
             }
-
-            const card = document.createElement('div');
-            card.classList.add('card', 'mt-4');
-            card.style.width = '900px';
-
-            const cardHeader = document.createElement('div');
-            cardHeader.classList.add('card-header', 'd-flex', 'align-items-center', 'justify-content-between');
-            const headerTitle = document.createElement('h5');
-            headerTitle.innerHTML = `<strong>Child ${childCount + 1}</strong>`;
-            const removeButton = document.createElement('button');
-            removeButton.classList.add('btn', 'btn-danger', 'btn-sm');
-            removeButton.innerHTML = 'x';
-            removeButton.onclick = function() {
-                container.removeChild(card);
-                updateChildCount();
-            };
-
-            cardHeader.appendChild(headerTitle);
-            cardHeader.appendChild(removeButton);
-
-            const cardBody = document.createElement('div');
-            cardBody.classList.add('card-body');
-
-            // Function to create input field with label and margin below
-            function createInputWithLabel(labelText, inputName) {
-                const label = document.createElement('label');
-                label.innerText = labelText + ':';
-                label.classList.add('mb-2');
-                const input = document.createElement('input');
-                input.setAttribute('type', 'text');
-                input.setAttribute('name', inputName);
-                input.classList.add('form-control', 'mb-3');
-                cardBody.appendChild(label);
-                cardBody.appendChild(input);
-            }
-
-            createInputWithLabel('Name', `childName_${childCount}`);
-            createInputWithLabel('Age', `childAge_${childCount}`);
-            createInputWithLabel('Education', `childEducation_${childCount}`);
-
-            card.appendChild(cardHeader);
-            card.appendChild(cardBody);
-
-            container.appendChild(card);
-
-            childCount++;
-        }
-
-        function updateChildCount() {
-            childCount--;
-            const cards = document.querySelectorAll('.childHeader strong');
-            cards.forEach((card, index) => {
-                card.textContent = `Child ${index + 1}`;
-            });
         }
     </script>
 @endsection
