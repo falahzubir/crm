@@ -142,7 +142,7 @@ body {
   width: 75px;
   height: 75px;
   border: 15px solid #ddd;
-  border-top-color: #595cd9;
+  border-top-color: #4f80e1;
   border-radius: 50%;
   animation: loading 0.75s ease infinite;
 }
