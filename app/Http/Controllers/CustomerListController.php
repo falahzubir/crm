@@ -233,14 +233,13 @@ class CustomerListController extends Controller
         // Update Customers table in Analytics
         if (!empty($request->input('name'))) {
             $customerAnalytics = [
+                'customer_id' => $id,
                 'customer_name' => $request->input('name'),
-                'updated_at' => $newDate,
             ];
 
             try {
-                $this->update_customers_analytic($id, $customerAnalytics);
+                $this->update_customer_data_in_analytics($customerAnalytics);
             } catch (\Exception $e) {
-                // Log error or handle accordingly
                 Log::error($e->getMessage());
             }
         }
@@ -343,43 +342,35 @@ class CustomerListController extends Controller
         ]);
     }
 
-    private function update_customers_analytic($customer_id, $data)
+    // ---------------------- API ---------------------- //
+    public function update_customer_data_in_analytics($data)
     {
-        DB::connection('ANALYTIC-STG')
-            ->table('customers')
-            ->where('customers.id', $customer_id)
-            ->update($data);
+        // Send data to the analytics system for updating
+        $url = 'http://127.0.0.1:8001/api/update_customer';
+        $this->makeRequest($url, 'POST', $data);
     }
 
-    // Get customers data using api
-    // public function fetchDataFromAnalytics()
-    // {
-    //     // Fetch customers data
-    //     $customersResponse = $this->makeRequest('http://127.0.0.1:8001/api/customers');
-    //     $customers = json_decode($customersResponse, true);
+    private function makeRequest($url, $method = 'GET', $data = [])
+    {
+        $curl = curl_init();
 
-    //     // Process data as needed
-    //     return view('customer_list/customer_list', [
-    //         'customers' => $customers,
-    //     ]);
-    // }
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_POSTFIELDS => json_encode($data), // Send data as JSON
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Accept: application/json',
+            ],
+        ]);
 
-    // private function makeRequest($url)
-    // {
-    //     $curl = curl_init();
+        $response = curl_exec($curl);
 
-    //     curl_setopt_array($curl, [
-    //         CURLOPT_URL => $url,
-    //         CURLOPT_RETURNTRANSFER => true,
-    //         CURLOPT_FOLLOWLOCATION => true,
-    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //         CURLOPT_CUSTOMREQUEST => "GET",
-    //     ]);
+        curl_close($curl);
 
-    //     $response = curl_exec($curl);
-
-    //     curl_close($curl);
-
-    //     return $response;
-    // }
+        return $response;
+    }
 }
