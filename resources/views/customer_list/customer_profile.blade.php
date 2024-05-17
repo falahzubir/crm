@@ -21,6 +21,7 @@
     </div>
 
     <div class="container">
+        {{-- Customer Photo --}}
         <div class="card mt-3 p-3">
             <div class="card-body">
                 <div class="row">
@@ -696,11 +697,11 @@
             </div>
             <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
                 @foreach ([
-            'Delivery Service' => 11,
-            'Customer Service' => 12,
-            'Product Quality' => 13,
-            'Product Quantity' => 14,
-        ] as $label => $questionId)
+                    'Delivery Service' => 11,
+                    'Customer Service' => 12,
+                    'Product Quality' => 13,
+                    'Product Quantity' => 14,
+                ] as $label => $questionId)
                     @php
                         $rating =
                             optional($customer->customerAnswers->firstWhere('question_id', $questionId))->value ?? 0;
