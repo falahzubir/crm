@@ -63,7 +63,7 @@ class CustomerListController extends Controller
 
     public function customer_edit($id)
     {
-        $customer = Customer::with('tags')->select('customers.*', 'users.name as updated_by', 'countries.name as country')
+        $customer = Customer::select('customers.*', 'users.name as updated_by', 'countries.name as country')
             ->leftJoin('users', 'customers.updated_by', '=', 'users.id')
             ->leftJoin('states', 'customers.state_id', '=', 'states.id')
             ->leftJoin('countries', 'states.country_id', '=', 'countries.id')
