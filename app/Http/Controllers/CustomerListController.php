@@ -59,14 +59,8 @@ class CustomerListController extends Controller
             ->leftJoin('salary_ranges', 'customers.salary_range_id', '=', 'salary_ranges.id')
             ->findOrFail($id);
 
-        // Children numbers
-        $customerChildren = CustomerChildren::where('customer_id', $id)->whereNull('deleted_at')->get();
-        $numberOfChild = $customerChildren->count();
-
         return view('customer_list/customer_profile', [
             'customer' => $customer,
-            'numberOfChild' => $numberOfChild,
-            'customerChildren' => $customerChildren,
         ]);
     }
 

@@ -65,7 +65,7 @@
                                 <label class="col-sm-2">Name :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name }}" readonly />
+                                        value="{{ $customer->name ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -74,7 +74,7 @@
                                 <label class="col-sm-4">Nick Name :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->nickname }}" readonly />
+                                        value="{{ $customer->nickname ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -83,7 +83,7 @@
                                 <label class="col-sm-2">Titles :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->title }}" readonly />
+                                        value="{{ $customer->title ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -101,7 +101,7 @@
                                 <label class="col-sm-4">Marital Status :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->status }}" readonly />
+                                        value="{{ $customer->status ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -110,7 +110,7 @@
                                 <label class="col-sm-2">Age :</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->age }}" readonly />
+                                        value="{{ $customer->age ?? 'N/A' }}" readonly />
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                                 <label class="col-sm-4">IC Number :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->identification_number }}" readonly />
+                                        value="{{ $customer->identification_number ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -129,7 +129,7 @@
                                 <label class="col-sm-4">Phone Number :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->phone }}" readonly />
+                                        value="{{ $customer->phone ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -138,7 +138,7 @@
                                 <label class="col-sm-3">Weight (KG) : </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->weight }}" readonly />
+                                        value="{{ $customer->weight ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -147,7 +147,7 @@
                                 <label class="col-sm-3">Height (cm) :</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->height }}" readonly />
+                                        value="{{ $customer->height ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -162,7 +162,7 @@
 
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ number_format($bmi, 2) }}" readonly />
+                                            value="{{ number_format($bmi, 2) ?? 'N/A' }}" readonly />
                                     </div>
                                 @else
                                     <div class="col-sm-10">
@@ -177,7 +177,7 @@
                                 <label class="col-sm-3">Blood Type :</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->blood_type }}" readonly />
+                                        value="{{ $customer->blood_type ?? 'N/A' }}" readonly />
                                 </div>
                             </div>
                         </div>
@@ -213,7 +213,7 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->birth_place }}" readonly />
+                                            value="{{ $customer->birth_place ?? 'N/A' }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -223,7 +223,7 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->state_name }}" readonly />
+                                            value="{{ $customer->state_name ?? 'N/A' }}" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -247,7 +247,7 @@
                                     <label class="col-sm-4">Occupation :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->occupation }}" readonly />
+                                            value="{{ $customer->occupation ?? 'N/A' }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -268,7 +268,7 @@
                                         :</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->identification_number_police != null ? $customer->identification_number_police : 'N/A' }}"
+                                            value="{{ $customer->identification_number_police != null ? $customer->identification_number_police : 'N/A' ?? 'N/A' }}"
                                             readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
@@ -279,7 +279,7 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->salary }}" readonly />
+                                            value="{{ $customer->salary ?? 'N/A' }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -316,7 +316,7 @@
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->birth_order }}" readonly />
+                                        value="{{ $customer->birth_order ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -326,7 +326,7 @@
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $numberOfChild }}" readonly />
+                                        value="{{ $customer->customerChildrens->count() ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -335,7 +335,7 @@
                                 <label class="col-sm-6">Spouse Name :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerSpouse->name }}" readonly />
+                                        value="{{ $customer->customerSpouse->name ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -345,7 +345,7 @@
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerSpouse->occupation }}" readonly />
+                                        value="{{ $customer->customerSpouse->occupation ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -354,14 +354,14 @@
                                 <label class="col-sm-4">Spouse Age :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerSpouse->age }}" readonly />
+                                        value="{{ $customer->customerSpouse->age ?? 'N/A' }}" readonly />
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <label class="text-dark">Children Information</label>
-                            @if ($customerChildren->isEmpty())
+                            @if ($customer->customerChildrens->isEmpty())
                                 <div class="container border rounded my-3 p-3">
                                     <div class="row mb-3">
                                         <label class="col-sm-4 mt-2">Name :</label>
@@ -390,13 +390,13 @@
                                     </div>
                                 </div>
                             @else
-                                @foreach ($customerChildren as $row)
+                                @foreach ($customer->customerChildrens as $row)
                                     <div class="container border rounded my-3 p-3">
                                         <div class="row mb-3">
                                             <label class="col-sm-4 mt-2">Name :</label>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control border-0 text-end bg-white"
-                                                    value="{{ $row->name }}" readonly />
+                                                    value="{{ $row->name ?? 'N/A' }}" readonly />
                                             </div>
                                             <hr class="border-light mt-2" />
                                         </div>
@@ -405,7 +405,7 @@
                                             <label class="col-sm-4">Age :</label>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control border-0 text-end bg-white"
-                                                    value="{{ $row->age }}" readonly />
+                                                    value="{{ $row->age ?? 'N/A' }}" readonly />
                                             </div>
                                             <hr class="border-light mt-2" />
                                         </div>
@@ -414,7 +414,7 @@
                                             <label class="col-sm-6 mb-3">Education Institution/ Workplace :</label>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control border-0 text-end bg-white"
-                                                    value="{{ $row->institution }}" readonly />
+                                                    value="{{ $row->institution ?? 'N/A' }}" readonly />
                                             </div>
                                         </div>
                                     </div>
@@ -433,11 +433,11 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Others</strong></h5>
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                        <a class="collapsed btn" data-bs-toggle="collapse" href="#others">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
-                    <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
+                    <div class="card-body" id="others" data-bs-parent="#accordion">
                         <form action="">
                             <div class="row p-4 d-flex align-items-center justify-content-between">
                                 <div class="row mb-3">
@@ -445,7 +445,7 @@
                                         :</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->hobby }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->hobby ?? 'N/A' }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -455,7 +455,8 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->fav_color }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->fav_color ?? 'N/A' }}"
+                                            readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -465,7 +466,7 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->fav_pet }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->fav_pet ?? 'N/A' }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -475,7 +476,8 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->fav_food }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->fav_food ?? 'N/A' }}"
+                                            readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -485,7 +487,8 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->fav_beverage }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->fav_beverage ?? 'N/A' }}"
+                                            readonly />
                                     </div>
                                 </div>
                             </div>
@@ -498,11 +501,11 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Suffering Disease</strong></h5>
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                        <a class="collapsed btn" data-bs-toggle="collapse" href="#sufferingDisease">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
-                    <div class="card-body" id="customerDetails" data-bs-parent="#accordion"
+                    <div class="card-body" id="sufferingDisease" data-bs-parent="#accordion"
                         style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 8pt;">
                         @foreach ($customer->tags as $tag)
                             <span class="rounded-pill p-2" style="background-color: #d6d6ff;">#{{ $tag->name }}</span>
@@ -516,11 +519,11 @@
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Product & Service</strong></h5>
-                <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#productService">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
-            <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
+            <div class="card-body" id="productService" data-bs-parent="#accordion">
                 <div class="row p-4 d-flex align-items-center justify-content-between">
                     <div class="col-md-5">
                         <div class="row mb-3">
@@ -704,7 +707,7 @@
                     @endphp
                     <div class="row mb-3">
                         <label for="serviceRating">{{ $label }}:</label>
-                        <div class="star-rating" data-rating="{{ $rating }}">
+                        <div class="star-rating" data-rating="{{ $rating ?? 0 }}">
                             @for ($i = 1; $i <= 5; $i++)
                                 @if ($i <= $rating)
                                     <span class="star">&#9733;</span> <!-- Filled star -->

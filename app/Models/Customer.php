@@ -56,4 +56,9 @@ class Customer extends Model
     {
         return $this->hasOne(CustomerSpouse::class);
     }
+
+    public function customerChildrens()
+    {
+        return $this->hasMany(CustomerChildren::class);
+    }
 }
