@@ -4,19 +4,15 @@
     <style>
         .star-rating {
             display: inline-block;
-            unicode-bidi: bidi-override;
-            direction: ltr;
         }
 
-        .star-rating .star {
-            display: inline-block;
-            font-size: 20px;
-            cursor: pointer;
+        .star {
+            font-size: 24px;
+            color: #FFD700;
         }
 
-        .star-rating .star:hover,
-        .star-rating .star.active {
-            color: orange;
+        .unfilled {
+            color: #8592a3;
         }
     </style>
 
@@ -526,157 +522,165 @@
                 </a>
             </div>
             <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
-                <form action="">
-                    <div class="row p-4 d-flex align-items-center justify-content-between">
-                        <div class="col-md-5">
-                            <div class="row mb-3">
-                                <label class="col-sm-7">Does EMZI familiar to you?
-                                    :</label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ optional($customerAnswers->where('question_id', 1)->where('customer_id', $customer->id)->first())->value === 'Y'? 'Yes': 'No' }}"
-                                        readonly />
-                                </div>
-                                <hr class="border-light mt-2" />
+                <div class="row p-4 d-flex align-items-center justify-content-between">
+                    <div class="col-md-5">
+                        <div class="row mb-3">
+                            <label class="col-sm-7">Does EMZI familiar to you?:</label>
+                            <div class="col-sm-5">
+                                @php
+                                    $answer = $customer->customerAnswers->firstWhere('question_id', 1);
+                                @endphp
+                                <input type="text" class="form-control border-0 text-end bg-white"
+                                    value="{{ $answer ? ($answer->value === 'Y' ? 'Yes' : 'No') : 'No' }}" readonly />
                             </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-6">Where did you know about
-                                    EMZI? :</label>
-                                <div class="col-sm-6">
-                                    @switch(optional($customerAnswers->where('question_id', 2)->where('customer_id',
-                                        $customer->id)->first())->value)
-                                        @case(1)
-                                            <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="Social Media" readonly />
-                                        @break
-
-                                        @case(2)
-                                            <input type="text" class="form-control border-0 text-end bg-white" value="Friends"
-                                                readonly />
-                                        @break
-
-                                        @case(3)
-                                            <input type="text" class="form-control border-0 text-end bg-white" value="Website"
-                                                readonly />
-                                        @break
-
-                                        @default
-                                            <input type="text" class="form-control border-0 text-end bg-white" value="N/A"
-                                                readonly />
-                                    @endswitch
-                                </div>
-                                <hr class="border-light mt-2" />
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-7">First EMZI Product
-                                    Purchased? :</label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 3)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
-                                        readonly />
-                                </div>
-                                <hr class="border-light mt-2" />
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-6">Reason of buying EMZI
-                                    Products? :</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 4)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
-                                        readonly />
-                                </div>
-                                <hr class="border-light mt-2" />
-                            </div>
-
-                            <div class="row mb-3">
-                                <label class="col-sm-6 mt-1">Why Support EMZI product?
-                                    :</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 5)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
-                                        readonly />
-                                </div>
-                            </div>
+                            <hr class="border-light mt-2" />
                         </div>
 
-                        <div class="col-md-5">
-                            <div class="row mb-3">
-                                <label class="col-sm-6">Purchase Frequency
-                                    :</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 6)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
-                                        readonly />
-                                </div>
-                                <hr class="border-light mt-2" />
+                        <div class="row mb-3">
+                            <label class="col-sm-6">Where did you know about EMZI?:</label>
+                            <div class="col-sm-6">
+                                @php
+                                    $answer = $customer->customerAnswers->firstWhere('question_id', 2);
+                                @endphp
+                                @switch($answer->value ?? 'N/A')
+                                    @case(1)
+                                        <input type="text" class="form-control border-0 text-end bg-white"
+                                            value="Social Media" readonly />
+                                    @break
+
+                                    @case(2)
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="Friends"
+                                            readonly />
+                                    @break
+
+                                    @case(3)
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="Website"
+                                            readonly />
+                                    @break
+
+                                    @default
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="N/A"
+                                            readonly />
+                                @endswitch
                             </div>
+                            <hr class="border-light mt-2" />
+                        </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-6">What Products Does EMZI
-                                    Have? :</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerAnswers->where('question_id', 7)->where('customer_id', $customer->id)->first()->value ?? 'N/A' }}"
-                                        readonly />
-                                </div>
-                                <hr class="border-light mt-2" />
+                        <div class="row mb-3">
+                            <label class="col-sm-7">First EMZI Product Purchased?:</label>
+                            <div class="col-sm-5">
+                                @php
+                                    $answer = $customer->customerAnswers->firstWhere('question_id', 3);
+                                @endphp
+                                <input type="text" class="form-control border-0 text-end bg-white"
+                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
                             </div>
+                            <hr class="border-light mt-2" />
+                        </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-6">Do you know that EMZI has
-                                    its own factory? : </label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ optional($customerAnswers->where('question_id', 8)->where('customer_id', $customer->id)->first())->value === 'Y'? 'Yes': 'No' }}"
-                                        readonly />
-                                </div>
-                                <hr class="border-light mt-2" />
+                        <div class="row mb-3">
+                            <label class="col-sm-6">Reason of buying EMZI Products?:</label>
+                            <div class="col-sm-6">
+                                @php
+                                    $answer = $customer->customerAnswers->firstWhere('question_id', 4);
+                                @endphp
+                                <input type="text" class="form-control border-0 text-end bg-white"
+                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
                             </div>
+                            <hr class="border-light mt-2" />
+                        </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-6">Do you know that EMZI has
-                                    a laboratory at the university? :</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ optional($customerAnswers->where('question_id', 9)->where('customer_id', $customer->id)->first())->value === 'Y'? 'Yes': 'No' }}"
-                                        readonly />
-                                </div>
-                                <hr class="border-light mt-2" />
-                            </div>
-
-                            <div class="form-group row mb-3">
-                                <label class="col-sm-7 mt-2">Does EMZI Products
-                                    Effective? :</label>
-                                <div class="col-sm-5">
-                                    @switch(optional($customerAnswers->where('question_id', 10)->where('customer_id',
-                                        $customer->id)->first())->value)
-                                        @case(1)
-                                            <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="Yes, Highly Effective" readonly />
-                                        @break
-
-                                        @case(2)
-                                            <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="Less Effective" readonly />
-                                        @break
-
-                                        @case(3)
-                                            <input type="text" class="form-control border-0 text-end bg-white"
-                                                value="Not Effective" readonly />
-                                        @break
-
-                                        @default
-                                            <input type="text" class="form-control border-0 text-end bg-white" value="N/A"
-                                                readonly />
-                                    @endswitch
-                                </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-6 mt-1">Why Support EMZI product?:</label>
+                            <div class="col-sm-6">
+                                @php
+                                    $answer = $customer->customerAnswers->firstWhere('question_id', 5);
+                                @endphp
+                                <input type="text" class="form-control border-0 text-end bg-white"
+                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
                             </div>
                         </div>
                     </div>
-                </form>
+
+                    <div class="col-md-5">
+                        <div class="row mb-3">
+                            <label class="col-sm-6">Purchase Frequency:</label>
+                            <div class="col-sm-6">
+                                @php
+                                    $answer = $customer->customerAnswers->firstWhere('question_id', 6);
+                                @endphp
+                                <input type="text" class="form-control border-0 text-end bg-white"
+                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
+                            </div>
+                            <hr class="border-light mt-2" />
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-6">What Products Does EMZI Have?:</label>
+                            <div class="col-sm-6">
+                                @php
+                                    $answer = $customer->customerAnswers->firstWhere('question_id', 7);
+                                @endphp
+                                <input type="text" class="form-control border-0 text-end bg-white"
+                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
+                            </div>
+                            <hr class="border-light mt-2" />
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-6">Do you know that EMZI has its own factory?:</label>
+                            @php
+                                $answer = $customer->customerAnswers->firstWhere('question_id', 8);
+                            @endphp
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control border-0 text-end bg-white"
+                                    value="{{ $answer ? ($answer->value === 'Y' ? 'Yes' : 'No') : 'No' }}" readonly />
+                            </div>
+                            <hr class="border-light mt-2" />
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-6">Do you know that EMZI has a laboratory at the university?:</label>
+                            @php
+                                $answer = $customer->customerAnswers->firstWhere('question_id', 9);
+                            @endphp
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control border-0 text-end bg-white"
+                                    value="{{ $answer ? ($answer->value === 'Y' ? 'Yes' : 'No') : 'No' }}" readonly />
+                            </div>
+                            <hr class="border-light mt-2" />
+                        </div>
+
+                        <div class="form-group row mb-3">
+                            <label class="col-sm-7 mt-2">Does EMZI Products Effective?:</label>
+                            @php
+                                $answer = $customer->customerAnswers->firstWhere('question_id', 10);
+                            @endphp
+                            <div class="col-sm-5">
+                                @switch($answer->value ?? 'N/A')
+                                    @case(1)
+                                        <input type="text" class="form-control border-0 text-end bg-white"
+                                            value="Yes, Highly Effective" readonly />
+                                    @break
+
+                                    @case(2)
+                                        <input type="text" class="form-control border-0 text-end bg-white"
+                                            value="Less Effective" readonly />
+                                    @break
+
+                                    @case(3)
+                                        <input type="text" class="form-control border-0 text-end bg-white"
+                                            value="Not Effective" readonly />
+                                    @break
+
+                                    @default
+                                        <input type="text" class="form-control border-0 text-end bg-white" value="N/A"
+                                            readonly />
+                                @endswitch
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -689,54 +693,31 @@
                 </a>
             </div>
             <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
-                <div class="row mb-3">
-                    <label for="deliveryService">Delivery Service:</label>
-                    <div class="star-rating"
-                        data-rating="{{ optional($customerAnswers->where('question_id', 11)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
+                @foreach ([
+                        'Delivery Service' => 11,
+                        'Customer Service' => 12,
+                        'Product Quality' => 13,
+                        'Product Quantity' => 14,
+                    ] as $label => $questionId)
+                    @php
+                        $rating =
+                            optional($customer->customerAnswers->firstWhere('question_id', $questionId))->value ?? 0;
+                    @endphp
+                    <div class="row mb-3">
+                        <label for="serviceRating">{{ $label }}:</label>
+                        <div class="star-rating" data-rating="{{ $rating }}">
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $rating)
+                                    <span class="star">&#9733;</span> <!-- Filled star -->
+                                @else
+                                    <span class="star unfilled">&#9734;</span> <!-- Unfilled star -->
+                                @endif
+                            @endfor
+                        </div>
                     </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="deliveryService">Customer Service:</label>
-                    <div class="star-rating"
-                        data-rating="{{ optional($customerAnswers->where('question_id', 12)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="deliveryService">Product Quality:</label>
-                    <div class="star-rating"
-                        data-rating="{{ optional($customerAnswers->where('question_id', 13)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <label for="deliveryService">Product Quantity:</label>
-                    <div class="star-rating"
-                        data-rating="{{ optional($customerAnswers->where('question_id', 14)->where('customer_id', $customer->id)->first())->value ?? 0 }}">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
+
     </div>
 @endsection

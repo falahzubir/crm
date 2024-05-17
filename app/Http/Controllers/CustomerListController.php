@@ -65,7 +65,6 @@ class CustomerListController extends Controller
 
         $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
         $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
-        $customerAnswers = CustomerAnswer::where('customer_id', $id)->firstOrNew();
 
         return view('customer_list/customer_profile', [
             'customer' => $customer,
@@ -73,7 +72,6 @@ class CustomerListController extends Controller
             'customerSpouse' => $customerSpouse,
             'customerChildren' => $customerChildren,
             'customerAdditionalInfo' => $customerAdditionalInfo,
-            'customerAnswers' => $customerAnswers,
         ]);
     }
 

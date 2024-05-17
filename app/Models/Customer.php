@@ -41,4 +41,9 @@ class Customer extends Model
     {
         return $this->belongsToMany(Tag::class, 'customer_tags', 'customer_id', 'tag_id');
     }
+
+    public function customerAnswers()
+    {
+        return $this->hasMany(CustomerAnswer::class);
+    }
 }
