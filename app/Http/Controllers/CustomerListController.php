@@ -61,17 +61,12 @@ class CustomerListController extends Controller
 
         // Children numbers
         $customerChildren = CustomerChildren::where('customer_id', $id)->whereNull('deleted_at')->get();
-        $numberOfChild = $customerChildren->sum('customer_id');
-
-        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
-        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
+        $numberOfChild = $customerChildren->count();
 
         return view('customer_list/customer_profile', [
             'customer' => $customer,
             'numberOfChild' => $numberOfChild,
-            'customerSpouse' => $customerSpouse,
             'customerChildren' => $customerChildren,
-            'customerAdditionalInfo' => $customerAdditionalInfo,
         ]);
     }
 

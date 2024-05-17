@@ -202,9 +202,8 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-6">Customer Address
                                         :</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->address }}" readonly />
+                                    <div class="col-sm-6 text-end">
+                                        {{ $customer->address }}
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -336,7 +335,7 @@
                                 <label class="col-sm-6">Spouse Name :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerSpouse->name }}" readonly />
+                                        value="{{ $customer->customerSpouse->name }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -346,7 +345,7 @@
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerSpouse->occupation }}" readonly />
+                                        value="{{ $customer->customerSpouse->occupation }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -355,7 +354,7 @@
                                 <label class="col-sm-4">Spouse Age :</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customerSpouse->age }}" readonly />
+                                        value="{{ $customer->customerSpouse->age }}" readonly />
                                 </div>
                             </div>
                         </div>
@@ -446,7 +445,7 @@
                                         :</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->hobby }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->hobby }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -456,7 +455,7 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->fav_color }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->fav_color }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -466,7 +465,7 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->fav_pet }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->fav_pet }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -476,7 +475,7 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->fav_food }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->fav_food }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -486,7 +485,7 @@
                                         :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customerAdditionalInfo->fav_beverage }}" readonly />
+                                            value="{{ $customer->customerAdditionalInfos->fav_beverage }}" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -694,11 +693,11 @@
             </div>
             <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
                 @foreach ([
-                        'Delivery Service' => 11,
-                        'Customer Service' => 12,
-                        'Product Quality' => 13,
-                        'Product Quantity' => 14,
-                    ] as $label => $questionId)
+            'Delivery Service' => 11,
+            'Customer Service' => 12,
+            'Product Quality' => 13,
+            'Product Quantity' => 14,
+        ] as $label => $questionId)
                     @php
                         $rating =
                             optional($customer->customerAnswers->firstWhere('question_id', $questionId))->value ?? 0;

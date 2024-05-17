@@ -46,4 +46,14 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerAnswer::class);
     }
+
+    public function customerAdditionalInfos()
+    {
+        return $this->hasOne(CustomerAdditionalInfo::class);
+    }
+
+    public function customerSpouse()
+    {
+        return $this->hasOne(CustomerSpouse::class);
+    }
 }
