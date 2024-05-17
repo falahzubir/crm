@@ -24,12 +24,9 @@ class CustomerListController extends Controller
 {
     public function customer_list()
     {
-        // Queries
+        $customers = Customer::whereNull('customers.deleted_at')->paginate(10);
         $states = State::all();
         $tags = Tag::all();
-        $customers = Customer::with('tags')
-            ->whereNull('customers.deleted_at')
-            ->paginate(10);
 
         return view('customer_list/customer_list', [
             'customers' => $customers,
