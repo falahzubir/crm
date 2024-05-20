@@ -121,7 +121,7 @@ class CustomerListController extends Controller
         $this->updateCustomerTags($customer, $tagIds, $newDate);
         $this->updateCustomerAdditionalInfo($customer, $request);
         $this->updateCustomerSpouse($customer, $request);
-        $this->updateCustomerAnswers($customer, $request);
+        $this->updateCustomerAnswers($customer, $request, $newDate);
         $this->updateCustomerChildren($customer, $request, $newDate);
 
         $this->updateCustomerDataInAnalytics($request);
@@ -211,7 +211,7 @@ class CustomerListController extends Controller
         ])->save();
     }
 
-    private function updateCustomerAnswers($customer, $request)
+    private function updateCustomerAnswers($customer, $request, $newDate)
     {
         $questions = [
             'aware_or_not_about_emzi' => 1,
@@ -231,10 +231,42 @@ class CustomerListController extends Controller
         ];
 
         foreach ($questions as $field => $questionId) {
-            CustomerAnswer::updateOrCreate(
-                ['customer_id' => $customer->id, 'question_id' => $questionId],
-                ['value' => $request->input($field)]
-            );
+            if ($field == 'how_did_you_know_about_emzi') {
+                // Handle multiple select for 'how_did_you_know_about_emzi'
+                $values = $request->input($field, []);
+                $existingAnswers = CustomerAnswer::where('customer_id', $customer->id)
+                    ->where('question_id', $questionId)
+                    ->get();
+
+                foreach ($existingAnswers as $answer) {
+                    if (in_array($answer->value, $values)) {
+                        // Update the timestamps if the value is re-selected
+                        $answer->update(['updated_at' => $newDate]);
+                    } else {
+                        // Mark as deleted if not re-selected
+                        $answer->update(['deleted_at' => $newDate, 'updated_at' => $newDate]);
+                    }
+                }
+
+                foreach ($values as $value) {
+                    $exists = $existingAnswers->contains('value', $value);
+                    if (!$exists) {
+                        CustomerAnswer::create([
+                            'customer_id' => $customer->id,
+                            'question_id' => $questionId,
+                            'value' => $value,
+                            'deleted_at' => null,
+                            'updated_at' => $newDate,
+                        ]);
+                    }
+                }
+            } else {
+                // Handle other questions
+                CustomerAnswer::updateOrCreate(
+                    ['customer_id' => $customer->id, 'question_id' => $questionId],
+                    ['value' => $request->input($field), 'updated_at' => $newDate]
+                );
+            }
         }
     }
 
