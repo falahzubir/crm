@@ -66,7 +66,10 @@ class CustomerListController extends Controller
     // Go to edit page
     public function customer_edit($id)
     {
-        $customer = Customer::select('customers.*', 'users.name as updated_by', 'countries.name as country')
+        $customer = Customer::with(['tags' => function($query) {
+                $query->whereNull('customer_tags.deleted_at');
+            }])
+            ->select('customers.*', 'users.name as updated_by', 'countries.name as country')
             ->leftJoin('users', 'customers.updated_by', '=', 'users.id')
             ->leftJoin('states', 'customers.state_id', '=', 'states.id')
             ->leftJoin('countries', 'states.country_id', '=', 'countries.id')
@@ -111,9 +114,76 @@ class CustomerListController extends Controller
         ]);
 
         $newDate = Carbon::now();
+        $tagIds = $request->input('tag_id', []);
+        $customer = Customer::findOrFail($id);
+        $user = Auth::user();
 
+        $this->updateCustomerTags($customer, $tagIds, $newDate);
+        $this->updateCustomerAdditionalInfo($customer, $request);
+        $this->updateCustomerSpouse($customer, $request);
+        $this->updateCustomerAnswers($customer, $request);
+        $this->updateCustomerChildren($customer, $request, $newDate);
+
+        $this->updateCustomerDataInAnalytics($request);
+
+        return response()->json(['message' => 'Customer updated successfully.'], 200);
+    }
+
+    private function updateCustomerTags($customer, $tagIds, $newDate)
+    {
+        $currentTagIds = $customer->tags->pluck('id')->toArray();
+        $tagsToRemove = array_diff($currentTagIds, $tagIds);
+        $tagsToAdd = array_diff($tagIds, $currentTagIds);
+
+        // Handle tags to be removed (i.e., set deleted_at to current timestamp)
+        if (!empty($tagsToRemove)) {
+            DB::table('customer_tags')
+                ->where('customer_id', $customer->id)
+                ->whereIn('tag_id', $tagsToRemove)
+                ->update(['deleted_at' => $newDate, 'updated_at' => $newDate]);
+        }
+
+        // Handle tags to be added or re-selected (i.e., set deleted_at to null and updated_at to current date)
+        if (!empty($tagsToAdd)) {
+            DB::table('customer_tags')
+                ->where('customer_id', $customer->id)
+                ->whereIn('tag_id', $tagsToAdd)
+                ->update(['deleted_at' => null, 'updated_at' => $newDate]);
+
+            // Add new tags if they don't exist in the pivot table
+            foreach ($tagsToAdd as $tagId) {
+                $exists = DB::table('customer_tags')
+                    ->where('customer_id', $customer->id)
+                    ->where('tag_id', $tagId)
+                    ->exists();
+
+                if (!$exists) {
+                    DB::table('customer_tags')->insert([
+                        'customer_id' => $customer->id,
+                        'tag_id' => $tagId,
+                        'deleted_at' => null,
+                        'updated_at' => $newDate,
+                    ]);
+                }
+            }
+        }
+
+        // Handle re-selected tags (i.e., tags that were previously deleted and now need to be restored)
+        $tagsToRestore = array_intersect($currentTagIds, $tagIds);
+
+        if (!empty($tagsToRestore)) {
+            DB::table('customer_tags')
+                ->where('customer_id', $customer->id)
+                ->whereIn('tag_id', $tagsToRestore)
+                ->whereNotNull('deleted_at')  // Only update if deleted_at is not null
+                ->update(['deleted_at' => null, 'updated_at' => $newDate]);
+        }
+    }
+
+    private function updateCustomerAdditionalInfo($customer, $request)
+    {
         $customerAdditionalInfoData = [
-            'customer_id' => $id,
+            'customer_id' => $customer->id,
             'hobby' => $request->input('hobby'),
             'fav_color' => $request->input('fav_color'),
             'fav_pet' => $request->input('fav_pet'),
@@ -121,31 +191,28 @@ class CustomerListController extends Controller
             'fav_beverage' => $request->input('fav_beverage'),
         ];
 
-        $customerTagsData = [
-            'customer_id' => $id,
-            'tag_id' => $request->input('tag_id'),
-        ];
+        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $customer->id)->firstOrNew();
+        $customerAdditionalInfo->fill($customerAdditionalInfoData)->save();
 
-        $customer = Customer::findOrFail($id);
-        $customerAdditionalInfo = CustomerAdditionalInfo::where('customer_id', $id)->firstOrNew();
-        $user = Auth::user();
-        $customerTags = CustomerTag::where('customer_id', $id)->firstOrNew();
+        $customer->update(array_merge($request->all(), [
+            'updated_by' => Auth::id(),
+            'additional_tags' => $request->input('additional_tags')
+        ]));
+    }
 
-        // Update the customer data
-        $customer->update(array_merge($request->all(), ['updated_by' => $user->id, 'additional_tags' => $request->input('additional_tags')]));
-        $customerAdditionalInfo->updateOrCreate($customerAdditionalInfoData);
-        $customerTags->updateOrCreate($customerTagsData);
+    private function updateCustomerSpouse($customer, $request)
+    {
+        $customerSpouse = CustomerSpouse::where('customer_id', $customer->id)->firstOrNew();
+        $customerSpouse->fill([
+            'customer_id' => $customer->id,
+            'name' => $request->input('spouse_name'),
+            'age' => $request->input('spouse_age'),
+            'occupation' => $request->input('spouse_occupation')
+        ])->save();
+    }
 
-        // Update the fields if the record exists, otherwise set the values
-        $customerSpouse = CustomerSpouse::where('customer_id', $id)->firstOrNew();
-        $customerSpouse->customer_id = $id;
-        $customerSpouse->name = $request->input('spouse_name');
-        $customerSpouse->age = $request->input('spouse_age');
-        $customerSpouse->occupation = $request->input('spouse_occupation');
-        // Save the record
-        $customerSpouse->save();
-
-        // Define an array to map question field names to their corresponding question IDs
+    private function updateCustomerAnswers($customer, $request)
+    {
         $questions = [
             'aware_or_not_about_emzi' => 1,
             'how_did_you_know_about_emzi' => 2,
@@ -163,16 +230,18 @@ class CustomerListController extends Controller
             'product_quantity_rating' => 14,
         ];
 
-        // Iterate over the questions array to set question_id and value for each CustomerAnswer record
         foreach ($questions as $field => $questionId) {
-            $customerAnswer = CustomerAnswer::updateOrCreate(
-                ['customer_id' => $id, 'question_id' => $questionId],
+            CustomerAnswer::updateOrCreate(
+                ['customer_id' => $customer->id, 'question_id' => $questionId],
                 ['value' => $request->input($field)]
             );
         }
+    }
 
-        // Handle child card input
+    private function updateCustomerChildren($customer, $request, $newDate)
+    {
         $childData = [];
+
         foreach ($request->all() as $key => $value) {
             if (strpos($key, 'childId_') === 0) {
                 $index = substr($key, strlen('childId_'));
@@ -189,38 +258,34 @@ class CustomerListController extends Controller
             }
         }
 
-        if (!empty($childData)) {
-            foreach ($childData as $index => $child) {
-                // Ensure 'id' key exists before accessing it
-                if (isset($child['id'])) {
-                    // Find existing child record by id
-                    $existingChild = CustomerChildren::find($child['id']);
+        foreach ($childData as $index => $child) {
+            if (isset($child['id'])) {
+                $existingChild = CustomerChildren::find($child['id']);
 
-                    if ($existingChild) {
-                        // Update existing child record
-                        $existingChild->update([
-                            'name' => $child['name'],
-                            'age' => $child['age'],
-                            'institution' => $child['education'],
-                            'updated_at' => $newDate,
-                        ]);
-                    }
-                } else {
-                    // Create new child record
-                    CustomerChildren::create([
-                        'customer_id' => $id,
+                if ($existingChild) {
+                    $existingChild->update([
                         'name' => $child['name'],
                         'age' => $child['age'],
-                        'institution' => $child['education']
+                        'institution' => $child['education'],
+                        'updated_at' => $newDate,
                     ]);
                 }
+            } else {
+                CustomerChildren::create([
+                    'customer_id' => $customer->id,
+                    'name' => $child['name'],
+                    'age' => $child['age'],
+                    'institution' => $child['education']
+                ]);
             }
         }
+    }
 
-        // Update Customers table in Analytics
+    private function updateCustomerDataInAnalytics($request)
+    {
         if (!empty($request->input('name'))) {
             $customerAnalytics = [
-                'customer_id' => $id,
+                'customer_id' => $request->input('customer_id'),
                 'customer_name' => $request->input('name'),
             ];
 
@@ -230,8 +295,6 @@ class CustomerListController extends Controller
                 Log::error($e->getMessage());
             }
         }
-
-        return response()->json(['message' => 'Customer updated successfully.'], 200);
     }
 
     // For Search & Filters

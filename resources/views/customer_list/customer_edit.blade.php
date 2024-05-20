@@ -473,8 +473,7 @@
                 <div class="card-body" id="sufferingDisease" data-bs-parent="#accordion">
                     <div class="mb-3">
                         <label class="mb-3">Disease :</label>
-                        <select name="tag_id" class="form-select">
-                            <option selected disabled></option>
+                        <select name="tag_id[]" id="tom_select" multiple>
                             @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}"
                                     {{ $customer->tags->contains('id', $tag->id) ? 'selected' : '' }}>

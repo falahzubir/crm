@@ -355,7 +355,7 @@
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerChildrens->count() ?? 'N/A' }}" readonly />
+                                        value="{{ $customer->customerChildrens->whereNull('deleted_at')->count() ?? 'N/A' }}" readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
@@ -420,33 +420,35 @@
                                 </div>
                             @else
                                 @foreach ($customer->customerChildrens as $row)
-                                    <div class="container border rounded my-3 p-3">
-                                        <div class="row mb-3">
-                                            <label class="col-sm-4 mt-2">Name :</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control border-0 text-end bg-white"
-                                                    value="{{ $row->name ?? 'N/A' }}" readonly />
+                                    @if (is_null($row->deleted_at))
+                                        <div class="container border rounded my-3 p-3">
+                                            <div class="row mb-3">
+                                                <label class="col-sm-4 mt-2">Name :</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control border-0 text-end bg-white"
+                                                        value="{{ $row->name ?? 'N/A' }}" readonly />
+                                                </div>
+                                                <hr class="border-light mt-2" />
                                             </div>
-                                            <hr class="border-light mt-2" />
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label class="col-sm-4">Age :</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control border-0 text-end bg-white"
-                                                    value="{{ $row->age ?? 'N/A' }}" readonly />
+                                            <div class="row mb-3">
+                                                <label class="col-sm-4">Age :</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control border-0 text-end bg-white"
+                                                        value="{{ $row->age ?? 'N/A' }}" readonly />
+                                                </div>
+                                                <hr class="border-light mt-2" />
                                             </div>
-                                            <hr class="border-light mt-2" />
-                                        </div>
 
-                                        <div class="row mb-3">
-                                            <label class="col-sm-6 mb-3">Education Institution/ Workplace :</label>
-                                            <div class="col-sm-6">
-                                                <input type="text" class="form-control border-0 text-end bg-white"
-                                                    value="{{ $row->institution ?? 'N/A' }}" readonly />
+                                            <div class="row mb-3">
+                                                <label class="col-sm-6 mb-3">Education Institution/ Workplace :</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control border-0 text-end bg-white"
+                                                        value="{{ $row->institution ?? 'N/A' }}" readonly />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 @endforeach
                             @endif
                         </div>
