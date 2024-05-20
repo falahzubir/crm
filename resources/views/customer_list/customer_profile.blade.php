@@ -4,15 +4,39 @@
     <style>
         .star-rating {
             display: inline-block;
+            unicode-bidi: bidi-override;
+            direction: ltr;
         }
 
-        .star {
-            font-size: 24px;
-            color: #FFD700;
+        .star-rating .star {
+            display: inline-block;
+            font-size: 20px;
+            cursor: pointer;
         }
 
-        .unfilled {
-            color: #8592a3;
+        .star-rating .star:hover,
+        .star-rating .star.active {
+            color: orange;
+        }
+
+        /* Hide radio buttons */
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+
+        /* Style labels as stars */
+        .star-rating label {
+            font-size: 30px;
+            /* Adjust size as needed */
+            color: #ccc;
+            /* Default star color */
+            cursor: pointer;
+        }
+
+        /* Style labels when radio button is checked */
+        .star-rating input[type="radio"]:checked~label {
+            color: #ffcc00;
+            /* Change color to represent selected star */
         }
     </style>
 
@@ -205,6 +229,10 @@
                                         :</label>
                                     <div class="col-sm-6 text-end">
                                         {{ $customer->address }}
+                                        <br>
+                                        {{ $customer->postcode }} {{ $customer->city }}
+                                        <br>
+                                        {{ $customer->state_name }}
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -696,31 +724,54 @@
                 </a>
             </div>
             <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
-                @foreach ([
-                    'Delivery Service' => 11,
-                    'Customer Service' => 12,
-                    'Product Quality' => 13,
-                    'Product Quantity' => 14,
-                ] as $label => $questionId)
-                    @php
-                        $rating =
-                            optional($customer->customerAnswers->firstWhere('question_id', $questionId))->value ?? 0;
-                    @endphp
-                    <div class="row mb-3">
-                        <label for="serviceRating">{{ $label }}:</label>
-                        <div class="star-rating" data-rating="{{ $rating ?? 0 }}">
-                            @for ($i = 1; $i <= 5; $i++)
-                                @if ($i <= $rating)
-                                    <span class="star">&#9733;</span> <!-- Filled star -->
-                                @else
-                                    <span class="star unfilled">&#9734;</span> <!-- Unfilled star -->
-                                @endif
-                            @endfor
-                        </div>
+                <div class="row mb-3">
+                    <label for="deliveryService">Delivery Service:</label>
+                    <div class="star-rating" name="delivery_service"
+                        data-rating="{{ optional($customer->customerAnswers->firstWhere('question_id', 11))->value ?? 0 }}">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
                     </div>
-                @endforeach
+                </div>
+
+                <div class="row mb-3">
+                    <label for="customerService">Customer Service:</label>
+                    <div class="star-rating" name="customer_service"
+                        data-rating="{{ optional($customer->customerAnswers->firstWhere('question_id', 12))->value ?? 0 }}">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="productQuality">Product Quality:</label>
+                    <div class="star-rating" name="product_quality"
+                        data-rating="{{ optional($customer->customerAnswers->firstWhere('question_id', 13))->value ?? 0 }}">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="productQuantity">Product Quantity:</label>
+                    <div class="star-rating" name="product_quantity"
+                        data-rating="{{ optional($customer->customerAnswers->firstWhere('question_id', 14))->value ?? 0 }}">
+                        <span class="star" data-value="1">&#9733;</span>
+                        <span class="star" data-value="2">&#9733;</span>
+                        <span class="star" data-value="3">&#9733;</span>
+                        <span class="star" data-value="4">&#9733;</span>
+                        <span class="star" data-value="5">&#9733;</span>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 @endsection
