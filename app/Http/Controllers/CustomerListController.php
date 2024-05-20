@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerListController extends Controller
 {
+    // List of customers
     public function customer_list()
     {
         $customers = Customer::whereNull('customers.deleted_at')->paginate(10);
@@ -35,6 +36,7 @@ class CustomerListController extends Controller
         ]);
     }
 
+    // Go to details page
     public function customer_profile($id)
     {
         $customer = Customer::select(
@@ -61,6 +63,7 @@ class CustomerListController extends Controller
         ]);
     }
 
+    // Go to edit page
     public function customer_edit($id)
     {
         $customer = Customer::select('customers.*', 'users.name as updated_by', 'countries.name as country')
@@ -259,12 +262,14 @@ class CustomerListController extends Controller
         // Handle tags filter
         if ($request->filled('tag')) {
             $tag_filter = $request->input('tag');
-            $filters['tag_filter'] = $tag_filter;
+            if (is_array($tag_filter)) {
+                $filters['tag_filter'] = $tag_filter;
 
-            // Join with customer_tags and tags table
-            $query->join('customer_tags', 'customers.id', '=', 'customer_tags.customer_id')
-                ->join('tags', 'customer_tags.tag_id', '=', 'tags.id')
-                ->where('tags.id', $tag_filter);
+                // Join with customer_tags and tags table
+                $query->join('customer_tags', 'customers.id', '=', 'customer_tags.customer_id')
+                    ->join('tags', 'customer_tags.tag_id', '=', 'tags.id')
+                    ->whereIn('tags.id', $tag_filter);
+            }
         }
 
         // Handle state filter

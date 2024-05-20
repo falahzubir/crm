@@ -1,6 +1,8 @@
 @extends('template.main')
 
 @section('content')
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+
     <div class="container mt-5">
         <h3 class="text-dark"><strong>Customer List</strong></h3>
     </div>
@@ -17,14 +19,14 @@
                         @if (isset($search)) value="{{ $search }}" @endif>
 
                     <div class="mt-4">
-                        <div class="row mb-4">
+                        <div class="row mb-4 border-0">
                             <div class="col">
                                 <label>Tagging</label>
-                                <select name="tag" class="form-select mt-2">
+                                <select name="tag[]" id="tag" class="mt-2" multiple>
                                     <option selected disabled></option>
                                     @foreach ($tags as $tag)
                                         <option value="{{ $tag->id }}"
-                                            {{ isset($filters['tag_filter']) && $tag->id == $filters['tag_filter'] ? 'selected' : '' }}>
+                                            {{ isset($filters['tag_filter']) && in_array($tag->id, $filters['tag_filter']) ? 'selected' : '' }}>
                                             {{ $tag->name }}
                                         </option>
                                     @endforeach
@@ -98,8 +100,12 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-danger float-end mt-4"><i class='bx bx-search'></i>
-                        Search</button>
+                    <div class="float-end mt-4">
+                        <a href="{{ route('customer.list') }}" class="btn btn-secondary">Reset</a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class='bx bx-search'></i> Search
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -179,4 +185,12 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    <script>
+        // Tom Select Plugin
+        new TomSelect("#tag", {
+            plugins: ['remove_button'],
+        });
+    </script>
 @endsection
