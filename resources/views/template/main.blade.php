@@ -36,6 +36,9 @@
     <!-- Page CSS -->
     <link rel="stylesheet" href="{{ asset('css/demo.css') }}" />
 
+    {{-- Tom Select --}}
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
@@ -110,6 +113,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {{-- Tom Select --}}
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    <script>
+        // Tom Select Plugin
+        new TomSelect("#tom_select", {
+            plugins: ['remove_button'],
+        });
+    </script>
 
     {{-- For loader --}}
     <script>

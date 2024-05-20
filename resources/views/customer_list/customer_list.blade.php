@@ -1,8 +1,6 @@
 @extends('template.main')
 
 @section('content')
-    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
-
     <div class="container mt-5">
         <h3 class="text-dark"><strong>Customer List</strong></h3>
     </div>
@@ -22,7 +20,7 @@
                         <div class="row mb-4 border-0">
                             <div class="col">
                                 <label>Tagging</label>
-                                <select name="tag[]" id="tag" class="mt-2" multiple>
+                                <select name="tag[]" id="tom_select" class="mt-2" multiple>
                                     <option selected disabled></option>
                                     @foreach ($tags as $tag)
                                         <option value="{{ $tag->id }}"
@@ -185,12 +183,4 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
-    <script>
-        // Tom Select Plugin
-        new TomSelect("#tag", {
-            plugins: ['remove_button'],
-        });
-    </script>
 @endsection
