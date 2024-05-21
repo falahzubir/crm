@@ -16,4 +16,11 @@ class CustomerSpouse extends Model
         'age',
         'occupation',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    protected $touches = ['customer'];
 }

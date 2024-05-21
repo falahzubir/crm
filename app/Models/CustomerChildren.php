@@ -15,4 +15,11 @@ class CustomerChildren extends Model
         'age',
         'institution',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    protected $touches = ['customer'];
 }

@@ -13,4 +13,16 @@ class CustomerTag extends Model
         'customer_id',
         'tag_id',
     ];
+
+    protected $touches = ['customer'];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
+    }
 }

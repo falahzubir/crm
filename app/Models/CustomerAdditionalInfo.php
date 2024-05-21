@@ -17,4 +17,11 @@ class CustomerAdditionalInfo extends Model
         'fav_food',
         'fav_beverage',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    protected $touches = ['customer'];
 }
