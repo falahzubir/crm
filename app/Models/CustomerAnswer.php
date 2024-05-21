@@ -14,5 +14,8 @@ class CustomerAnswer extends Model
         'question_id',
         'customer_id',
         'value',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 }
