@@ -240,24 +240,12 @@ class CustomerListController extends Controller
 
                 foreach ($existingAnswers as $answer) {
                     if (in_array($answer->value, $values)) {
+                        // dd($answer->value, $values);
                         // Update the timestamps if the value is re-selected
-                        $answer->update(['updated_at' => $newDate]);
+                        $answer->update(['deleted_at' => null, 'updated_at' => $newDate]);
                     } else {
                         // Mark as deleted if not re-selected
                         $answer->update(['deleted_at' => $newDate, 'updated_at' => $newDate]);
-                    }
-                }
-
-                foreach ($values as $value) {
-                    $exists = $existingAnswers->contains('value', $value);
-                    if (!$exists) {
-                        CustomerAnswer::create([
-                            'customer_id' => $customer->id,
-                            'question_id' => $questionId,
-                            'value' => $value,
-                            'deleted_at' => null,
-                            'updated_at' => $newDate,
-                        ]);
                     }
                 }
             } else {

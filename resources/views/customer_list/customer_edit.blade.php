@@ -516,13 +516,13 @@
                         <label class="mb-3">How do you know about EMZI? :</label>
                         <div class="d-flex justify-content-start">
                             <input type="checkbox" name="how_did_you_know_about_emzi[]" value="1"
-                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->pluck('value')->contains('1')? 'checked': '' }}>
+                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->whereNull('deleted_at')->pluck('value')->contains('1')? 'checked': '' }}>
                             <label class="ms-1">Social Media</label>
                             <input type="checkbox" name="how_did_you_know_about_emzi[]" class="ms-3" value="2"
-                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->pluck('value')->contains('2')? 'checked': '' }}>
+                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->whereNull('deleted_at')->pluck('value')->contains('2')? 'checked': '' }}>
                             <label class="ms-1">Friends</label>
                             <input type="checkbox" name="how_did_you_know_about_emzi[]" class="ms-3" value="3"
-                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->pluck('value')->contains('3')? 'checked': '' }}>
+                                {{ $customerAnswers->where('question_id', 2)->where('customer_id', $customer->id)->whereNull('deleted_at')->pluck('value')->contains('3')? 'checked': '' }}>
                             <label class="ms-1">Website</label>
                         </div>
                     </div>
