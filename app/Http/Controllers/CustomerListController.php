@@ -30,8 +30,24 @@ class CustomerListController extends Controller
     {
         $user = Auth::user();
 
-        // Fetch customers related to the logged-in user
-        $customers = $user->customers()->whereNull('customers.deleted_at')->paginate(10);
+        // Assuming roles are fetched as a collection of role id
+        $roles = $user->pluck('role_id');
+
+        // Roles ID
+        $seeAll = [1, 2];
+        $onlyTheirCustomers = [3, 4, 5];
+
+        if ($roles->intersect($seeAll)->isNotEmpty()) {
+            // Can see all customers
+            $customers = Customer::whereNull('customers.deleted_at')->paginate(10);
+        } elseif ($roles->intersect($onlyTheirCustomers)->isNotEmpty()) {
+            // Can see only customers assigned to them
+            $customers = $user->customers()->whereNull('customers.deleted_at')->paginate(10);
+        } else {
+            // Default case, no access
+            $customers = collect();
+        }
+
         $states = State::all();
         $tags = Tag::all();
 
