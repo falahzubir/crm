@@ -61,4 +61,9 @@ class Customer extends Model
     {
         return $this->hasMany(CustomerChildren::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'customer_p_i_c_s', 'customer_id', 'user_id');
+    }
 }

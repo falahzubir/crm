@@ -10,8 +10,6 @@ class Tag extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $touches = ['customers'];
-
     public function customers()
     {
         return $this->belongsToMany(Customer::class, 'customer_tags', 'tag_id', 'customer_id');

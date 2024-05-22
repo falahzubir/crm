@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class, 'customer_p_i_c_s', 'user_id', 'customer_id');
+    }
 }
