@@ -30,10 +30,10 @@ class CustomerListController extends Controller
     {
         $user = Auth::user();
 
-        // Assuming roles are fetched as a collection of role id
+        // Roles ID
         $roles = $user->pluck('role_id');
 
-        // Roles ID
+        // Check role id for display data
         $seeAll = [1, 2];
         $onlyTheirCustomers = [3, 4, 5];
 
