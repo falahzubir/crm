@@ -16,8 +16,10 @@ use App\Models\SalaryRange;
 use App\Models\State;
 use App\Models\Tag;
 use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class CustomerListController extends Controller
@@ -37,8 +39,10 @@ class CustomerListController extends Controller
     }
 
     // Go to details page
-    public function customer_profile($id)
+    public function customer_profile($encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
+
         $customer = Customer::select(
             'customers.*', 
             'states.name as state_name', 
@@ -64,8 +68,10 @@ class CustomerListController extends Controller
     }
 
     // Go to edit page
-    public function customer_edit($id)
+    public function customer_edit($encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
+
         $customer = Customer::with(['tags' => function($query) {
                 $query->whereNull('customer_tags.deleted_at');
             }])
@@ -106,8 +112,10 @@ class CustomerListController extends Controller
     }
 
     // Save updated data
-    public function customer_update(Request $request, $id)
+    public function customer_update(Request $request, $encryptedId)
     {
+        $id = Crypt::decryptString($encryptedId);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required',

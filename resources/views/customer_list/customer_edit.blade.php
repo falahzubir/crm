@@ -45,7 +45,7 @@
             <p class="alert alert-danger text-center my-3">Please check your input</p>
         @endif
 
-        <form id="updateForm" action="{{ route('customer.update', ['id' => $customer->id]) }}" method="POST"
+        <form id="updateForm" action="{{ route('customer.update', Crypt::encryptString($customer->id)) }}" method="POST"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')

@@ -131,9 +131,9 @@
                                     <tr>
                                         <td class="text-center">
                                             {{-- Action --}}
-                                            <a href="{{ route('customer.edit', ['id' => $row->id]) }}"
+                                            <a href="{{ route('customer.edit', Crypt::encryptString($row->id)) }}"
                                                 class="text-secondary"><i class='bx bx-pencil'></i></a>
-                                            <a href="{{ route('customer.profile', ['id' => $row->id]) }}"
+                                            <a href="{{ route('customer.profile', Crypt::encryptString($row->id)) }}"
                                                 class="text-secondary"><i class='bx bx-show-alt'></i></a>
                                         </td>
                                         <td>
