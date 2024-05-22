@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <div class="float-end mt-4">
-                        <a href="{{ route('customer.list') }}" class="btn btn-secondary">Reset</a>
+                        <a href="{{ route('customer.list') }}" class="btn btn-secondary">Clear All</a>
                         <button type="submit" class="btn btn-danger">
                             <i class='bx bx-search'></i> Search
                         </button>
