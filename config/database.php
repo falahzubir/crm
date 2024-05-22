@@ -139,6 +139,16 @@ return [
             'collation' => 'utf8_unicode_ci'
         ],
 
+        "ED-STG" => [
+            'driver'    => 'mysql',
+            'host'      => "167.99.74.78",
+            'database'  => "bos_qastg_ed",
+            'username'  => "bos_qaa",
+            'password'  => "grobox@0987",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+        
     ],
 
     /*

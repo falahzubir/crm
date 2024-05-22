@@ -24,10 +24,14 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerListController extends Controller
 {
+    // ---------------------- [ INSIDE CRM ] ---------------------- //
     // List of customers
     public function customer_list()
     {
-        $customers = Customer::whereNull('customers.deleted_at')->paginate(10);
+        $user = Auth::user();
+
+        // Fetch customers related to the logged-in user
+        $customers = $user->customers()->whereNull('customers.deleted_at')->paginate(10);
         $states = State::all();
         $tags = Tag::all();
 
@@ -422,7 +426,8 @@ class CustomerListController extends Controller
         ]);
     }
 
-    // ---------------------- API ---------------------- //
+
+    // ---------------------- [ OUTSIDE CRM/API ] ---------------------- //
     public function update_customer_data_in_analytics($data)
     {
         // Send data to the analytics system for updating
