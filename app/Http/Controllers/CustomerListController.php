@@ -444,8 +444,8 @@ class CustomerListController extends Controller
             }
         }
 
-        // Pagination
-        $customers = $query->paginate(10);
+        // Pagination with appends
+        $customers = $query->paginate(10)->appends($request->except('page'));
 
         // Pass filters to the view
         return view('customer_list/customer_list', [
