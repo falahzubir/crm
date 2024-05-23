@@ -58,7 +58,7 @@
                 </div>
                 <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
                     <div class="mb-3">
-                        <label class="mb-3">Name :</label>
+                        <label class="mb-3">Name : <i class="text-danger">*</i></label>
                         <input type="text" class="form-control" name="name" value="{{ $customer->name }}">
                     </div>
 
