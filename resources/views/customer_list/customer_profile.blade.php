@@ -50,7 +50,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-1">
-                        <img src="{{ $customer->photo != null ? $customer->photo : asset('assets/img/avatars/user.jpeg') }}"
+                        <img id="customer-photo"
+                            src="{{ $customer->photo ? asset($customer->photo) : asset('assets/img/avatars/user.jpeg') }}"
                             class="w-px-100 h-px-100 rounded-circle" />
                     </div>
 
@@ -355,7 +356,8 @@
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerChildrens->whereNull('deleted_at')->count() ?? 'N/A' }}" readonly />
+                                        value="{{ $customer->customerChildrens->whereNull('deleted_at')->count() ?? 'N/A' }}"
+                                        readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>

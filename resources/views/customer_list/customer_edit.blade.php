@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="col-md-1 position-relative">
                             <img id="customer-photo"
-                                src="{{ $customer->photo ? asset('storage/' . $customer->photo) : asset('assets/img/avatars/user.jpeg') }}"
+                                src="{{ $customer->photo ? asset($customer->photo) : asset('assets/img/avatars/user.jpeg') }}"
                                 class="w-px-100 h-px-100 rounded-circle" />
                         </div>
 
@@ -82,8 +82,7 @@
                         </div>
 
                         <div class="mt-3">
-                            <label for="photo">Update Photo</label>
-                            <input type="file" name="image" id="photo" class="form-control">
+                            <input type="file" name="customer_photo" id="customer_photo" class="form-control">
                         </div>
                     </div>
                 </div>

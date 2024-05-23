@@ -144,7 +144,7 @@ class CustomerListController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'customer_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $newDate = Carbon::now();
@@ -153,10 +153,12 @@ class CustomerListController extends Controller
         $user = Auth::user();
 
         // Update customer photo
-        $fileName = time().$request->file('image')->getClientOriginalName();
-        $path = $request->file('image')->storeAs('photos', $fileName, 'public');
-        $link = '/storage/' . $path;
-        $customer->photo = $link;
+        if ($request->hasFile('customer_photo')) {
+            $fileName = time() . '_' . $request->file('customer_photo')->getClientOriginalName();
+            $path = $request->file('customer_photo')->storeAs('photos', $fileName, 'public');
+            $customer->photo = 'storage/' . $path; // Store the path to the photo
+        }
+
         $customer->save();
 
         $this->updateCustomerTags($customer, $tagIds, $newDate);
