@@ -234,6 +234,8 @@
                                         {{ $customer->postcode }} {{ $customer->city }}
                                         <br>
                                         {{ $customer->state_name }}
+                                        <br>
+                                        {{ $customer->country_name }}
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>

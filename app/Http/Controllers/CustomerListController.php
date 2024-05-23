@@ -72,6 +72,7 @@ class CustomerListController extends Controller
             'customers.*', 
             'states.name as state_name', 
             'countries.flag as flag', 
+            'countries.name as country_name', 
             'users.name as updated_by', 
             'customer_titles.name as title',
             'marital_statuses.name as status',
