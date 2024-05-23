@@ -325,7 +325,7 @@
                     <div class="mb-3">
                         <label class="mb-3">Child Birth Order
                             :</label>
-                        <input type="text" class="form-control" name="birth_order"
+                        <input type="number" class="form-control" name="birth_order"
                             value="{{ $customer->birth_order ?? null }}">
                     </div>
 
