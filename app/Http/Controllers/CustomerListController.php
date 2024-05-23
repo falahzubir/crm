@@ -30,17 +30,21 @@ class CustomerListController extends Controller
     {
         $user = Auth::user();
 
-        // Roles ID
-        $roles = $user->pluck('role_id');
+        // Get the user's role
+        $role = $user->role;
 
-        // Check role id for display data
-        $seeAll = [1, 2];
-        $onlyTheirCustomers = [3, 4, 5];
+        // Get the permissions for the user's role
+        $permissions = $role->permissions->pluck('id')->toArray();
 
-        if ($roles->intersect($seeAll)->isNotEmpty()) {
+        // Define permission IDs
+        $seeAllCustomersPermissionId = 1;
+        $seeTheirCustomersPermissionId = 2;
+
+        // Check the permissions and fetch customers accordingly
+        if (in_array($seeAllCustomersPermissionId, $permissions)) {
             // Can see all customers
             $customers = Customer::whereNull('customers.deleted_at')->paginate(10);
-        } elseif ($roles->intersect($onlyTheirCustomers)->isNotEmpty()) {
+        } elseif (in_array($seeTheirCustomersPermissionId, $permissions)) {
             // Can see only customers assigned to them
             $customers = $user->customers()->whereNull('customers.deleted_at')->paginate(10);
         } else {

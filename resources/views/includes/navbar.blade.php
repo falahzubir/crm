@@ -12,11 +12,15 @@
             <li class="nav-item">
                 <div class="p-2">
                     <div class="mb-0">
-                        <label><strong>{{ Auth::user()->name }}</strong></label>
+                        <label class="float-end"><strong>{{ Auth::user()->name }}</strong></label>
                     </div>
 
                     <div class="mb-0">
-                        <label class="float-end">{{ Auth::user()->role }}</label>
+                        <label class="float-end">
+                            @if (Auth::user()->role)
+                                {{ Auth::user()->role->name }}
+                            @endif
+                        </label>
                     </div>
                 </div>
             </li>
@@ -29,4 +33,5 @@
         </ul>
     </div>
 </nav>
+
 <!-- / Navbar -->
