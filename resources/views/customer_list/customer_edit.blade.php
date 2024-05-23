@@ -122,7 +122,7 @@
                             </div>
                         </div>
 
-                        <div class="row d-flex align-items-center justify-content-between">
+                        <div class="row d-flex justify-content-between">
                             <div class="col mb-3">
                                 <label class="mb-3">Weight (kg) :</label>
                                 <input type="number" class="form-control" name="weight" min="1"
@@ -133,6 +133,25 @@
                                 <label class="mb-3">Height (cm) :</label>
                                 <input type="number" class="form-control" name="height" min="1"
                                     value="{{ $customer->height ?? null }}">
+
+                                @if ($customer->height != null && $customer->weight != null)
+                                    @php
+                                        $heightInMeters = $customer->height / 100; // Convert height from cm to meters
+                                        $bmi = $customer->weight / ($heightInMeters * $heightInMeters); // Calculate BMI
+
+                                        if ($bmi < 18.5) {
+                                            $status = "Underweight";
+                                        } elseif ($bmi >= 18.5 && $bmi <= 24.9) {
+                                            $status = "Normal";
+                                        } elseif ($bmi >= 25 && $bmi <= 29.9) {
+                                            $status = "Overweight";
+                                        } elseif ($bmi > 30) {
+                                            $status = "Obesity";
+                                        }
+                                    @endphp
+
+                                    <label class="mt-2">BMI: {{ $status }}</label>
+                                @endif
                             </div>
 
                             <div class="col mb-3">
