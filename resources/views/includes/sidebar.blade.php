@@ -32,12 +32,12 @@
             </a>
         </li>
 
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <a href="" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-cog"></i>
                 <div class="sidebar-text">Setting</div>
             </a>
-        </li>
+        </li> --}}
 
         <li class="menu-item">
             <form id="logout-form" action="{{ route('logout') }}" method="POST">
