@@ -284,8 +284,17 @@
                                     <label class="col-sm-4">Working Hour
                                         :</label>
                                     <div class="col-sm-8">
+                                        @php
+                                            if ($customer->working_hour == 'N') {
+                                                $working_hour = 'Normal';
+                                            } elseif ($customer->working_hour == 'S') {
+                                                $working_hour = 'Shift';
+                                            } else {
+                                                $working_hour = 'N/A';
+                                            }
+                                        @endphp
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->working_hour == 'S' ? 'Shift' : 'Normal' }}" readonly />
+                                            value="{{ $working_hour }}" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -530,9 +539,17 @@
                             <div class="col-sm-5">
                                 @php
                                     $answer = $customer->customerAnswers->firstWhere('question_id', 1);
+
+                                    if ($answer->value === 'Y') {
+                                        $customer_answer = 'Yes';
+                                    } elseif ($answer->value === 'N') {
+                                        $customer_answer = 'No';
+                                    } else {
+                                        $customer_answer = 'N/A';
+                                    }
                                 @endphp
                                 <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $answer ? ($answer->value === 'Y' ? 'Yes' : 'No') : 'No' }}" readonly />
+                                    value="{{ $customer_answer }}" readonly />
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
@@ -632,10 +649,18 @@
                             <label class="col-sm-6">Do you know that EMZI has its own factory?:</label>
                             @php
                                 $answer = $customer->customerAnswers->firstWhere('question_id', 8);
+
+                                if ($answer->value === 'Y') {
+                                    $customer_answer = 'Yes';
+                                } elseif ($answer->value === 'N') {
+                                    $customer_answer = 'No';
+                                } else {
+                                    $customer_answer = 'N/A';
+                                }
                             @endphp
                             <div class="col-sm-6">
                                 <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $answer ? ($answer->value === 'Y' ? 'Yes' : 'No') : 'No' }}" readonly />
+                                    value="{{ $customer_answer }}" readonly />
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
@@ -644,10 +669,18 @@
                             <label class="col-sm-6">Do you know that EMZI has a laboratory at the university?:</label>
                             @php
                                 $answer = $customer->customerAnswers->firstWhere('question_id', 9);
+
+                                if ($answer->value === 'Y') {
+                                    $customer_answer = 'Yes';
+                                } elseif ($answer->value === 'N') {
+                                    $customer_answer = 'No';
+                                } else {
+                                    $customer_answer = 'N/A';
+                                }
                             @endphp
                             <div class="col-sm-6">
                                 <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $answer ? ($answer->value === 'Y' ? 'Yes' : 'No') : 'No' }}" readonly />
+                                    value="{{ $customer_answer }}" readonly />
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
