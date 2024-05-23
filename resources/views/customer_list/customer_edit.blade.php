@@ -231,11 +231,11 @@
 
                         <div class="col mb-3">
                             <label class="mb-3">State of Birth :</label>
-                            <select name="state_of_birth" class="form-select">
+                            <select name="birth_state" class="form-select">
                                 <option selected disabled>Please Select</option>
                                 @foreach ($states as $row)
                                     <option value="{{ $row->id }}"
-                                        {{ isset($customer->state_id) && $row->id == $customer->state_id ? 'selected' : '' }}>
+                                        {{ isset($customer->birth_state) && $row->id == $customer->birth_state ? 'selected' : '' }}>
                                         {{ $row->name }}
                                     </option>
                                 @endforeach

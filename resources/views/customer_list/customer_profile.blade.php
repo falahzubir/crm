@@ -214,8 +214,12 @@
                                     <label class="col-sm-4">State of Birth
                                         :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->state_name ?? 'N/A' }}" readonly />
+                                        @foreach ($states as $row)
+                                            @if (isset($customer->birth_state) && $row->id == $customer->birth_state)
+                                                <input type="text" class="form-control border-0 text-end bg-white"
+                                                    value="{{ $row->name ?? 'N/A' }}" readonly />
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

@@ -27,6 +27,7 @@ class Customer extends Model
         'postcode',
         'state_id',
         'birth_place',
+        'birth_state',
         'occupation',
         'sector',
         'identification_number_police',

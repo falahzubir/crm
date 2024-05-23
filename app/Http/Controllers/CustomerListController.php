@@ -68,6 +68,7 @@ class CustomerListController extends Controller
     {
         $id = Crypt::decryptString($encryptedId);
 
+        $states = State::all();
         $customer = Customer::select(
             'customers.*', 
             'states.name as state_name', 
@@ -90,6 +91,7 @@ class CustomerListController extends Controller
 
         return view('customer_list/customer_profile', [
             'customer' => $customer,
+            'states' => $states,
         ]);
     }
 
