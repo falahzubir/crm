@@ -17,12 +17,13 @@ body {
 }
 
 .app-brand-text.demo {
-  font-size: 1.0rem;
+  font-size: 1rem;
   letter-spacing: -0.5px;
   text-transform: uppercase;
 }
 
-.form-control, .form-select {
+.form-control,
+.form-select {
   font-size: 10pt;
 }
 
@@ -162,4 +163,48 @@ body {
   position: absolute;
   right: 5%;
   font-size: 9pt;
+}
+
+.customer-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.star-rating {
+  display: inline-block;
+  unicode-bidi: bidi-override;
+  direction: ltr;
+}
+
+.star-rating .star {
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.star-rating .star:hover,
+.star-rating .star.active {
+  color: orange;
+}
+
+/* Hide radio buttons */
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+/* Style labels as stars */
+.star-rating label {
+  font-size: 30px;
+  /* Adjust size as needed */
+  color: #ccc;
+  /* Default star color */
+  cursor: pointer;
+}
+
+/* Style labels when radio button is checked */
+.star-rating input[type="radio"]:checked ~ label {
+  color: #ffcc00;
+  /* Change color to represent selected star */
 }

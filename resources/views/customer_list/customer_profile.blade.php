@@ -1,45 +1,6 @@
 @extends('template.main')
 
 @section('content')
-    <style>
-        .star-rating {
-            display: inline-block;
-            unicode-bidi: bidi-override;
-            direction: ltr;
-        }
-
-        .star-rating .star {
-            display: inline-block;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .star-rating .star:hover,
-        .star-rating .star.active {
-            color: orange;
-        }
-
-        /* Hide radio buttons */
-        .star-rating input[type="radio"] {
-            display: none;
-        }
-
-        /* Style labels as stars */
-        .star-rating label {
-            font-size: 30px;
-            /* Adjust size as needed */
-            color: #ccc;
-            /* Default star color */
-            cursor: pointer;
-        }
-
-        /* Style labels when radio button is checked */
-        .star-rating input[type="radio"]:checked~label {
-            color: #ffcc00;
-            /* Change color to represent selected star */
-        }
-    </style>
-
     <div class="container mt-5">
         <h3 class="text-dark"><strong>Customer Profile</strong></h3>
     </div>
@@ -50,9 +11,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-1">
-                        <img id="customer-photo"
-                            src="{{ $customer->photo ? asset($customer->photo) : asset('assets/img/avatars/user.jpeg') }}"
-                            class="w-px-100 h-px-100 rounded-circle" />
+                        <img src="{{ $customer->photo ? asset($customer->photo) : asset('assets/img/avatars/user.jpeg') }}"
+                            class="w-px-100 h-px-100 rounded-circle customer-photo" />
                     </div>
 
                     <div class="col-md-4 float-start" style="margin-left: 50px;">

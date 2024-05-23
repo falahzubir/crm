@@ -143,8 +143,8 @@
                                                     <ul class="navbar-nav flex-row align-items-center">
                                                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                                             <div class="avatar">
-                                                                <img src="{{ $row->photo != null ? $row->photo : asset('assets/img/avatars/user.jpeg') }}"
-                                                                    class="w-px-45 h-100 rounded-circle" />
+                                                                <img src="{{ $row->photo ? asset($row->photo) : asset('assets/img/avatars/user.jpeg') }}"
+                                                                    class="w-px-45 h-100 rounded-circle customer-photo" />
                                                             </div>
                                                         </li>
                                                     </ul>
