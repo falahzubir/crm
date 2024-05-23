@@ -165,11 +165,30 @@ body {
   font-size: 9pt;
 }
 
+.position-relative {
+  position: relative;
+}
+
 .customer-photo {
   width: 100px;
   height: 100px;
   object-fit: cover;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+#customer_photo {
+  display: none;
 }
 
 .star-rating {

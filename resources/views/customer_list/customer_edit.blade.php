@@ -6,7 +6,8 @@
             <p class="alert alert-danger text-center my-3">Please check your input</p>
         @endif
 
-        <form id="updateForm" action="{{ route('customer.update', Crypt::encryptString($customer->id)) }}" method="POST" enctype="multipart/form-data">
+        <form id="updateForm" action="{{ route('customer.update', Crypt::encryptString($customer->id)) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -15,8 +16,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-1 position-relative">
-                            <img src="{{ $customer->photo ? asset($customer->photo) : asset('assets/img/avatars/user.jpeg') }}"
+                            <img id="customer-photo"
+                                src="{{ $customer->photo ? asset($customer->photo) : asset('assets/img/avatars/user.jpeg') }}"
                                 class="w-px-100 h-px-100 rounded-circle customer-photo" />
+                            <i class="bx bxs-camera camera-icon"></i>
                         </div>
 
                         <div class="col-md-4 float-start" style="margin-left: 50px;">
@@ -24,29 +27,19 @@
                                 <h3>{{ $customer->name }}</h3>
                             </div>
 
-                            {{-- <div class="mb-0">
-                                <label>LAST PURCHASE</label>
-                                &nbsp;
-                                <label class="text-success">10 days ago</label>
-                            </div> --}}
-
                             <div class="mt-3">
                                 <label>
                                     Last updated {{ $customer->updated_at->diffForHumans() }}
                                     @if ($customer->updated_by)
                                         by {{ $customer->updated_by }}
-                                    @else
                                     @endif
                                 </label>
                             </div>
                         </div>
-
-                        <div class="mt-3">
-                            <input type="file" name="customer_photo" id="customer_photo" class="form-control">
-                        </div>
                     </div>
                 </div>
             </div>
+            <input type="file" name="customer_photo" id="customer_photo" class="form-control" accept="image/*">
 
             {{-- Customer Details --}}
             <div class="card mt-4">
@@ -737,23 +730,23 @@
 
     {{-- Prevent non-numeric characters --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const numberInputs = document.querySelectorAll('input[type="number"]');
 
-            numberInputs.forEach(function (input) {
-                input.addEventListener('input', function (e) {
+            numberInputs.forEach(function(input) {
+                input.addEventListener('input', function(e) {
                     // Remove any non-numeric characters except for '.' and '-'
                     const value = e.target.value.replace(/[^0-9]/g, '');
                     e.target.value = value;
                 });
 
-                input.addEventListener('keydown', function (e) {
+                input.addEventListener('keydown', function(e) {
                     // Allow navigation keys and backspace, delete
                     if (
-                        e.key === 'Backspace' || 
-                        e.key === 'Delete' || 
-                        e.key === 'ArrowLeft' || 
-                        e.key === 'ArrowRight' || 
+                        e.key === 'Backspace' ||
+                        e.key === 'Delete' ||
+                        e.key === 'ArrowLeft' ||
+                        e.key === 'ArrowRight' ||
                         e.key === 'Tab'
                     ) {
                         return;
@@ -764,6 +757,29 @@
                         e.preventDefault();
                     }
                 });
+            });
+        });
+    </script>
+
+    {{-- For customer photo --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const photo = document.getElementById('customer-photo');
+            const fileInput = document.getElementById('customer_photo');
+
+            photo.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        photo.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
             });
         });
     </script>
