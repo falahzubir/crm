@@ -774,4 +774,37 @@
             }
         }
     </script>
+
+    {{-- Prevent non-numeric characters --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const numberInputs = document.querySelectorAll('input[type="number"]');
+
+            numberInputs.forEach(function (input) {
+                input.addEventListener('input', function (e) {
+                    // Remove any non-numeric characters except for '.' and '-'
+                    const value = e.target.value.replace(/[^0-9]/g, '');
+                    e.target.value = value;
+                });
+
+                input.addEventListener('keydown', function (e) {
+                    // Allow navigation keys and backspace, delete
+                    if (
+                        e.key === 'Backspace' || 
+                        e.key === 'Delete' || 
+                        e.key === 'ArrowLeft' || 
+                        e.key === 'ArrowRight' || 
+                        e.key === 'Tab'
+                    ) {
+                        return;
+                    }
+
+                    // Prevent any non-numeric character except for digits
+                    if (!/[0-9]/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
