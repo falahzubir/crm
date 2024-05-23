@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerListController extends Controller
 {
@@ -143,12 +144,20 @@ class CustomerListController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $newDate = Carbon::now();
         $tagIds = $request->input('tag_id', []);
         $customer = Customer::findOrFail($id);
         $user = Auth::user();
+
+        // Update customer photo
+        $path = $request->file('photo')->store('photos', 'public');
+
+        // Save the image path to the database
+        $customer->photo = $path;
+        $customer->save();
 
         $this->updateCustomerTags($customer, $tagIds, $newDate);
         $this->updateCustomerAdditionalInfo($customer, $request);

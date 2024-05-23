@@ -45,8 +45,7 @@
             <p class="alert alert-danger text-center my-3">Please check your input</p>
         @endif
 
-        <form id="updateForm" action="{{ route('customer.update', Crypt::encryptString($customer->id)) }}" method="POST"
-            enctype="multipart/form-data">
+        <form id="updateForm" action="{{ route('customer.update', Crypt::encryptString($customer->id)) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -56,7 +55,7 @@
                     <div class="row">
                         <div class="col-md-1 position-relative">
                             <img id="customer-photo"
-                                src="{{ $customer->photo != null ? $customer->photo : asset('assets/img/avatars/user.jpeg') }}"
+                                src="{{ $customer->photo ? asset('storage/' . $customer->photo) : asset('assets/img/avatars/user.jpeg') }}"
                                 class="w-px-100 h-px-100 rounded-circle" />
                         </div>
 
@@ -80,6 +79,11 @@
                                     @endif
                                 </label>
                             </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="photo">Update Photo</label>
+                            <input type="file" name="photo" id="photo" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -155,7 +159,7 @@
 
                             <div class="col mb-3">
                                 <label class="mb-3">IC Number :</label>
-                                <input type="text" class="form-control" name="identification_number"
+                                <input type="number" class="form-control" name="identification_number"
                                     value="{{ $customer->identification_number ?? null }}">
                             </div>
 
@@ -370,7 +374,7 @@
 
                     <div class="mb-3">
                         <label class="mb-3">Spouse Age :</label>
-                        <input type="text" class="form-control" name="spouse_age"
+                        <input type="number" class="form-control" name="spouse_age"
                             value="{{ $customerSpouse->age }}">
                     </div>
 
