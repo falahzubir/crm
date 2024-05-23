@@ -45,7 +45,7 @@
             <p class="alert alert-danger text-center my-3">Please check your input</p>
         @endif
 
-        <form id="updateForm" action="{{ route('customer.update', Crypt::encryptString($customer->id)) }}" method="POST">
+        <form id="updateForm" action="{{ route('customer.update', Crypt::encryptString($customer->id)) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -83,7 +83,7 @@
 
                         <div class="mt-3">
                             <label for="photo">Update Photo</label>
-                            <input type="file" name="photo" id="photo" class="form-control">
+                            <input type="file" name="image" id="photo" class="form-control">
                         </div>
                     </div>
                 </div>
