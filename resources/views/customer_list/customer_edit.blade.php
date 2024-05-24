@@ -837,4 +837,46 @@
             });
         });
     </script>
+
+    {{-- For star rating --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to update star classes based on database value
+            function updateStars(value, starContainer) {
+                const stars = starContainer.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < value) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+
+            // Function to handle user click on stars
+            document.querySelectorAll('.star-rating').forEach(starContainer => {
+                starContainer.querySelectorAll('.star').forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = parseInt(this.getAttribute('data-value'));
+                        updateStars(value, starContainer);
+                    });
+                });
+
+                // Assume you retrieve the value from the database here for each rating
+                const databaseValue = parseInt(starContainer.dataset.rating);
+                updateStars(databaseValue, starContainer);
+            });
+
+            document.querySelectorAll('.star-rating .star').forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    const ratingInput = this.closest('.star-rating').querySelector(
+                        'input[type="hidden"]');
+                    if (ratingInput) {
+                        ratingInput.value = value;
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

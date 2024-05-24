@@ -85,12 +85,13 @@
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Customer Details</strong></h5>
-                <a class="collapsed btn" data-bs-toggle="collapse" href="#customerDetails">
+                <a class="btn" data-bs-toggle="collapse" href="#customerDetails" aria-expanded="false"
+                    aria-controls="customerDetails">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
-            <div class="card-body" id="customerDetails" data-bs-parent="#accordion">
-                <form action="">
+            <div class="collapse show" id="customerDetails">
+                <div class="card-body" data-bs-parent="#accordion">
                     <div class="row p-4 d-flex align-items-center justify-content-between">
                         <div class="col-md-5">
                             <div class="row my-3">
@@ -170,11 +171,9 @@
                                                 STR_PAD_LEFT,
                                             );
                                         }
-
                                     @endphp
                                     {{ $maskedIC }}
                                 </div>
-
                                 <hr class="border-light mt-2" />
                             </div>
 
@@ -187,7 +186,7 @@
                             </div>
 
                             <div class="row my-3">
-                                <label class="col-sm-4">Weight (KG) : </label>
+                                <label class="col-sm-4">Weight (KG) :</label>
                                 <div class="col-sm-8 text-end">
                                     {{ $customer->weight ?? 'N/A' }}
                                 </div>
@@ -236,7 +235,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -246,62 +245,62 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Customer Address</strong></h5>
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#customerAddress">
+                        <a class="btn" data-bs-toggle="collapse" href="#customerAddress" aria-expanded="false" aria-controls="customerAddress">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
-                    <div class="card-body" id="customerAddress" data-bs-parent="#accordion">
-                        <form action="">
-                            <div class="row p-4 d-flex align-items-center justify-content-between">
-                                <div class="row mb-3">
-                                    <label class="col-sm-6">Customer Address
-                                        :</label>
-                                    <div class="col-sm-6 text-end">
-                                        @if ($customer->address != null || $customer->postcode != null || $customer->city != null)
-                                            {{ $customer->address }}
-                                            <br>
-                                            {{ $customer->postcode }} {{ $customer->city }}
-                                            <br>
-                                            {{ $customer->state_name }}
-                                            <br>
-                                            {{ $customer->country_name }}
-                                        @else
-                                            N/A
-                                        @endif
-                                    </div>
-                                    <hr class="border-light mt-2" />
+                    <div class="collapse show" id="customerAddress">
+                    <div class="card-body" data-bs-parent="#accordion">
+                        <div class="row p-4 d-flex align-items-center justify-content-between">
+                            <div class="row mb-3">
+                                <label class="col-sm-6">Customer Address
+                                    :</label>
+                                <div class="col-sm-6 text-end">
+                                    @if ($customer->address != null || $customer->postcode != null || $customer->city != null)
+                                        {{ $customer->address }}
+                                        <br>
+                                        {{ $customer->postcode }} {{ $customer->city }}
+                                        <br>
+                                        {{ $customer->state_name }}
+                                        <br>
+                                        {{ $customer->country_name }}
+                                    @else
+                                        N/A
+                                    @endif
                                 </div>
+                                <hr class="border-light mt-2" />
+                            </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-4">Place of Birth
-                                        :</label>
-                                    <div class="col-sm-8 text-end">
-                                        @if ($customer->birth_place != null)
-                                            {{ $customer->birth_place ?? 'N/A' }}
-                                        @else
-                                            N/A
-                                        @endif
-                                    </div>
-                                    <hr class="border-light mt-2" />
+                            <div class="row mb-3">
+                                <label class="col-sm-4">Place of Birth
+                                    :</label>
+                                <div class="col-sm-8 text-end">
+                                    @if ($customer->birth_place != null)
+                                        {{ $customer->birth_place ?? 'N/A' }}
+                                    @else
+                                        N/A
+                                    @endif
                                 </div>
+                                <hr class="border-light mt-2" />
+                            </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-4">State of Birth
-                                        :</label>
-                                    <div class="col-sm-8 text-end">
-                                        @if ($customer->birth_state != null)
-                                            @foreach ($states as $row)
-                                                @if (isset($customer->birth_state) && $row->id == $customer->birth_state)
-                                                    {{ $row->name ?? 'N/A' }}
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            N/A
-                                        @endif
-                                    </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-4">State of Birth
+                                    :</label>
+                                <div class="col-sm-8 text-end">
+                                    @if ($customer->birth_state != null)
+                                        @foreach ($states as $row)
+                                            @if (isset($customer->birth_state) && $row->id == $customer->birth_state)
+                                                {{ $row->name ?? 'N/A' }}
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        N/A
+                                    @endif
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -310,12 +309,12 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Occupation</strong></h5>
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#occupation">
+                        <a class="btn" data-bs-toggle="collapse" href="#occupation" aria-expanded="false" aria-controls="occupation">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
-                    <div class="card-body" id="occupation" data-bs-parent="#accordion">
-                        <form action="">
+                    <div class="collapse show" id="occupation">
+                    <div class="card-body" data-bs-parent="#accordion">
                             <div class="row p-4 d-flex align-items-center justify-content-between">
                                 <div class="row mb-3">
                                     <label class="col-sm-4">Occupation :</label>
@@ -385,7 +384,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -395,12 +394,12 @@
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Family</strong></h5>
-                <a class="collapsed btn" data-bs-toggle="collapse" href="#family">
+                <a class="btn" data-bs-toggle="collapse" href="#family" aria-expanded="false" aria-controls="family">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
-            <div class="card-body" id="family" data-bs-parent="#accordion">
-                <form action="">
+            <div class="collapse show" id="family">
+            <div class="card-body" data-bs-parent="#accordion">
                     <div class="row p-3 d-flex align-items-center justify-content-between">
                         <div class="col-md-5">
                             <div class="row mb-3">
@@ -518,7 +517,7 @@
                         </div>
 
                     </div>
-                </form>
+            </div>
             </div>
         </div>
 
@@ -528,65 +527,64 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Others</strong></h5>
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#others">
+                        <a class="collapsed btn" data-bs-toggle="collapse" href="#others" aria-expanded="false"
+                            aria-controls="others">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
-                    <div class="card-body" id="others" data-bs-parent="#accordion">
-                        <form action="">
-                            <div class="row p-4 d-flex align-items-center justify-content-between">
-                                <div class="row mb-3">
-                                    <label class="col-sm-6">Hobby
-                                        :</label>
-                                    <div class="col-sm-6 text-end">
-                                        {{ $customer->customerAdditionalInfos->hobby ?? 'N/A' }}
-                                    </div>
-                                    <hr class="border-light mt-2" />
+                    <div class="collapse show" id="others">
+                    <div class="card-body" data-bs-parent="#accordion">
+                        <div class="row p-4 d-flex align-items-center justify-content-between">
+                            <div class="row mb-3">
+                                <label class="col-sm-6">Hobby
+                                    :</label>
+                                <div class="col-sm-6 text-end">
+                                    {{ $customer->customerAdditionalInfos->hobby ?? 'N/A' }}
                                 </div>
+                                <hr class="border-light mt-2" />
+                            </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-4">Favourite Colour
-                                        :</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->fav_color ?? 'N/A' }}"
-                                            readonly />
-                                    </div>
-                                    <hr class="border-light mt-2" />
+                            <div class="row mb-3">
+                                <label class="col-sm-4">Favourite Colour
+                                    :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control border-0 text-end bg-white"
+                                        value="{{ $customer->customerAdditionalInfos->fav_color ?? 'N/A' }}" readonly />
                                 </div>
+                                <hr class="border-light mt-2" />
+                            </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-4">Favourite Pet
-                                        :</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->fav_pet ?? 'N/A' }}" readonly />
-                                    </div>
-                                    <hr class="border-light mt-2" />
+                            <div class="row mb-3">
+                                <label class="col-sm-4">Favourite Pet
+                                    :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control border-0 text-end bg-white"
+                                        value="{{ $customer->customerAdditionalInfos->fav_pet ?? 'N/A' }}" readonly />
                                 </div>
+                                <hr class="border-light mt-2" />
+                            </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-4">Favourite Food
-                                        :</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->fav_food ?? 'N/A' }}"
-                                            readonly />
-                                    </div>
-                                    <hr class="border-light mt-2" />
+                            <div class="row mb-3">
+                                <label class="col-sm-4">Favourite Food
+                                    :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control border-0 text-end bg-white"
+                                        value="{{ $customer->customerAdditionalInfos->fav_food ?? 'N/A' }}" readonly />
                                 </div>
+                                <hr class="border-light mt-2" />
+                            </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-4">Favourite Drinks
-                                        :</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->fav_beverage ?? 'N/A' }}"
-                                            readonly />
-                                    </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-4">Favourite Drinks
+                                    :</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control border-0 text-end bg-white"
+                                        value="{{ $customer->customerAdditionalInfos->fav_beverage ?? 'N/A' }}"
+                                        readonly />
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -595,11 +593,12 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Suffering Disease</strong></h5>
-                        <a class="collapsed btn" data-bs-toggle="collapse" href="#sufferingDisease">
+                        <a class="btn" data-bs-toggle="collapse" href="#sufferingDisease" aria-expanded="false" aria-controls="sufferingDisease">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
-                    <div class="card-body" id="sufferingDisease" data-bs-parent="#accordion"
+                    <div class="collapse show" id="sufferingDisease">
+                    <div class="card-body" data-bs-parent="#accordion"
                         style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 8pt;">
                         @foreach ($customer->tags as $tag)
                             <span class="rounded-pill p-2" style="background-color: #d6d6ff;">
@@ -613,7 +612,7 @@
                             </span>
                         @endif
                     </div>
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -622,11 +621,12 @@
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Product & Service</strong></h5>
-                <a class="collapsed btn" data-bs-toggle="collapse" href="#productService">
+                <a class="btn" data-bs-toggle="collapse" href="#productService" aria-expanded="false" aria-controls="productService">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
-            <div class="card-body" id="productService" data-bs-parent="#accordion">
+            <div class="collapse show" id="productService">
+            <div class="card-body" data-bs-parent="#accordion">
                 <div class="row p-4 d-flex align-items-center justify-content-between">
                     <div class="col-md-5">
                         <div class="row mb-3">
@@ -836,17 +836,19 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
 
         {{-- Service Rating --}}
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Service Rating</strong></h5>
-                <a class="collapsed btn" data-bs-toggle="collapse" href="#serviceRating">
+                <a class="btn" data-bs-toggle="collapse" href="#serviceRating" aria-expanded="false" aria-controls="serviceRating">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
-            <div class="card-body ms-4" id="serviceRating" data-bs-parent="#accordion">
+            <div class="collapse show" id="serviceRating">
+            <div class="card-body ms-4" data-bs-parent="#accordion">
                 <div class="row mb-3">
                     <label for="deliveryService">Delivery Service:</label>
                     <div class="star-rating" name="delivery_service"
@@ -895,6 +897,49 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
+
+    {{-- For star rating --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to update star classes based on database value
+            function updateStars(value, starContainer) {
+                const stars = starContainer.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < value) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+            }
+
+            // Function to handle user click on stars
+            document.querySelectorAll('.star-rating').forEach(starContainer => {
+                starContainer.querySelectorAll('.star').forEach(star => {
+                    star.addEventListener('click', function() {
+                        const value = parseInt(this.getAttribute('data-value'));
+                        updateStars(value, starContainer);
+                    });
+                });
+
+                // Assume you retrieve the value from the database here for each rating
+                const databaseValue = parseInt(starContainer.dataset.rating);
+                updateStars(databaseValue, starContainer);
+            });
+
+            document.querySelectorAll('.star-rating .star').forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    const ratingInput = this.closest('.star-rating').querySelector(
+                        'input[type="hidden"]');
+                    if (ratingInput) {
+                        ratingInput.value = value;
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
