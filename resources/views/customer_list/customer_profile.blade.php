@@ -121,8 +121,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-3">Weight (KG) : </label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-4">Weight (KG) : </label>
+                                <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->weight ?? 'N/A' }}" readonly />
                                 </div>
@@ -130,8 +130,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-3">Height (cm) :</label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-4">Height (cm) :</label>
+                                <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->height ?? 'N/A' }}" readonly />
                                 </div>
@@ -165,8 +165,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-3">Blood Type :</label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-4">Blood Type :</label>
+                                <div class="col-sm-8">
                                     <input type="text" class="form-control border-0 text-end bg-white"
                                         value="{{ $customer->blood_type ?? 'N/A' }}" readonly />
                                 </div>

@@ -66,14 +66,14 @@
                                 </div>
                             </div>
 
-                            <div class="mb-4">
+                            {{-- <div class="mb-4">
                                 <div class="form-check custom-control custom-checkbox">
                                     <input type="checkbox" class="form-check-input custom-control-input" id="remember" />
                                     <label class="form-check label custom-control-label" for="remember">Remember me</label>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="mb-4">
+                            <div class="my-4">
                                 <button class="btn btn-dark d-grid w-100" type="submit">
                                     Sign in
                                 </button>
