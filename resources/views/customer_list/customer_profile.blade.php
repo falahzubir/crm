@@ -560,7 +560,7 @@
                             <label class="col-sm-7">Does EMZI familiar to you?:</label>
                             <div class="col-sm-5 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->firstWhere('question_id', 1);
+                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 1);
 
                                     if ($answer->value === 'Y') {
                                         $customer_answer = 'Yes';
@@ -579,7 +579,7 @@
                             <label class="col-sm-6">Where did you know about EMZI?:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->firstWhere('question_id', 2);
+                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 2);
                                 @endphp
                                 @switch($answer->value ?? 'N/A')
                                     @case(1)
@@ -605,7 +605,7 @@
                             <label class="col-sm-7">First EMZI Product Purchased?:</label>
                             <div class="col-sm-5 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->firstWhere('question_id', 3);
+                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 3);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -616,7 +616,7 @@
                             <label class="col-sm-6">Reason of buying EMZI Products?:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->firstWhere('question_id', 4);
+                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 4);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -627,7 +627,7 @@
                             <label class="col-sm-6 mt-1">Why Support EMZI product?:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->firstWhere('question_id', 5);
+                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 5);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -639,7 +639,7 @@
                             <label class="col-sm-6">Purchase Frequency:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->firstWhere('question_id', 6);
+                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 6);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -650,7 +650,7 @@
                             <label class="col-sm-6">What Products Does EMZI Have?:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->firstWhere('question_id', 7);
+                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 7);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -660,7 +660,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-6">Do you know that EMZI has its own factory?:</label>
                             @php
-                                $answer = $customer->customerAnswers->firstWhere('question_id', 8);
+                                $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 8);
 
                                 if ($answer->value === 'Y') {
                                     $customer_answer = 'Yes';
@@ -679,7 +679,7 @@
                         <div class="row mb-3">
                             <label class="col-sm-6">Do you know that EMZI has a laboratory at the university?:</label>
                             @php
-                                $answer = $customer->customerAnswers->firstWhere('question_id', 9);
+                                $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 9);
 
                                 if ($answer->value === 'Y') {
                                     $customer_answer = 'Yes';
@@ -698,7 +698,7 @@
                         <div class="form-group row mb-3">
                             <label class="col-sm-7 mt-2">Does EMZI Products Effective?:</label>
                             @php
-                                $answer = $customer->customerAnswers->firstWhere('question_id', 10);
+                                $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 10);
                             @endphp
                             <div class="col-sm-5 text-end">
                                 @switch($answer->value ?? 'N/A')
@@ -736,7 +736,7 @@
                 <div class="row mb-3">
                     <label for="deliveryService">Delivery Service:</label>
                     <div class="star-rating" name="delivery_service"
-                        data-rating="{{ optional($customer->customerAnswers->firstWhere('question_id', 11))->value ?? 0 }}">
+                        data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 11))->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -748,7 +748,7 @@
                 <div class="row mb-3">
                     <label for="customerService">Customer Service:</label>
                     <div class="star-rating" name="customer_service"
-                        data-rating="{{ optional($customer->customerAnswers->firstWhere('question_id', 12))->value ?? 0 }}">
+                        data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 12))->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -760,7 +760,7 @@
                 <div class="row mb-3">
                     <label for="productQuality">Product Quality:</label>
                     <div class="star-rating" name="product_quality"
-                        data-rating="{{ optional($customer->customerAnswers->firstWhere('question_id', 13))->value ?? 0 }}">
+                        data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 13))->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
@@ -772,7 +772,7 @@
                 <div class="row mb-3">
                     <label for="productQuantity">Product Quantity:</label>
                     <div class="star-rating" name="product_quantity"
-                        data-rating="{{ optional($customer->customerAnswers->firstWhere('question_id', 14))->value ?? 0 }}">
+                        data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 14))->value ?? 0 }}">
                         <span class="star" data-value="1">&#9733;</span>
                         <span class="star" data-value="2">&#9733;</span>
                         <span class="star" data-value="3">&#9733;</span>
