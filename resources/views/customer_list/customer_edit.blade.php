@@ -102,7 +102,7 @@
                             </div>
                         </div>
 
-                        <div class="row d-flex align-items-center justify-content-between">
+                        <div class="row d-flex justify-content-between">
                             <div class="col mb-3">
                                 <label class="mb-3">Age :</label>
                                 <input type="number" class="form-control" name="age" min="1"
@@ -112,7 +112,9 @@
                             <div class="col mb-3">
                                 <label class="mb-3">IC Number :</label>
                                 <input type="number" class="form-control" name="identification_number"
-                                    value="{{ $customer->identification_number ?? null }}">
+                                    id="identification_number" value="{{ $customer->identification_number ?? null }}">
+                                <div id="identification_number_error" class="text-danger mt-2" style="font-size: 9pt;">
+                                </div>
                             </div>
 
                             <div class="col mb-3">
@@ -140,13 +142,13 @@
                                         $bmi = $customer->weight / ($heightInMeters * $heightInMeters); // Calculate BMI
 
                                         if ($bmi < 18.5) {
-                                            $status = "Underweight";
+                                            $status = 'Underweight';
                                         } elseif ($bmi >= 18.5 && $bmi <= 24.9) {
-                                            $status = "Normal";
+                                            $status = 'Normal';
                                         } elseif ($bmi >= 25 && $bmi <= 29.9) {
-                                            $status = "Overweight";
+                                            $status = 'Overweight';
                                         } elseif ($bmi > 30) {
-                                            $status = "Obesity";
+                                            $status = 'Obesity';
                                         }
                                     @endphp
 
@@ -651,7 +653,8 @@
 
             {{-- Save Button --}}
             <div class="buy-now">
-                <button type="submit" class="btn btn-primary btn-lg btn-buy-now">SAVE CHANGES</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-buy-now" id="submit_button" disabled>SAVE
+                    CHANGES</button>
             </div>
         </form>
     </div>
@@ -750,33 +753,57 @@
     {{-- Prevent non-numeric characters --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const numberInputs = document.querySelectorAll('input[type="number"]');
+            const identificationNumberInput = document.getElementById('identification_number');
+            const errorDiv = document.getElementById('identification_number_error');
+            const submitButton = document.getElementById('submit_button');
+            const form = document.querySelector('form');
 
-            numberInputs.forEach(function(input) {
-                input.addEventListener('input', function(e) {
-                    // Remove any non-numeric characters except for '.' and '-'
-                    const value = e.target.value.replace(/[^0-9]/g, '');
-                    e.target.value = value;
-                });
+            function validateInput() {
+                const value = identificationNumberInput.value.replace(/[^0-9]/g, '');
 
-                input.addEventListener('keydown', function(e) {
-                    // Allow navigation keys and backspace, delete
-                    if (
-                        e.key === 'Backspace' ||
-                        e.key === 'Delete' ||
-                        e.key === 'ArrowLeft' ||
-                        e.key === 'ArrowRight' ||
-                        e.key === 'Tab'
-                    ) {
-                        return;
-                    }
+                if (value.length < 12 && value.length != 0) {
+                    errorDiv.textContent = 'IC Number must be at least 12 digits long.';
+                    submitButton.disabled = true;
+                } else {
+                    errorDiv.textContent = '';
+                    submitButton.disabled = false;
+                }
 
-                    // Prevent any non-numeric character except for digits
-                    if (!/[0-9]/.test(e.key)) {
-                        e.preventDefault();
-                    }
-                });
+                identificationNumberInput.value = value;
+            }
+
+            identificationNumberInput.addEventListener('input', function(e) {
+                validateInput();
             });
+
+            identificationNumberInput.addEventListener('keydown', function(e) {
+                // Allow navigation keys and backspace, delete
+                if (
+                    e.key === 'Backspace' ||
+                    e.key === 'Delete' ||
+                    e.key === 'ArrowLeft' ||
+                    e.key === 'ArrowRight' ||
+                    e.key === 'Tab'
+                ) {
+                    return;
+                }
+
+                // Prevent any non-numeric character except for digits
+                if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                const identificationNumber = identificationNumberInput.value;
+                if (identificationNumber.length < 12) {
+                    e.preventDefault();
+                    errorDiv.textContent = 'IC Number must be at least 12 digits long.';
+                }
+            });
+
+            // Initial validation check in case the input is pre-filled
+            validateInput();
         });
     </script>
 

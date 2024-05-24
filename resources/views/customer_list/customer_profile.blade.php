@@ -252,8 +252,17 @@
                                     <label class="col-sm-4">Sector
                                         :</label>
                                     <div class="col-sm-8">
+                                        @php
+                                            if ($customer->sector == 'P') {
+                                                $sector = 'Private';
+                                            } elseif ($customer->sector == 'G') {
+                                                $sector = 'Government';
+                                            } else {
+                                                $sector = 'N/A';
+                                            }
+                                        @endphp
                                         <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->sector === 'P' ? 'Private' : 'Government' }}" readonly />
+                                            value="{{ $sector }}" readonly />
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -451,9 +460,8 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-6">Hobby
                                         :</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->customerAdditionalInfos->hobby ?? 'N/A' }}" readonly />
+                                    <div class="col-sm-6 text-end">
+                                        {{ $customer->customerAdditionalInfos->hobby ?? 'N/A' }}
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
