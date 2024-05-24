@@ -564,10 +564,14 @@
                                         ->whereNull('deleted_at')
                                         ->firstWhere('question_id', 1);
 
-                                    if ($answer->value === 'Y') {
-                                        $customer_answer = 'Yes';
-                                    } elseif ($answer->value === 'N') {
-                                        $customer_answer = 'No';
+                                    if ($answer) {
+                                        if ($answer->value === 'Y') {
+                                            $customer_answer = 'Yes';
+                                        } elseif ($answer->value === 'N') {
+                                            $customer_answer = 'No';
+                                        } else {
+                                            $customer_answer = 'N/A';
+                                        }
                                     } else {
                                         $customer_answer = 'N/A';
                                     }
@@ -687,10 +691,14 @@
                                     ->whereNull('deleted_at')
                                     ->firstWhere('question_id', 8);
 
-                                if ($answer->value === 'Y') {
-                                    $customer_answer = 'Yes';
-                                } elseif ($answer->value === 'N') {
-                                    $customer_answer = 'No';
+                                if ($answer) {
+                                    if ($answer->value === 'Y') {
+                                        $customer_answer = 'Yes';
+                                    } elseif ($answer->value === 'N') {
+                                        $customer_answer = 'No';
+                                    } else {
+                                        $customer_answer = 'N/A';
+                                    }
                                 } else {
                                     $customer_answer = 'N/A';
                                 }
@@ -708,10 +716,14 @@
                                     ->whereNull('deleted_at')
                                     ->firstWhere('question_id', 9);
 
-                                if ($answer->value === 'Y') {
-                                    $customer_answer = 'Yes';
-                                } elseif ($answer->value === 'N') {
-                                    $customer_answer = 'No';
+                                if ($answer) {
+                                    if ($answer->value === 'Y') {
+                                        $customer_answer = 'Yes';
+                                    } elseif ($answer->value === 'N') {
+                                        $customer_answer = 'No';
+                                    } else {
+                                        $customer_answer = 'N/A';
+                                    }
                                 } else {
                                     $customer_answer = 'N/A';
                                 }
