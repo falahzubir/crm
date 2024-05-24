@@ -109,26 +109,7 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
-        // "ANALYTIC-LIVE" => [
-        //     'driver'    => 'mysql',
-        //     'host'      => "128.199.249.168",
-        //     'database'  => "the_analytics",
-        //     'username'  => "admin_analytics",
-        //     'password'  => "ANALYTICS@2023",
-        //     'charset'   => 'utf8',
-        //     'collation' => 'utf8_unicode_ci'
-        // ],
-
-        "ANALYTIC-STG" => [
-            'driver'    => 'mysql',
-            'host'      => "167.99.74.78",
-            'database'  => "emzi_analytics_stg_v2",
-            'username'  => "admin_analytics",
-            'password'  => "grobox@0986",
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci'
-        ],
-        
+        // ================ STAGGING DATABASE ================ //
         "CRM-STG" => [
             'driver'    => 'mysql',
             'host'      => "206.189.144.234",
@@ -139,12 +120,73 @@ return [
             'collation' => 'utf8_unicode_ci'
         ],
 
+        "EH-STG" => [
+            'driver'    => 'mysql',
+            'host'      => "167.99.74.78",
+            'database'  => "bos_qastg_ehv2",
+            'username'  => "bos_qaa",
+            'password'  => "grobox@0987",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+        
         "ED-STG" => [
             'driver'    => 'mysql',
             'host'      => "167.99.74.78",
             'database'  => "bos_qastg_ed",
             'username'  => "bos_qaa",
             'password'  => "grobox@0987",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+
+        "ANALYTIC-STG" => [
+            'driver'    => 'mysql',
+            'host'      => "167.99.74.78",
+            'database'  => "emzi_analytics_stg_v2",
+            'username'  => "admin_analytics",
+            'password'  => "grobox@0986",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+
+        // ================ LIVE DATABASE ================ //
+        "EH" => [
+            'driver'    => 'mysql',
+            'host'      => "165.232.173.45",
+            'database'  => "bos_emzi_v2",
+            'username'  => "emzi_server_08",
+            'password'  => "eMzi@Technologies2023",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+
+        "ED" => [
+            'driver'    => 'mysql',
+            'host'      => "167.99.74.78",
+            'database'  => "bos_aa",
+            'username'  => "emzi_server_db",
+            'password'  => "eMzi@Technologies2023",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+
+        "EI" => [
+            'driver'    => 'mysql',
+            'host'      => "167.99.74.78",
+            'database'  => "bos_idn",
+            'username'  => "emzi_server_db",
+            'password'  => "eMzi@Technologies2023",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+
+        "ANALYTIC-LIVE" => [
+            'driver'    => 'mysql',
+            'host'      => "128.199.249.168",
+            'database'  => "the_analytics",
+            'username'  => "admin_analytics",
+            'password'  => "ANALYTICS@2023",
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci'
         ],
