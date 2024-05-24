@@ -653,8 +653,11 @@
 
             {{-- Save Button --}}
             <div class="buy-now">
-                <button type="submit" class="btn btn-primary btn-lg btn-buy-now" id="submit_button" disabled>SAVE
-                    CHANGES</button>
+                <button type="submit" id="submit_button" class="btn btn-primary btn-lg btn-buy-now" disabled>
+                    <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status"
+                        aria-hidden="true"></span>
+                    SAVE CHANGES
+                </button>
             </div>
         </form>
     </div>
@@ -750,13 +753,14 @@
         }
     </script>
 
-    {{-- Prevent non-numeric characters --}}
+    {{-- Prevent non-numeric / ic validation / loader for button --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const identificationNumberInput = document.getElementById('identification_number');
             const errorDiv = document.getElementById('identification_number_error');
             const submitButton = document.getElementById('submit_button');
-            const form = document.querySelector('form');
+            const form = document.getElementById('updateForm');
+            const spinner = document.getElementById('spinner');
 
             function validateInput() {
                 const value = identificationNumberInput.value.replace(/[^0-9]/g, '');
@@ -796,9 +800,13 @@
 
             form.addEventListener('submit', function(e) {
                 const identificationNumber = identificationNumberInput.value;
-                if (identificationNumber.length < 12) {
+                if (identificationNumber.length < 12 && identificationNumber.length != 0) {
                     e.preventDefault();
                     errorDiv.textContent = 'IC Number must be at least 12 digits long.';
+                } else {
+                    // Show spinner and disable the button
+                    spinner.classList.remove('d-none');
+                    submitButton.disabled = true;
                 }
             });
 

@@ -282,15 +282,29 @@ class CustomerListController extends Controller
                 $values = $request->input($field, []);
                 $existingAnswers = CustomerAnswer::where('customer_id', $customer->id)
                     ->where('question_id', $questionId)
-                    ->get();
+                    ->get()
+                    ->keyBy('value');
 
-                foreach ($existingAnswers as $answer) {
-                    if (in_array($answer->value, $values)) {
-                        // dd($answer->value, $values);
-                        // Update the timestamps if the value is re-selected
-                        $answer->update(['deleted_at' => null, 'updated_at' => $newDate]);
+                // Update or create new answers
+                foreach ($values as $value) {
+                    if (isset($existingAnswers[$value])) {
+                        // Update existing answer if it is re-selected
+                        $existingAnswers[$value]->update(['deleted_at' => null, 'updated_at' => $newDate]);
                     } else {
-                        // Mark as deleted if not re-selected
+                        // Create new answer if it does not exist
+                        CustomerAnswer::create([
+                            'customer_id' => $customer->id,
+                            'question_id' => $questionId,
+                            'value' => $value,
+                            'created_at' => $newDate,
+                            'updated_at' => $newDate,
+                        ]);
+                    }
+                }
+
+                // Mark answers as deleted if they are not re-selected
+                foreach ($existingAnswers as $answer) {
+                    if (!in_array($answer->value, $values)) {
                         $answer->update(['deleted_at' => $newDate, 'updated_at' => $newDate]);
                     }
                 }
