@@ -547,7 +547,7 @@
                     <div class="col-md-5">
                         <div class="row mb-3">
                             <label class="col-sm-7">Does EMZI familiar to you?:</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-5 text-end">
                                 @php
                                     $answer = $customer->customerAnswers->firstWhere('question_id', 1);
 
@@ -559,37 +559,32 @@
                                         $customer_answer = 'N/A';
                                     }
                                 @endphp
-                                <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $customer_answer }}" readonly />
+                                {{ $customer_answer }}
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-6">Where did you know about EMZI?:</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 text-end">
                                 @php
                                     $answer = $customer->customerAnswers->firstWhere('question_id', 2);
                                 @endphp
                                 @switch($answer->value ?? 'N/A')
                                     @case(1)
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="Social Media" readonly />
+                                        Social Media
                                     @break
 
                                     @case(2)
-                                        <input type="text" class="form-control border-0 text-end bg-white" value="Friends"
-                                            readonly />
+                                        Friends
                                     @break
 
                                     @case(3)
-                                        <input type="text" class="form-control border-0 text-end bg-white" value="Website"
-                                            readonly />
+                                        Website
                                     @break
 
                                     @default
-                                        <input type="text" class="form-control border-0 text-end bg-white" value="N/A"
-                                            readonly />
+                                        N/A
                                 @endswitch
                             </div>
                             <hr class="border-light mt-2" />
@@ -597,36 +592,33 @@
 
                         <div class="row mb-3">
                             <label class="col-sm-7">First EMZI Product Purchased?:</label>
-                            <div class="col-sm-5">
+                            <div class="col-sm-5 text-end">
                                 @php
                                     $answer = $customer->customerAnswers->firstWhere('question_id', 3);
                                 @endphp
-                                <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
+                                {{ $answer->value ?? 'N/A' }}
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-6">Reason of buying EMZI Products?:</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 text-end">
                                 @php
                                     $answer = $customer->customerAnswers->firstWhere('question_id', 4);
                                 @endphp
-                                <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
+                                {{ $answer->value ?? 'N/A' }}
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-6 mt-1">Why Support EMZI product?:</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 text-end">
                                 @php
                                     $answer = $customer->customerAnswers->firstWhere('question_id', 5);
                                 @endphp
-                                <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
+                                {{ $answer->value ?? 'N/A' }}
                             </div>
                         </div>
                     </div>
@@ -634,24 +626,22 @@
                     <div class="col-md-5">
                         <div class="row mb-3">
                             <label class="col-sm-6">Purchase Frequency:</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 text-end">
                                 @php
                                     $answer = $customer->customerAnswers->firstWhere('question_id', 6);
                                 @endphp
-                                <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
+                                {{ $answer->value ?? 'N/A' }}
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-6">What Products Does EMZI Have?:</label>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6 text-end">
                                 @php
                                     $answer = $customer->customerAnswers->firstWhere('question_id', 7);
                                 @endphp
-                                <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $answer->value ?? 'N/A' }}" readonly />
+                                {{ $answer->value ?? 'N/A' }}
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
@@ -669,9 +659,8 @@
                                     $customer_answer = 'N/A';
                                 }
                             @endphp
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $customer_answer }}" readonly />
+                            <div class="col-sm-6 text-end">
+                                {{ $customer_answer }}
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
@@ -689,9 +678,8 @@
                                     $customer_answer = 'N/A';
                                 }
                             @endphp
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control border-0 text-end bg-white"
-                                    value="{{ $customer_answer }}" readonly />
+                            <div class="col-sm-6 text-end">
+                                {{ $customer_answer }}
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
@@ -701,26 +689,22 @@
                             @php
                                 $answer = $customer->customerAnswers->firstWhere('question_id', 10);
                             @endphp
-                            <div class="col-sm-5">
+                            <div class="col-sm-5 text-end">
                                 @switch($answer->value ?? 'N/A')
                                     @case(1)
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="Yes, Highly Effective" readonly />
+                                        Yes, Highly Effective
                                     @break
 
                                     @case(2)
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="Less Effective" readonly />
+                                        Less Effective
                                     @break
 
                                     @case(3)
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="Not Effective" readonly />
+                                        Not Effective
                                     @break
 
                                     @default
-                                        <input type="text" class="form-control border-0 text-end bg-white" value="N/A"
-                                            readonly />
+                                        N/A
                                 @endswitch
                             </div>
                         </div>
