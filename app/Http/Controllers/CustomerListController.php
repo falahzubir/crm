@@ -18,6 +18,7 @@ use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -476,11 +477,43 @@ class CustomerListController extends Controller
 
 
     // ---------------------- [ OUTSIDE CRM/API ] ---------------------- //
-    public function update_customer_data_in_analytics($data)
+    public function update_customer_data_in_analytics(Request $request)
     {
-        // Send data to the analytics system for updating
-        $url = 'http://127.0.0.1:8001/api/update_customer';
-        $this->makeRequest($url, 'POST', $data);
+        $phone = $request->input('phone');
+        $name = $request->input('name');
+        $gender = $request->input('gender');
+
+        if ($gender == 'M') {
+            $bos_gender = "Male";
+        } elseif ($gender == 'F') {
+            $bos_gender = "Female";
+        }
+        
+
+        if (App::environment('local', 'development')) {
+            DB::connection('EH-STG')->table('customer')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                    'gender' => $bos_gender,
+                ]);
+
+            DB::connection('ED-STG')->table('customer')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                    'gender' => $bos_gender,
+                ]);
+
+            DB::connection('ANALYTIC-STG')->table('customers')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                ]);
+        } else {
+            
+        }
+
     }
 
     private function makeRequest($url, $method = 'GET', $data = [])
