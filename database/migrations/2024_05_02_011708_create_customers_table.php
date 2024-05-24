@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('marital_status_id')->nullable()->default(null);
             $table->foreign('marital_status_id')->references('id')->on('marital_statuses');
             $table->string('phone', 50)->nullable()->default(null);
-            $table->integer('siblings')->unsigned()->nullable()->default(null);
+            $table->integer('number_of_children')->unsigned()->nullable()->default(null);
             $table->integer('birth_order')->unsigned()->nullable()->default(null);
             $table->string('birth_place', 50)->nullable()->default(null);
             $table->float('weight')->nullable()->default(null);
