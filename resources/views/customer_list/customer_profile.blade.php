@@ -524,9 +524,12 @@
                     <div class="card-body" id="sufferingDisease" data-bs-parent="#accordion"
                         style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 8pt;">
                         @foreach ($customer->tags as $tag)
-                            <span class="rounded-pill p-2" style="background-color: #d6d6ff;">#{{ $tag->name }}</span>
+                            <span class="rounded-pill p-2" style="background-color: #d6d6ff;">
+                                #{{ $tag->name }}
+                            </span>
                         @endforeach
                     </div>
+
                 </div>
             </div>
         </div>

@@ -40,7 +40,13 @@ class Customer extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'customer_tags', 'customer_id', 'tag_id');
+        return $this->hasManyThrough(Tag::class, CustomerTag::class, 'customer_id', 'id', 'id', 'tag_id')
+                    ->whereNull('customer_tags.deleted_at');
+    }
+
+    public function activeCustomerTags()
+    {
+        return $this->hasMany(CustomerTag::class)->whereNull('deleted_at');
     }
 
     public function customerAnswers()
