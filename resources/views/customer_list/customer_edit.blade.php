@@ -366,7 +366,7 @@
                             <div>
                                 <label class="mb-3">Number of children :</label>
                                 <input type="number" class="form-control" name="number_of_children"
-                                    id="number_of_children">
+                                    id="number_of_children" value="{{ $customer->number_of_children ?? null }}">
                             </div>
 
                             <div class="mt-4">

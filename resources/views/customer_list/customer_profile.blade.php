@@ -420,7 +420,7 @@
                                     :</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerChildrens->whereNull('deleted_at')->count() ?? 'N/A' }}"
+                                        value="{{ $customer->number_of_children ?? 'N/A' }}"
                                         readonly />
                                 </div>
                                 <hr class="border-light mt-2" />
