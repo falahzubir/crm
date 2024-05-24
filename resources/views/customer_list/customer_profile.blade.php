@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        {{-- Customer Address --}}
+        {{-- Shipping Information --}}
         <div class="card mt-5 w-50">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Shipping Information</strong></h5>
@@ -93,98 +93,116 @@
                 <form action="">
                     <div class="row p-4 d-flex align-items-center justify-content-between">
                         <div class="col-md-5">
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-2">Name :</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->name ?? 'N/A' }}" readonly />
+                                <div class="col-sm-10 text-end">
+                                    {{ $customer->name ?? 'N/A' }}
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-4">Nick Name :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->nickname ?? 'N/A' }}" readonly />
+                                <div class="col-sm-8 text-end">
+                                    {{ $customer->nickname ?? 'N/A' }}
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-2">Titles :</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->title ?? 'N/A' }}" readonly />
+                                <div class="col-sm-10 text-end">
+                                    {{ $customer->title ?? 'N/A' }}
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-3">Gender :</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->gender == 'M' ? 'Male' : 'Female' }}" readonly />
+                                <div class="col-sm-9 text-end">
+                                    @php
+                                        if ($customer) {
+                                            if ($customer->gender === 'M') {
+                                                $gender = 'Male';
+                                            } elseif ($customer->gender === 'F') {
+                                                $gender = 'Female';
+                                            } else {
+                                                $gender = 'N/A';
+                                            }
+                                        } else {
+                                            $gender = 'N/A';
+                                        }
+                                    @endphp
+                                    {{ $gender }}
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-4">Marital Status :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->status ?? 'N/A' }}" readonly />
+                                <div class="col-sm-8 text-end">
+                                    {{ $customer->status ?? 'N/A' }}
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-2">Age :</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->age ?? 'N/A' }}" readonly />
+                                <div class="col-sm-10 text-end">
+                                    {{ $customer->age ?? 'N/A' }}
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-5">
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-4">IC Number :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->identification_number ?? 'N/A' }}" readonly />
+                                <div class="col-sm-8 text-end">
+                                    @php
+                                        $icNumber = $customer->identification_number ?? null;
+                                        if ($icNumber == null) {
+                                            $maskedIC = 'N/A';
+                                        } else {
+                                            $maskedIC = str_pad(
+                                                substr($icNumber, -4),
+                                                strlen($icNumber),
+                                                '*',
+                                                STR_PAD_LEFT,
+                                            );
+                                        }
+
+                                    @endphp
+                                    {{ $maskedIC }}
                                 </div>
+
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-4">Phone Number :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->phone ?? 'N/A' }}" readonly />
+                                <div class="col-sm-8 text-end">
+                                    {{ $customer->phone ?? 'N/A' }}
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-4">Weight (KG) : </label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->weight ?? 'N/A' }}" readonly />
+                                <div class="col-sm-8 text-end">
+                                    {{ $customer->weight ?? 'N/A' }}
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-4">Height (cm) :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->height ?? 'N/A' }}" readonly />
+                                <div class="col-sm-8 text-end">
+                                    {{ $customer->height ?? 'N/A' }}
                                 </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-2">BMI :</label>
                                 <div class="col-sm-10 text-end">
                                     @if ($customer->height != null && $customer->weight != null)
@@ -210,11 +228,10 @@
                                 <hr class="border-light mt-2" />
                             </div>
 
-                            <div class="row mb-3">
+                            <div class="row my-3">
                                 <label class="col-sm-4">Blood Type :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->blood_type ?? 'N/A' }}" readonly />
+                                <div class="col-sm-8 text-end">
+                                    {{ $customer->blood_type ?? 'N/A' }}
                                 </div>
                             </div>
                         </div>
