@@ -560,7 +560,9 @@
                             <label class="col-sm-7">Does EMZI familiar to you?:</label>
                             <div class="col-sm-5 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 1);
+                                    $answer = $customer->customerAnswers
+                                        ->whereNull('deleted_at')
+                                        ->firstWhere('question_id', 1);
 
                                     if ($answer->value === 'Y') {
                                         $customer_answer = 'Yes';
@@ -579,24 +581,35 @@
                             <label class="col-sm-6">Where did you know about EMZI?:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 2);
+                                    $answers = $customer->customerAnswers
+                                        ->whereNull('deleted_at')
+                                        ->where('question_id', 2);
                                 @endphp
-                                @switch($answer->value ?? 'N/A')
-                                    @case(1)
-                                        Social Media
-                                    @break
+                                @if ($answers->isNotEmpty())
+                                    @foreach ($answers as $answer)
+                                        @switch($answer->value)
+                                            @case(1)
+                                                <span>Social Media</span>
+                                            @break
 
-                                    @case(2)
-                                        Friends
-                                    @break
+                                            @case(2)
+                                                <span>Friends</span>
+                                            @break
 
-                                    @case(3)
-                                        Website
-                                    @break
+                                            @case(3)
+                                                <span>Website</span>
+                                            @break
 
-                                    @default
-                                        N/A
-                                @endswitch
+                                            @default
+                                                <span>N/A</span>
+                                        @endswitch
+                                        @if (!$loop->last)
+                                            <span>, </span>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <span>N/A</span>
+                                @endif
                             </div>
                             <hr class="border-light mt-2" />
                         </div>
@@ -605,7 +618,9 @@
                             <label class="col-sm-7">First EMZI Product Purchased?:</label>
                             <div class="col-sm-5 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 3);
+                                    $answer = $customer->customerAnswers
+                                        ->whereNull('deleted_at')
+                                        ->firstWhere('question_id', 3);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -616,7 +631,9 @@
                             <label class="col-sm-6">Reason of buying EMZI Products?:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 4);
+                                    $answer = $customer->customerAnswers
+                                        ->whereNull('deleted_at')
+                                        ->firstWhere('question_id', 4);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -627,7 +644,9 @@
                             <label class="col-sm-6 mt-1">Why Support EMZI product?:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 5);
+                                    $answer = $customer->customerAnswers
+                                        ->whereNull('deleted_at')
+                                        ->firstWhere('question_id', 5);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -639,7 +658,9 @@
                             <label class="col-sm-6">Purchase Frequency:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 6);
+                                    $answer = $customer->customerAnswers
+                                        ->whereNull('deleted_at')
+                                        ->firstWhere('question_id', 6);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -650,7 +671,9 @@
                             <label class="col-sm-6">What Products Does EMZI Have?:</label>
                             <div class="col-sm-6 text-end">
                                 @php
-                                    $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 7);
+                                    $answer = $customer->customerAnswers
+                                        ->whereNull('deleted_at')
+                                        ->firstWhere('question_id', 7);
                                 @endphp
                                 {{ $answer->value ?? 'N/A' }}
                             </div>
@@ -660,7 +683,9 @@
                         <div class="row mb-3">
                             <label class="col-sm-6">Do you know that EMZI has its own factory?:</label>
                             @php
-                                $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 8);
+                                $answer = $customer->customerAnswers
+                                    ->whereNull('deleted_at')
+                                    ->firstWhere('question_id', 8);
 
                                 if ($answer->value === 'Y') {
                                     $customer_answer = 'Yes';
@@ -679,7 +704,9 @@
                         <div class="row mb-3">
                             <label class="col-sm-6">Do you know that EMZI has a laboratory at the university?:</label>
                             @php
-                                $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 9);
+                                $answer = $customer->customerAnswers
+                                    ->whereNull('deleted_at')
+                                    ->firstWhere('question_id', 9);
 
                                 if ($answer->value === 'Y') {
                                     $customer_answer = 'Yes';
@@ -698,7 +725,9 @@
                         <div class="form-group row mb-3">
                             <label class="col-sm-7 mt-2">Does EMZI Products Effective?:</label>
                             @php
-                                $answer = $customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 10);
+                                $answer = $customer->customerAnswers
+                                    ->whereNull('deleted_at')
+                                    ->firstWhere('question_id', 10);
                             @endphp
                             <div class="col-sm-5 text-end">
                                 @switch($answer->value ?? 'N/A')
