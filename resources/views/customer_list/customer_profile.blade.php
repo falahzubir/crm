@@ -140,22 +140,27 @@
 
                             <div class="row mb-3">
                                 <label class="col-sm-2">BMI :</label>
-                                @if ($customer->height != null && $customer->weight != null)
-                                    @php
-                                        $heightInMeters = $customer->height / 100; // Convert height from cm to meters
-                                        $bmi = $customer->weight / ($heightInMeters * $heightInMeters); // Calculate BMI
-                                    @endphp
+                                <div class="col-sm-10 text-end">
+                                    @if ($customer->height != null && $customer->weight != null)
+                                        @php
+                                            $heightInMeters = $customer->height / 100; // Convert height from cm to meters
+                                            $bmi = $customer->weight / ($heightInMeters * $heightInMeters); // Calculate BMI
 
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ number_format($bmi, 2) ?? 'N/A' }}" readonly />
-                                    </div>
-                                @else
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="N/A" readonly />
-                                    </div>
-                                @endif
+                                            if ($bmi < 18.5) {
+                                                $status = 'Underweight';
+                                            } elseif ($bmi >= 18.5 && $bmi <= 24.9) {
+                                                $status = 'Normal';
+                                            } elseif ($bmi >= 25 && $bmi <= 29.9) {
+                                                $status = 'Overweight';
+                                            } elseif ($bmi > 30) {
+                                                $status = 'Obesity';
+                                            }
+                                        @endphp
+                                        {{ $status }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </div>
                                 <hr class="border-light mt-2" />
                             </div>
 
