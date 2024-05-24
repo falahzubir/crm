@@ -245,62 +245,63 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Customer Address</strong></h5>
-                        <a class="btn" data-bs-toggle="collapse" href="#customerAddress" aria-expanded="false" aria-controls="customerAddress">
+                        <a class="btn" data-bs-toggle="collapse" href="#customerAddress" aria-expanded="false"
+                            aria-controls="customerAddress">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
                     <div class="collapse show" id="customerAddress">
-                    <div class="card-body" data-bs-parent="#accordion">
-                        <div class="row p-4 d-flex align-items-center justify-content-between">
-                            <div class="row mb-3">
-                                <label class="col-sm-6">Customer Address
-                                    :</label>
-                                <div class="col-sm-6 text-end">
-                                    @if ($customer->address != null || $customer->postcode != null || $customer->city != null)
-                                        {{ $customer->address }}
-                                        <br>
-                                        {{ $customer->postcode }} {{ $customer->city }}
-                                        <br>
-                                        {{ $customer->state_name }}
-                                        <br>
-                                        {{ $customer->country_name }}
-                                    @else
-                                        N/A
-                                    @endif
+                        <div class="card-body" data-bs-parent="#accordion">
+                            <div class="row p-4 d-flex align-items-center justify-content-between">
+                                <div class="row mb-3">
+                                    <label class="col-sm-6">Customer Address
+                                        :</label>
+                                    <div class="col-sm-6 text-end">
+                                        @if ($customer->address != null || $customer->postcode != null || $customer->city != null)
+                                            {{ $customer->address }}
+                                            <br>
+                                            {{ $customer->postcode }} {{ $customer->city }}
+                                            <br>
+                                            {{ $customer->state_name }}
+                                            <br>
+                                            {{ $customer->country_name }}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </div>
+                                    <hr class="border-light mt-2" />
                                 </div>
-                                <hr class="border-light mt-2" />
-                            </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-4">Place of Birth
-                                    :</label>
-                                <div class="col-sm-8 text-end">
-                                    @if ($customer->birth_place != null)
-                                        {{ $customer->birth_place ?? 'N/A' }}
-                                    @else
-                                        N/A
-                                    @endif
+                                <div class="row mb-3">
+                                    <label class="col-sm-4">Place of Birth
+                                        :</label>
+                                    <div class="col-sm-8 text-end">
+                                        @if ($customer->birth_place != null)
+                                            {{ $customer->birth_place ?? 'N/A' }}
+                                        @else
+                                            N/A
+                                        @endif
+                                    </div>
+                                    <hr class="border-light mt-2" />
                                 </div>
-                                <hr class="border-light mt-2" />
-                            </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-4">State of Birth
-                                    :</label>
-                                <div class="col-sm-8 text-end">
-                                    @if ($customer->birth_state != null)
-                                        @foreach ($states as $row)
-                                            @if (isset($customer->birth_state) && $row->id == $customer->birth_state)
-                                                {{ $row->name ?? 'N/A' }}
-                                            @endif
-                                        @endforeach
-                                    @else
-                                        N/A
-                                    @endif
+                                <div class="row mb-3">
+                                    <label class="col-sm-4">State of Birth
+                                        :</label>
+                                    <div class="col-sm-8 text-end">
+                                        @if ($customer->birth_state != null)
+                                            @foreach ($states as $row)
+                                                @if (isset($customer->birth_state) && $row->id == $customer->birth_state)
+                                                    {{ $row->name ?? 'N/A' }}
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            N/A
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -309,12 +310,13 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Occupation</strong></h5>
-                        <a class="btn" data-bs-toggle="collapse" href="#occupation" aria-expanded="false" aria-controls="occupation">
+                        <a class="btn" data-bs-toggle="collapse" href="#occupation" aria-expanded="false"
+                            aria-controls="occupation">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
                     <div class="collapse show" id="occupation">
-                    <div class="card-body" data-bs-parent="#accordion">
+                        <div class="card-body" data-bs-parent="#accordion">
                             <div class="row p-4 d-flex align-items-center justify-content-between">
                                 <div class="row mb-3">
                                     <label class="col-sm-4">Occupation :</label>
@@ -384,7 +386,7 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -394,12 +396,13 @@
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Family</strong></h5>
-                <a class="btn" data-bs-toggle="collapse" href="#family" aria-expanded="false" aria-controls="family">
+                <a class="btn" data-bs-toggle="collapse" href="#family" aria-expanded="false"
+                    aria-controls="family">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
             <div class="collapse show" id="family">
-            <div class="card-body" data-bs-parent="#accordion">
+                <div class="card-body" data-bs-parent="#accordion">
                     <div class="row p-3 d-flex align-items-center justify-content-between">
                         <div class="col-md-5">
                             <div class="row mb-3">
@@ -517,7 +520,7 @@
                         </div>
 
                     </div>
-            </div>
+                </div>
             </div>
         </div>
 
@@ -533,58 +536,60 @@
                         </a>
                     </div>
                     <div class="collapse show" id="others">
-                    <div class="card-body" data-bs-parent="#accordion">
-                        <div class="row p-4 d-flex align-items-center justify-content-between">
-                            <div class="row mb-3">
-                                <label class="col-sm-6">Hobby
-                                    :</label>
-                                <div class="col-sm-6 text-end">
-                                    {{ $customer->customerAdditionalInfos->hobby ?? 'N/A' }}
+                        <div class="card-body" data-bs-parent="#accordion">
+                            <div class="row p-4 d-flex align-items-center justify-content-between">
+                                <div class="row mb-3">
+                                    <label class="col-sm-6">Hobby
+                                        :</label>
+                                    <div class="col-sm-6 text-end">
+                                        {{ $customer->customerAdditionalInfos->hobby ?? 'N/A' }}
+                                    </div>
+                                    <hr class="border-light mt-2" />
                                 </div>
-                                <hr class="border-light mt-2" />
-                            </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-4">Favourite Colour
-                                    :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerAdditionalInfos->fav_color ?? 'N/A' }}" readonly />
+                                <div class="row mb-3">
+                                    <label class="col-sm-4">Favourite Colour
+                                        :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control border-0 text-end bg-white"
+                                            value="{{ $customer->customerAdditionalInfos->fav_color ?? 'N/A' }}"
+                                            readonly />
+                                    </div>
+                                    <hr class="border-light mt-2" />
                                 </div>
-                                <hr class="border-light mt-2" />
-                            </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-4">Favourite Pet
-                                    :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerAdditionalInfos->fav_pet ?? 'N/A' }}" readonly />
+                                <div class="row mb-3">
+                                    <label class="col-sm-4">Favourite Pet
+                                        :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control border-0 text-end bg-white"
+                                            value="{{ $customer->customerAdditionalInfos->fav_pet ?? 'N/A' }}" readonly />
+                                    </div>
+                                    <hr class="border-light mt-2" />
                                 </div>
-                                <hr class="border-light mt-2" />
-                            </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-4">Favourite Food
-                                    :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerAdditionalInfos->fav_food ?? 'N/A' }}" readonly />
+                                <div class="row mb-3">
+                                    <label class="col-sm-4">Favourite Food
+                                        :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control border-0 text-end bg-white"
+                                            value="{{ $customer->customerAdditionalInfos->fav_food ?? 'N/A' }}"
+                                            readonly />
+                                    </div>
+                                    <hr class="border-light mt-2" />
                                 </div>
-                                <hr class="border-light mt-2" />
-                            </div>
 
-                            <div class="row mb-3">
-                                <label class="col-sm-4">Favourite Drinks
-                                    :</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control border-0 text-end bg-white"
-                                        value="{{ $customer->customerAdditionalInfos->fav_beverage ?? 'N/A' }}"
-                                        readonly />
+                                <div class="row mb-3">
+                                    <label class="col-sm-4">Favourite Drinks
+                                        :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control border-0 text-end bg-white"
+                                            value="{{ $customer->customerAdditionalInfos->fav_beverage ?? 'N/A' }}"
+                                            readonly />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -593,25 +598,26 @@
                 <div class="card mt-5">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h5><strong>Suffering Disease</strong></h5>
-                        <a class="btn" data-bs-toggle="collapse" href="#sufferingDisease" aria-expanded="false" aria-controls="sufferingDisease">
+                        <a class="btn" data-bs-toggle="collapse" href="#sufferingDisease" aria-expanded="false"
+                            aria-controls="sufferingDisease">
                             <strong><i class='bx bx-chevron-down'></i></strong>
                         </a>
                     </div>
                     <div class="collapse show" id="sufferingDisease">
-                    <div class="card-body" data-bs-parent="#accordion"
-                        style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 8pt;">
-                        @foreach ($customer->tags as $tag)
-                            <span class="rounded-pill p-2" style="background-color: #d6d6ff;">
-                                #{{ $tag->name }}
-                            </span>
-                        @endforeach
+                        <div class="card-body" data-bs-parent="#accordion"
+                            style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 8pt;">
+                            @foreach ($customer->tags as $tag)
+                                <span class="rounded-pill p-2" style="background-color: #d6d6ff;">
+                                    #{{ $tag->name }}
+                                </span>
+                            @endforeach
 
-                        @if ($customer->additional_tags != null)
-                            <span class="rounded-pill p-2" style="background-color: #d6d6ff;">
-                                #{{ $customer->additional_tags }}
-                            </span>
-                        @endif
-                    </div>
+                            @if ($customer->additional_tags != null)
+                                <span class="rounded-pill p-2" style="background-color: #d6d6ff;">
+                                    #{{ $customer->additional_tags }}
+                                </span>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -621,21 +627,149 @@
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Product & Service</strong></h5>
-                <a class="btn" data-bs-toggle="collapse" href="#productService" aria-expanded="false" aria-controls="productService">
+                <a class="btn" data-bs-toggle="collapse" href="#productService" aria-expanded="false"
+                    aria-controls="productService">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
             <div class="collapse show" id="productService">
-            <div class="card-body" data-bs-parent="#accordion">
-                <div class="row p-4 d-flex align-items-center justify-content-between">
-                    <div class="col-md-5">
-                        <div class="row mb-3">
-                            <label class="col-sm-7">Does EMZI familiar to you?:</label>
-                            <div class="col-sm-5 text-end">
+                <div class="card-body" data-bs-parent="#accordion">
+                    <div class="row p-4 d-flex align-items-center justify-content-between">
+                        <div class="col-md-5">
+                            <div class="row mb-3">
+                                <label class="col-sm-7">Does EMZI familiar to you?:</label>
+                                <div class="col-sm-5 text-end">
+                                    @php
+                                        $answer = $customer->customerAnswers
+                                            ->whereNull('deleted_at')
+                                            ->firstWhere('question_id', 1);
+
+                                        if ($answer) {
+                                            if ($answer->value === 'Y') {
+                                                $customer_answer = 'Yes';
+                                            } elseif ($answer->value === 'N') {
+                                                $customer_answer = 'No';
+                                            } else {
+                                                $customer_answer = 'N/A';
+                                            }
+                                        } else {
+                                            $customer_answer = 'N/A';
+                                        }
+                                    @endphp
+                                    {{ $customer_answer }}
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-6">Where did you know about EMZI?:</label>
+                                <div class="col-sm-6 text-end">
+                                    @php
+                                        $answers = $customer->customerAnswers
+                                            ->whereNull('deleted_at')
+                                            ->where('question_id', 2);
+                                    @endphp
+                                    @if ($answers->isNotEmpty())
+                                        @foreach ($answers as $answer)
+                                            @switch($answer->value)
+                                                @case(1)
+                                                    <span>Social Media</span>
+                                                @break
+
+                                                @case(2)
+                                                    <span>Friends</span>
+                                                @break
+
+                                                @case(3)
+                                                    <span>Website</span>
+                                                @break
+
+                                                @default
+                                                    <span>N/A</span>
+                                            @endswitch
+                                            @if (!$loop->last)
+                                                <span>, </span>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <span>N/A</span>
+                                    @endif
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-7">First EMZI Product Purchased?:</label>
+                                <div class="col-sm-5 text-end">
+                                    @php
+                                        $answer = $customer->customerAnswers
+                                            ->whereNull('deleted_at')
+                                            ->firstWhere('question_id', 3);
+                                    @endphp
+                                    {{ $answer->value ?? 'N/A' }}
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-6">Reason of buying EMZI Products?:</label>
+                                <div class="col-sm-6 text-end">
+                                    @php
+                                        $answer = $customer->customerAnswers
+                                            ->whereNull('deleted_at')
+                                            ->firstWhere('question_id', 4);
+                                    @endphp
+                                    {{ $answer->value ?? 'N/A' }}
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-6 mt-1">Why Support EMZI product?:</label>
+                                <div class="col-sm-6 text-end">
+                                    @php
+                                        $answer = $customer->customerAnswers
+                                            ->whereNull('deleted_at')
+                                            ->firstWhere('question_id', 5);
+                                    @endphp
+                                    {{ $answer->value ?? 'N/A' }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="row mb-3">
+                                <label class="col-sm-6">Purchase Frequency:</label>
+                                <div class="col-sm-6 text-end">
+                                    @php
+                                        $answer = $customer->customerAnswers
+                                            ->whereNull('deleted_at')
+                                            ->firstWhere('question_id', 6);
+                                    @endphp
+                                    {{ $answer->value ?? 'N/A' }}
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-6">What Products Does EMZI Have?:</label>
+                                <div class="col-sm-6 text-end">
+                                    @php
+                                        $answer = $customer->customerAnswers
+                                            ->whereNull('deleted_at')
+                                            ->firstWhere('question_id', 7);
+                                    @endphp
+                                    {{ $answer->value ?? 'N/A' }}
+                                </div>
+                                <hr class="border-light mt-2" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-6">Do you know that EMZI has its own factory?:</label>
                                 @php
                                     $answer = $customer->customerAnswers
                                         ->whereNull('deleted_at')
-                                        ->firstWhere('question_id', 1);
+                                        ->firstWhere('question_id', 8);
 
                                     if ($answer) {
                                         if ($answer->value === 'Y') {
@@ -649,193 +783,66 @@
                                         $customer_answer = 'N/A';
                                     }
                                 @endphp
-                                {{ $customer_answer }}
+                                <div class="col-sm-6 text-end">
+                                    {{ $customer_answer }}
+                                </div>
+                                <hr class="border-light mt-2" />
                             </div>
-                            <hr class="border-light mt-2" />
-                        </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-6">Where did you know about EMZI?:</label>
-                            <div class="col-sm-6 text-end">
-                                @php
-                                    $answers = $customer->customerAnswers
-                                        ->whereNull('deleted_at')
-                                        ->where('question_id', 2);
-                                @endphp
-                                @if ($answers->isNotEmpty())
-                                    @foreach ($answers as $answer)
-                                        @switch($answer->value)
-                                            @case(1)
-                                                <span>Social Media</span>
-                                            @break
-
-                                            @case(2)
-                                                <span>Friends</span>
-                                            @break
-
-                                            @case(3)
-                                                <span>Website</span>
-                                            @break
-
-                                            @default
-                                                <span>N/A</span>
-                                        @endswitch
-                                        @if (!$loop->last)
-                                            <span>, </span>
-                                        @endif
-                                    @endforeach
-                                @else
-                                    <span>N/A</span>
-                                @endif
-                            </div>
-                            <hr class="border-light mt-2" />
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-7">First EMZI Product Purchased?:</label>
-                            <div class="col-sm-5 text-end">
+                            <div class="row mb-3">
+                                <label class="col-sm-6">Do you know that EMZI has a laboratory at the university?:</label>
                                 @php
                                     $answer = $customer->customerAnswers
                                         ->whereNull('deleted_at')
-                                        ->firstWhere('question_id', 3);
-                                @endphp
-                                {{ $answer->value ?? 'N/A' }}
-                            </div>
-                            <hr class="border-light mt-2" />
-                        </div>
+                                        ->firstWhere('question_id', 9);
 
-                        <div class="row mb-3">
-                            <label class="col-sm-6">Reason of buying EMZI Products?:</label>
-                            <div class="col-sm-6 text-end">
-                                @php
-                                    $answer = $customer->customerAnswers
-                                        ->whereNull('deleted_at')
-                                        ->firstWhere('question_id', 4);
-                                @endphp
-                                {{ $answer->value ?? 'N/A' }}
-                            </div>
-                            <hr class="border-light mt-2" />
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-6 mt-1">Why Support EMZI product?:</label>
-                            <div class="col-sm-6 text-end">
-                                @php
-                                    $answer = $customer->customerAnswers
-                                        ->whereNull('deleted_at')
-                                        ->firstWhere('question_id', 5);
-                                @endphp
-                                {{ $answer->value ?? 'N/A' }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-5">
-                        <div class="row mb-3">
-                            <label class="col-sm-6">Purchase Frequency:</label>
-                            <div class="col-sm-6 text-end">
-                                @php
-                                    $answer = $customer->customerAnswers
-                                        ->whereNull('deleted_at')
-                                        ->firstWhere('question_id', 6);
-                                @endphp
-                                {{ $answer->value ?? 'N/A' }}
-                            </div>
-                            <hr class="border-light mt-2" />
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-6">What Products Does EMZI Have?:</label>
-                            <div class="col-sm-6 text-end">
-                                @php
-                                    $answer = $customer->customerAnswers
-                                        ->whereNull('deleted_at')
-                                        ->firstWhere('question_id', 7);
-                                @endphp
-                                {{ $answer->value ?? 'N/A' }}
-                            </div>
-                            <hr class="border-light mt-2" />
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-6">Do you know that EMZI has its own factory?:</label>
-                            @php
-                                $answer = $customer->customerAnswers
-                                    ->whereNull('deleted_at')
-                                    ->firstWhere('question_id', 8);
-
-                                if ($answer) {
-                                    if ($answer->value === 'Y') {
-                                        $customer_answer = 'Yes';
-                                    } elseif ($answer->value === 'N') {
-                                        $customer_answer = 'No';
+                                    if ($answer) {
+                                        if ($answer->value === 'Y') {
+                                            $customer_answer = 'Yes';
+                                        } elseif ($answer->value === 'N') {
+                                            $customer_answer = 'No';
+                                        } else {
+                                            $customer_answer = 'N/A';
+                                        }
                                     } else {
                                         $customer_answer = 'N/A';
                                     }
-                                } else {
-                                    $customer_answer = 'N/A';
-                                }
-                            @endphp
-                            <div class="col-sm-6 text-end">
-                                {{ $customer_answer }}
+                                @endphp
+                                <div class="col-sm-6 text-end">
+                                    {{ $customer_answer }}
+                                </div>
+                                <hr class="border-light mt-2" />
                             </div>
-                            <hr class="border-light mt-2" />
-                        </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-6">Do you know that EMZI has a laboratory at the university?:</label>
-                            @php
-                                $answer = $customer->customerAnswers
-                                    ->whereNull('deleted_at')
-                                    ->firstWhere('question_id', 9);
+                            <div class="form-group row mb-3">
+                                <label class="col-sm-7 mt-2">Does EMZI Products Effective?:</label>
+                                @php
+                                    $answer = $customer->customerAnswers
+                                        ->whereNull('deleted_at')
+                                        ->firstWhere('question_id', 10);
+                                @endphp
+                                <div class="col-sm-5 text-end">
+                                    @switch($answer->value ?? 'N/A')
+                                        @case(1)
+                                            Yes, Highly Effective
+                                        @break
 
-                                if ($answer) {
-                                    if ($answer->value === 'Y') {
-                                        $customer_answer = 'Yes';
-                                    } elseif ($answer->value === 'N') {
-                                        $customer_answer = 'No';
-                                    } else {
-                                        $customer_answer = 'N/A';
-                                    }
-                                } else {
-                                    $customer_answer = 'N/A';
-                                }
-                            @endphp
-                            <div class="col-sm-6 text-end">
-                                {{ $customer_answer }}
-                            </div>
-                            <hr class="border-light mt-2" />
-                        </div>
+                                        @case(2)
+                                            Less Effective
+                                        @break
 
-                        <div class="form-group row mb-3">
-                            <label class="col-sm-7 mt-2">Does EMZI Products Effective?:</label>
-                            @php
-                                $answer = $customer->customerAnswers
-                                    ->whereNull('deleted_at')
-                                    ->firstWhere('question_id', 10);
-                            @endphp
-                            <div class="col-sm-5 text-end">
-                                @switch($answer->value ?? 'N/A')
-                                    @case(1)
-                                        Yes, Highly Effective
-                                    @break
+                                        @case(3)
+                                            Not Effective
+                                        @break
 
-                                    @case(2)
-                                        Less Effective
-                                    @break
-
-                                    @case(3)
-                                        Not Effective
-                                    @break
-
-                                    @default
-                                        N/A
-                                @endswitch
+                                        @default
+                                            N/A
+                                    @endswitch
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
 
@@ -843,60 +850,65 @@
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5><strong>Service Rating</strong></h5>
-                <a class="btn" data-bs-toggle="collapse" href="#serviceRating" aria-expanded="false" aria-controls="serviceRating">
+                <a class="btn" data-bs-toggle="collapse" href="#serviceRating" aria-expanded="false"
+                    aria-controls="serviceRating">
                     <strong><i class='bx bx-chevron-down'></i></strong>
                 </a>
             </div>
             <div class="collapse show" id="serviceRating">
-            <div class="card-body ms-4" data-bs-parent="#accordion">
-                <div class="row mb-3">
-                    <label for="deliveryService">Delivery Service:</label>
-                    <div class="star-rating" name="delivery_service"
-                        data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 11))->value ?? 0 }}">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
+                <div class="card-body ms-4" data-bs-parent="#accordion">
+                    <div class="row mb-3">
+                        <label for="deliveryService">Delivery Service:</label>
+                        <div class="star-rating" name="delivery_service"
+                            data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 11))->value ?? 0 }}"
+                            data-clickable="false">
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row mb-3">
-                    <label for="customerService">Customer Service:</label>
-                    <div class="star-rating" name="customer_service"
-                        data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 12))->value ?? 0 }}">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
+                    <div class="row mb-3">
+                        <label for="customerService">Customer Service:</label>
+                        <div class="star-rating" name="customer_service"
+                            data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 12))->value ?? 0 }}"
+                            data-clickable="false">
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row mb-3">
-                    <label for="productQuality">Product Quality:</label>
-                    <div class="star-rating" name="product_quality"
-                        data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 13))->value ?? 0 }}">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
+                    <div class="row mb-3">
+                        <label for="productQuality">Product Quality:</label>
+                        <div class="star-rating" name="product_quality"
+                            data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 13))->value ?? 0 }}"
+                            data-clickable="false">
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row mb-3">
-                    <label for="productQuantity">Product Quantity:</label>
-                    <div class="star-rating" name="product_quantity"
-                        data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 14))->value ?? 0 }}">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
+                    <div class="row mb-3">
+                        <label for="productQuantity">Product Quantity:</label>
+                        <div class="star-rating" name="product_quantity"
+                            data-rating="{{ optional($customer->customerAnswers->whereNull('deleted_at')->firstWhere('question_id', 14))->value ?? 0 }}"
+                            data-clickable="false">
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -916,29 +928,27 @@
                 });
             }
 
-            // Function to handle user click on stars
             document.querySelectorAll('.star-rating').forEach(starContainer => {
-                starContainer.querySelectorAll('.star').forEach(star => {
-                    star.addEventListener('click', function() {
-                        const value = parseInt(this.getAttribute('data-value'));
-                        updateStars(value, starContainer);
+                const isClickable = starContainer.dataset.clickable === 'true';
+
+                if (isClickable) {
+                    // Function to handle user click on stars
+                    starContainer.querySelectorAll('.star').forEach(star => {
+                        star.addEventListener('click', function() {
+                            const value = parseInt(this.getAttribute('data-value'));
+                            updateStars(value, starContainer);
+                            const ratingInput = starContainer.querySelector(
+                                'input[type="hidden"]');
+                            if (ratingInput) {
+                                ratingInput.value = value;
+                            }
+                        });
                     });
-                });
+                }
 
                 // Assume you retrieve the value from the database here for each rating
                 const databaseValue = parseInt(starContainer.dataset.rating);
                 updateStars(databaseValue, starContainer);
-            });
-
-            document.querySelectorAll('.star-rating .star').forEach(star => {
-                star.addEventListener('click', function() {
-                    const value = parseInt(this.getAttribute('data-value'));
-                    const ratingInput = this.closest('.star-rating').querySelector(
-                        'input[type="hidden"]');
-                    if (ratingInput) {
-                        ratingInput.value = value;
-                    }
-                });
             });
         });
     </script>

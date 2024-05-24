@@ -227,3 +227,17 @@ body {
   color: #ffcc00;
   /* Change color to represent selected star */
 }
+
+.star-rating[data-clickable="true"] .star {
+    cursor: pointer;
+}
+
+.star-rating[data-clickable="true"] .star:hover {
+    color: gold; /* Change color on hover only when clickable */
+}
+
+.star-rating[data-clickable="false"] .star {
+    cursor: default;
+    /* Remove hover effect for non-clickable stars */
+    pointer-events: none; /* Prevent hover styles */
+}
