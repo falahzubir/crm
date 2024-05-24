@@ -35,6 +35,52 @@
             </div>
         </div>
 
+        {{-- Customer Address --}}
+        <div class="card mt-5 w-50">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h5><strong>Shipping Information</strong></h5>
+            </div>
+            <div class="card-body">
+                <div class="row p-2 mb-3">
+                    <label class="col-sm-6">Customer Address
+                        :</label>
+                    <div class="col-sm-6 text-end">
+                        @if ($customer->address != null || $customer->postcode != null || $customer->city != null)
+                            {{ $customer->address }}
+                            <br>
+                            {{ $customer->postcode }} {{ $customer->city }}
+                            <br>
+                            {{ $customer->state_name }}
+                            <br>
+                            {{ $customer->country_name }}
+                        @else
+                            N/A
+                        @endif
+                    </div>
+                </div>
+
+                @if ($customer->receiverAddresses->where('deleted_at', null)->isNotEmpty())
+                    @foreach ($customer->receiverAddresses->where('deleted_at', null) as $index => $receiverAddress)
+                        <div class="row p-2 my-3">
+                            <hr class="border-light my-3" />
+                            <label class="col-sm-6">Receiver Address {{ $index + 1 }}</label>
+                            <div class="col-sm-6 text-end">
+                                {{ $receiverAddress->address }}
+                                <br>
+                                {{ $receiverAddress->postcode }} {{ $receiverAddress->city }}
+                                <br>
+                                @if ($receiverAddress->state)
+                                    {{ $receiverAddress->state->name }}
+                                    <br>
+                                    {{ $receiverAddress->state->country->name }}
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+
         {{-- Customer Details --}}
         <div class="card mt-5">
             <div class="card-header d-flex align-items-center justify-content-between">
@@ -194,13 +240,17 @@
                                     <label class="col-sm-6">Customer Address
                                         :</label>
                                     <div class="col-sm-6 text-end">
-                                        {{ $customer->address }}
-                                        <br>
-                                        {{ $customer->postcode }} {{ $customer->city }}
-                                        <br>
-                                        {{ $customer->state_name }}
-                                        <br>
-                                        {{ $customer->country_name }}
+                                        @if ($customer->address != null || $customer->postcode != null || $customer->city != null)
+                                            {{ $customer->address }}
+                                            <br>
+                                            {{ $customer->postcode }} {{ $customer->city }}
+                                            <br>
+                                            {{ $customer->state_name }}
+                                            <br>
+                                            {{ $customer->country_name }}
+                                        @else
+                                            N/A
+                                        @endif
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -208,9 +258,12 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-4">Place of Birth
                                         :</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control border-0 text-end bg-white"
-                                            value="{{ $customer->birth_place ?? 'N/A' }}" readonly />
+                                    <div class="col-sm-8 text-end">
+                                        @if ($customer->birth_place != null)
+                                            {{ $customer->birth_place ?? 'N/A' }}
+                                        @else
+                                            N/A
+                                        @endif
                                     </div>
                                     <hr class="border-light mt-2" />
                                 </div>
@@ -218,13 +271,16 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-4">State of Birth
                                         :</label>
-                                    <div class="col-sm-8">
-                                        @foreach ($states as $row)
-                                            @if (isset($customer->birth_state) && $row->id == $customer->birth_state)
-                                                <input type="text" class="form-control border-0 text-end bg-white"
-                                                    value="{{ $row->name ?? 'N/A' }}" readonly />
-                                            @endif
-                                        @endforeach
+                                    <div class="col-sm-8 text-end">
+                                        @if ($customer->birth_state != null)
+                                            @foreach ($states as $row)
+                                                @if (isset($customer->birth_state) && $row->id == $customer->birth_state)
+                                                    {{ $row->name ?? 'N/A' }}
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            N/A
+                                        @endif
                                     </div>
                                 </div>
                             </div>

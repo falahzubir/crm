@@ -73,4 +73,9 @@ class Customer extends Model
     {
         return $this->belongsToMany(User::class, 'customer_p_i_c_s', 'customer_id', 'user_id');
     }
+
+    public function receiverAddresses()
+    {
+        return $this->hasMany(ReceiverAddress::class);
+    }
 }
