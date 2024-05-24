@@ -533,6 +533,12 @@
                                 #{{ $tag->name }}
                             </span>
                         @endforeach
+
+                        @if ($customer->additional_tags != null)
+                            <span class="rounded-pill p-2" style="background-color: #d6d6ff;">
+                                #{{ $customer->additional_tags }}
+                            </span>
+                        @endif
                     </div>
 
                 </div>
