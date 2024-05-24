@@ -95,8 +95,8 @@
                     <div class="row p-4 d-flex align-items-center justify-content-between">
                         <div class="col-md-5">
                             <div class="row my-3">
-                                <label class="col-sm-2">Name :</label>
-                                <div class="col-sm-10 text-end">
+                                <label class="col-sm-4">Name :</label>
+                                <div class="col-sm-8 text-end">
                                     {{ $customer->name ?? 'N/A' }}
                                 </div>
                                 <hr class="border-light mt-2" />
