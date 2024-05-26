@@ -511,7 +511,32 @@ class CustomerListController extends Controller
                     'customer_name' => $name,
                 ]);
         } else {
-            
+            DB::connection('EH')->table('customer')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                    'gender' => $bos_gender,
+                ]);
+
+            DB::connection('ED')->table('customer')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                    'gender' => $bos_gender,
+                ]);
+
+            DB::connection('EI')->table('customer')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                    'gender' => $bos_gender,
+                ]);
+
+            DB::connection('ANALYTIC-LIVE')->table('customers')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                ]);
         }
 
     }
