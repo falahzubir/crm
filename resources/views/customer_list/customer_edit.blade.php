@@ -392,7 +392,7 @@
                             <input type="text" name="childName_{{ $index + 1 }}" class="form-control mb-3"
                                 value="{{ $child->name }}">
                             <label class="mb-2">Age:</label>
-                            <input type="text" name="childAge_{{ $index + 1 }}" class="form-control mb-3"
+                            <input type="number" name="childAge_{{ $index + 1 }}" class="form-control mb-3"
                                 value="{{ $child->age }}">
                             <label class="mb-2">Education:</label>
                             <input type="text" name="childEducation_{{ $index + 1 }}" class="form-control mb-3"
