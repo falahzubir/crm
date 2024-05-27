@@ -396,7 +396,8 @@ class CustomerListController extends Controller
                 // Join with customer_tags and tags table
                 $query->join('customer_tags', 'customers.id', '=', 'customer_tags.customer_id')
                     ->join('tags', 'customer_tags.tag_id', '=', 'tags.id')
-                    ->whereIn('tags.id', $tag_filter);
+                    ->whereIn('tags.id', $tag_filter)
+                    ->whereNull('customer_tags.deleted_at');
             }
         }
 
