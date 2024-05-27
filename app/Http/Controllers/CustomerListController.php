@@ -490,27 +490,7 @@ class CustomerListController extends Controller
         }
         
 
-        if (App::environment('local', 'development')) {
-            DB::connection('EH-STG')->table('customer')
-                ->where('customer_tel', $phone)
-                ->update([
-                    'customer_name' => $name,
-                    'gender' => $bos_gender,
-                ]);
-
-            DB::connection('ED-STG')->table('customer')
-                ->where('customer_tel', $phone)
-                ->update([
-                    'customer_name' => $name,
-                    'gender' => $bos_gender,
-                ]);
-
-            DB::connection('ANALYTIC-STG')->table('customers')
-                ->where('customer_tel', $phone)
-                ->update([
-                    'customer_name' => $name,
-                ]);
-        } else {
+        if (App::environment('production')) {
             DB::connection('EH')->table('customer')
                 ->where('customer_tel', $phone)
                 ->update([
@@ -537,8 +517,27 @@ class CustomerListController extends Controller
                 ->update([
                     'customer_name' => $name,
                 ]);
-        }
+        } else {
+            DB::connection('EH-STG')->table('customer')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                    'gender' => $bos_gender,
+                ]);
 
+            DB::connection('ED-STG')->table('customer')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                    'gender' => $bos_gender,
+                ]);
+
+            DB::connection('ANALYTIC-STG')->table('customers')
+                ->where('customer_tel', $phone)
+                ->update([
+                    'customer_name' => $name,
+                ]);
+        }
     }
 
     private function makeRequest($url, $method = 'GET', $data = [])
