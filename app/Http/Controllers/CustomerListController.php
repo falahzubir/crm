@@ -171,7 +171,7 @@ class CustomerListController extends Controller
         $this->updateCustomerAnswers($customer, $request, $newDate);
         $this->updateCustomerChildren($customer, $request, $newDate);
 
-        $this->updateCustomerDataInAnalytics($request);
+        $this->updateCustomerDataInAnalytics($request, $newDate);
 
         return response()->json(['message' => 'Customer updated successfully.'], 200);
     }
@@ -362,22 +362,6 @@ class CustomerListController extends Controller
         }
     }
 
-    private function updateCustomerDataInAnalytics($request)
-    {
-        if (!empty($request->input('name'))) {
-            $customerAnalytics = [
-                'customer_id' => $request->input('customer_id'),
-                'customer_name' => $request->input('name'),
-            ];
-
-            try {
-                $this->update_customer_data_in_analytics($customerAnalytics);
-            } catch (\Exception $e) {
-                Log::error($e->getMessage());
-            }
-        }
-    }
-
     // For Search & Filters
     public function handle_search(Request $request)
     {
@@ -477,10 +461,10 @@ class CustomerListController extends Controller
 
 
     // ---------------------- [ OUTSIDE CRM/API ] ---------------------- //
-    public function update_customer_data_in_analytics(Request $request)
+    public function updateCustomerDataInAnalytics($request, $newDate)
     {
-        $phone = $request->input('phone');
         $name = $request->input('name');
+        $phone = $request->input('phone');
         $gender = $request->input('gender');
 
         if ($gender == 'M') {
@@ -516,6 +500,7 @@ class CustomerListController extends Controller
                 ->where('customer_tel', $phone)
                 ->update([
                     'customer_name' => $name,
+                    'updated_at' => $newDate,
                 ]);
         } else {
             DB::connection('EH-STG')->table('customer')
@@ -536,6 +521,7 @@ class CustomerListController extends Controller
                 ->where('customer_tel', $phone)
                 ->update([
                     'customer_name' => $name,
+                    'updated_at' => $newDate,
                 ]);
         }
     }
