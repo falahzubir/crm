@@ -715,7 +715,10 @@
                         title: 'Error!',
                         text: error.response.data.message,
                         showConfirmButton: true
-                    })
+                    }).then(function() {
+                        // Reload the page after SweetAlert is closed
+                        location.reload();
+                    });
                 });
         });
     </script>
@@ -767,7 +770,7 @@
                     cardBody.appendChild(input);
                 }
 
-                createInputWithLabel('Name', 'text',`childName_${i}`);
+                createInputWithLabel('Name', 'text', `childName_${i}`);
                 createInputWithLabel('Age', 'number', `childAge_${i}`);
                 createInputWithLabel('Education', 'text', `childEducation_${i}`);
 
