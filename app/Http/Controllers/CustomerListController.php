@@ -484,9 +484,9 @@ class CustomerListController extends Controller
         $gender = $request->input('gender');
 
         if ($gender == 'M') {
-            $bos_gender = "Male";
+            $bos_gender = "male";
         } elseif ($gender == 'F') {
-            $bos_gender = "Female";
+            $bos_gender = "female";
         }
         
 
