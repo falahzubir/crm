@@ -755,21 +755,21 @@
                 cardBody.classList.add('card-body');
 
                 // Function to create input field with label and margin below
-                function createInputWithLabel(labelText, inputName) {
+                function createInputWithLabel(labelText, type, inputName) {
                     const label = document.createElement('label');
                     label.innerText = labelText + ':';
                     label.classList.add('mb-2');
                     const input = document.createElement('input');
-                    input.setAttribute('type', 'text');
+                    input.setAttribute('type', type);
                     input.setAttribute('name', inputName);
                     input.classList.add('form-control', 'mb-3');
                     cardBody.appendChild(label);
                     cardBody.appendChild(input);
                 }
 
-                createInputWithLabel('Name', `childName_${i}`);
-                createInputWithLabel('Age', `childAge_${i}`);
-                createInputWithLabel('Education', `childEducation_${i}`);
+                createInputWithLabel('Name', 'text',`childName_${i}`);
+                createInputWithLabel('Age', 'number', `childAge_${i}`);
+                createInputWithLabel('Education', 'text', `childEducation_${i}`);
 
                 card.appendChild(cardHeader);
                 card.appendChild(cardBody);
