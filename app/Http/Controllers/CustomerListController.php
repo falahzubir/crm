@@ -460,7 +460,7 @@ class CustomerListController extends Controller
     }
 
 
-    // ---------------------- [ OUTSIDE CRM/API ] ---------------------- //
+    // ---------------------- [ OUTSIDE CRM ] ---------------------- //
     public function updateCustomerDataInAnalytics($request, $newDate)
     {
         $name = $request->input('name');
