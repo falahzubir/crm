@@ -162,17 +162,12 @@
                                             {{-- State --}}
                                             {{ $states->where('id', $row->state_id)->first()->name ?? '-' }}
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center" style="width: 400px;">
                                             {{-- Tagging --}}
                                             @foreach ($row->tags as $tag)
-                                                {{ $tag->name }}
-                                                @if (!$loop->last)
-                                                    {{-- Add comma if it's not the last tag --}}
-                                                    ,
-                                                @endif
+                                                {{ $tag->name }}@if (!$loop->last),@endif
                                             @endforeach
                                         </td>
-
                                     </tr>
                                 @endforeach
                             @endif
