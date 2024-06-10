@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,7 @@ class UserSeeder extends Seeder
         // ]);
 
         // Last table row
-        $lastProcessedRow = 2000;
+        $lastProcessedRow = 0;
         
         // Get data from the analytic table starting from the last processed row
         $order_incharges = DB::connection('ANALYTIC-LIVE')
@@ -38,6 +39,8 @@ class UserSeeder extends Seeder
                 'staff_id' => $row->staff_id,
                 'name' => $row->name,
                 'password' => bcrypt('password'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
         }
     }
