@@ -42,8 +42,8 @@
                             <div class="mb-3">
                                 <label for="username" class="form-label text-capitalize fw-bold">Username</label>
                                 <input type="username" class="form-control  @error('username') is-invalid @enderror"
-                                    id="username" name="email" placeholder="Enter your username"
-                                    value="{{ old('email') }}" autofocus />
+                                    id="username" name="username" placeholder="Enter your username"
+                                    value="{{ old('username') }}" autofocus />
                                 @error('username')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

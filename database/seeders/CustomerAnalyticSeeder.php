@@ -15,10 +15,10 @@ class CustomerAnalyticSeeder extends Seeder
     public function run(): void
     {
         // Last table row
-        $lastProcessedRow = 0;
+        $lastProcessedRow = 2000;
 
         // Get data from the analytic table starting from the last processed row
-        $customers = DB::connection('ANALYTIC-STG')
+        $customers = DB::connection('ANALYTIC-LIVE')
             ->table('customers')
             ->where('id', '>', $lastProcessedRow)
             ->take(1000) // Insert 1000 rows at a time

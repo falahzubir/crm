@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class CustomerAnalyticSeeder extends Seeder
+class CustomerPICSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,23 +15,30 @@ class CustomerAnalyticSeeder extends Seeder
     public function run(): void
     {
         // Last table row
-        $lastProcessedRow = 0;
+        $lastProcessedRow = 893;
 
         // Get data from the analytic table starting from the last processed row
-        $customers = DB::connection('ANALYTIC-STG')
+        $orders = DB::connection('ANALYTIC-LIVE')
             ->table('orders')
             ->where('id', '>', $lastProcessedRow)
-            ->take(100) // Insert 1000 rows at a time
+            ->take(1000) // Insert 1000 rows at a time
             ->get();
 
         // Insert data into CRM
-        foreach ($customers as $customer) {
-            // Insert the customer data into CRM
-            DB::connection('CRM-STG')->table('customers')->insert([
-                'id' => $customer->id,
-                'name' => $customer->customer_name,
-                'phone' => $customer->customer_tel,
-            ]);
+        foreach ($orders as $row) {
+            // Check if the customer_id exists in the customers table
+            $customerExists = DB::connection('CRM-STG')
+                ->table('customers')
+                ->where('id', $row->customer_id)
+                ->exists();
+
+            if ($customerExists) {
+                // Insert the customer data into CRM if the customer_id exists
+                DB::connection('CRM-STG')->table('customer_p_i_c_s')->insert([
+                    'customer_id' => $row->customer_id,
+                    'user_id' => $row->order_incharge_id,
+                ]);
+            }
         }
     }
 }
