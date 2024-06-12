@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\Jobs\GetUsernameJob;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+
+class GetUsername extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'command:get-username';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle()
+    {
+        //get all total cust from analytics
+        $getTotalCount = DB::connection('CRM')->table('users')->count();
+
+        // Last table row
+        $start = 0;
+        $end = $getTotalCount;
+
+        $totalDivide = ceil($end/100);
+
+        // $totalDivide = 2;//test
+
+        for ($x = 0; $x < $totalDivide; $x++) {
+
+            GetUsernameJob::dispatch($x);
+        }
+    }
+}
