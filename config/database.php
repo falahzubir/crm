@@ -151,6 +151,16 @@ return [
         ],
 
         // ================ LIVE DATABASE ================ //
+        "CRM" => [
+            'driver'    => 'mysql',
+            'host'      => "206.189.43.84",
+            'database'  => "CRMLive",
+            'username'  => "crm_admin",
+            'password'  => "12345",
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci'
+        ],
+
         "EH" => [
             'driver'    => 'mysql',
             'host'      => "165.232.173.45",
