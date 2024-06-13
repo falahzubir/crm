@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\CustomerTagJob;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class Tag extends Command
 {
