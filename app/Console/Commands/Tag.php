@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Jobs\CustomerTagJob;
+use App\Jobs\TagJob;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -40,7 +41,7 @@ class Tag extends Command
 
         for ($x = 0; $x < $totalDivide; $x++) {
 
-            CustomerTagJob::dispatch($x);
+            TagJob::dispatch($x);
         }
     }
 }

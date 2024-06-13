@@ -44,6 +44,7 @@ class RoleJob implements ShouldQueue
             DB::connection('CRM')->table('roles')->insert([
                 'id' => $row->access_profile_id,
                 'name' => $row->access_profile_name,
+                'guard_name' => 'web',
             ]);
         }
     }
