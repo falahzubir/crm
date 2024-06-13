@@ -43,6 +43,9 @@ class CustomerJob implements ShouldQueue
         // Insert data into CRM
         foreach ($customers as $row) {
             // Insert the customer data into CRM
+            if ($crm->contains('id', $row->id)) {
+                continue;
+            }
             DB::connection('CRM')->table('customers')->insert([
                 'id' => $row->id,
                 'name' => $row->customer_name,
