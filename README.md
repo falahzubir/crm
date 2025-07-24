@@ -2,12 +2,11 @@
 
 ## ✨ Overview
 
-This is a full-featured CRM (Customer Relationship Management) web application built using Laravel. It helps businesses manage customers, leads, tasks, and communications in one centralized dashboard.
+This is a full-featured CRM (Customer Relationship Management) web application built using Laravel. It helps businesses manage customers, leads, and communications in one centralized dashboard.
 
 ## 🚀 Features
 
 - Customer & Lead Management
-- Task & Activity Tracking
 - User Roles & Permissions
 - Email Notifications
 - Responsive Dashboard UI
@@ -15,17 +14,17 @@ This is a full-featured CRM (Customer Relationship Management) web application b
 ## 🛠️ Tech Stack
 
 - **Backend**: Laravel 10
-- **Frontend**: Blade, Bootstrap / Tailwind CSS
+- **Frontend**: Bootstrap
 - **Database**: MySQL
-- **Other Tools**: Composer, Laravel Mix, Git
+- **Other Tools**: Composer, Git
 
 ## 📦 Installation
 
 # Clone the repository
-git clone https://github.com/your-username/crm-web-app.git
+git clone https://github.com/your-username/crm.git
 
 # Go into the project folder
-cd crm-web-app
+cd crm
 
 # Install PHP dependencies
 composer install
