@@ -24,11 +24,11 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'view.roles']);
 
         // create roles and assign created permissions
-        $role = Role::firstOrCreate(['name' => 'super_admin']);
+        $role = Role::firstOrCreate(['name' => 'admin']);
         $role->givePermissionTo(Permission::all());
 
         //giverole to user
         $user = \App\Models\User::find(1);
-        $user->assignRole('super_admin');
+        $user->assignRole('admin');
     }
 }

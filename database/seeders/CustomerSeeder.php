@@ -23,7 +23,6 @@ class CustomerSeeder extends Seeder
             'photo' => 'path/to/photo.jpg',
             'marital_status_id' => null,
             'phone' => '1234567890',
-            'siblings' => null,
             'birth_order' => null,
             'birth_place' => 'City',
             'weight' => null,
