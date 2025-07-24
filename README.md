@@ -20,22 +20,23 @@ This is a full-featured CRM (Customer Relationship Management) web application b
 
 ## 📦 Installation
 
-### Clone the repository
+```bash
+# Clone the repository
 git clone https://github.com/your-username/crm.git
 
-### Go into the project folder
+# Go into the project folder
 cd crm
 
-### Install PHP dependencies
+# Install PHP dependencies
 composer install
 
-### Copy the .env example file
+# Copy the .env example file
 cp .env.example .env
 
-### Generate the app key
+# Generate the app key
 php artisan key:generate
 
-### Set up your database in the .env file
+# Set up your database in the .env file
 ### Then run migrations
 php artisan migrate
 
