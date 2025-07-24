@@ -22,7 +22,7 @@ This is a full-featured CRM (Customer Relationship Management) web application b
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/crm.git
+git clone https://github.com/falahzubir/crm.git
 
 # Go into the project folder
 cd crm
